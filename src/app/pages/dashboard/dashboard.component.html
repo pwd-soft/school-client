@@ -1,0 +1,183 @@
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)"
+             size="default"
+             type="ball-spin-clockwise">
+  <p style="color: white">অপেক্ষা করুন .....</p>
+</ngx-spinner>
+
+<ng-container>
+
+  <div class="card card-custom gutter-b mb-3">
+    <div class="card-header">
+      <div class="card-title">
+        <h5 class="card-label">  অডিট আপত্তি ড্যাশবোর্ড: <u>{{officeName}}</u> </h5>
+      </div>
+      <div class="card-toolbar">
+
+        <!-- <a   routerLink="/audit/allsummary" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+          <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                [inlineSVG]="'./assets/media/svg/icons/Communication/Flag.svg'">
+          </span>সকল
+        </a>
+        <a routerLink="/audit/objection/new" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+          <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                [inlineSVG]="'./assets/media/svg/icons/Communication/Flag.svg'">
+          </span>নতুন
+        </a>
+        <a routerLink="/audit/objections" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+          <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                [inlineSVG]="'./assets/media/svg/icons/Layout/Layout-left-panel-2.svg'">
+          </span> তালিকা
+        </a>
+
+        <a routerLink="/audit/summary/new" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+          <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                [inlineSVG]="'./assets/media/svg/icons/Communication/Shield-thunder.svg'">
+          </span>সারসংক্ষেপ
+        </a>
+
+        <a *ngIf="isOfficeAdmin" routerLink="/audit/manageuser" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+          <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                [inlineSVG]="'./assets/media/svg/icons/Communication/Group.svg'">
+          </span>ব্যবহারকারী
+        </a> -->
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+
+        <div class="col-3 text-center">
+
+          <a routerLink="/audit/objection/new" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+            <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                  [inlineSVG]="'./assets/media/svg/icons/Communication/Flag.svg'">
+            </span>লিপিবদ্ধকরণ
+          </a>
+
+        </div>
+
+        <div class="col-3 text-center">
+
+          <a routerLink="/audit/objections" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+            <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                  [inlineSVG]="'./assets/media/svg/icons/Layout/Layout-left-panel-2.svg'">
+            </span> আপত্তির তালিকা
+          </a>
+
+        </div>
+
+        <div class="col-3 text-center">
+
+          <a routerLink="/audit/summary/new" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+            <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                  [inlineSVG]="'./assets/media/svg/icons/Communication/Shield-thunder.svg'">
+            </span>সারসংক্ষেপ
+          </a>
+
+        </div>
+
+        <div class="col-3 text-center">
+
+          <a *ngIf="isOfficeAdmin" routerLink="/audit/manageuser" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+            <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+                  [inlineSVG]="'./assets/media/svg/icons/Communication/Group.svg'">
+            </span>ব্যবহারকারী
+          </a>
+
+        </div>
+
+        <div class="col-3 text-center">
+
+          <a routerLink="/audit/yearlyobjections" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+            <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                  [inlineSVG]="'./assets/media/svg/icons/General/calendar2.svg'">
+            </span>বছর ভিত্তিক অডিট আপত্তির সংখ্যা
+          </a>
+
+        </div>
+
+        <div class="col-3 text-center" *ngIf="showSubordinateOfficeResponses">
+
+          <a routerLink="/audit/objection/incoming-responses" class="btn btn-text-dark-50 btn-icon-primary font-weight-bold btn-hover-bg-light mx-2">
+            <span class="svg-icon svg-icon-2x svg-icon-primary mb-2"
+                  [inlineSVG]="'./assets/media/svg/icons/Files/Download.svg'">
+            </span>  আগত জবাবের তালিকা
+            <!-- / আগত আপত্তির তালিকা -->
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</ng-container>
+
+<div class="row pb-4">
+  <div class="col-3">
+    <div class="card card-custom gutter-b" style="height: 160px">
+      <div class="card-body">
+        <h6 class="text-center">
+          এসএফআই
+        </h6>
+        <pre>{{sfiValue}}</pre>
+        <!-- <a
+          href="#"
+          class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"
+          >New Customers</a
+        > -->
+      </div>
+    </div>
+
+  </div>
+  <div class="col-3">
+    <div class="card card-custom gutter-b" style="height: 160px">
+      <div class="card-body">
+        <h6 class="text-center">
+          নন এসএফআই
+        </h6>
+        <pre>{{nonSFIValue}}</pre>
+        <!-- <a
+          href="#"
+          class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"
+          >New Customers</a
+        > -->
+      </div>
+    </div>
+
+  </div>
+  <div class="col-3">
+    <div class="card card-custom gutter-b" style="height: 160px">
+      <div class="card-body">
+        <h6 class="text-center">
+          ড্রাফট
+        </h6>
+        <pre>{{draftValue}}</pre>
+        <!-- <a
+          href="#"
+          class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"
+          >New Customers</a
+        > -->
+      </div>
+    </div>
+
+  </div>
+  <div class="col-3">
+    <div class="card card-custom gutter-b" style="height: 160px">
+      <div class="card-body">
+        <h6 class="text-center">
+          মোট
+        </h6>
+        <pre>{{totalValue}}</pre>
+        <!-- <a
+          href="#"
+          class="text-muted text-hover-primary font-weight-bold font-size-lg mt-1"
+          >New Customers</a
+        > -->
+        <!-- <pre>{{sfiValue}}</pre> -->
+      </div>
+    </div>
+  </div>
+</div>

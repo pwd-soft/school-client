@@ -1,0 +1,22 @@
+//
+// Theme style
+//
+
+// Mode
+$mode: default;
+
+// Initialize
+@import "init";
+
+// Components
+@import "./core/components/components";
+@import "components/components";
+
+// Layout
+@import "layout/layout";
+@import "./core/layout/docs/layout";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+// should be the last one
+@import "schedule";
+@import "custom";

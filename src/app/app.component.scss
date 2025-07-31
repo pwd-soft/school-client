@@ -1,0 +1,50 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+:host {
+  height: 100%;
+  margin: 0;
+}
+
+.w-40px{
+  width: 40px;
+}
+
+.w-45px{
+  width: 45px;
+}
+
+.w-50px{
+  width: 50px;
+}
+
+.w-65px{
+  width: 65px;
+}
+
+.w-80px {
+  width: 80px;
+}
+
+.w-100px{
+  width: 100px;
+}
+.w-120px {
+  width: 120px;
+}
+.td-padding-30px {
+  padding-right: 30px
+}
+.tr-cust {
+  border-top: solid 0.5px lightgray;
+  border-bottom: solid 0.5px lightgray;
+  font-weight: bold;
+}
+.tr-text-align {
+  text-align: center;
+}
+.table-margine-bottom-10 {
+  margin-bottom: 10px
+}
+
+* {
+  font-family: 'Nikosh',sans-serif;
+  }

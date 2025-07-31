@@ -1,0 +1,102 @@
+<div class="row" [formGroup]="fg">
+
+  <div class="col-lg-2">
+    <label for="directorateType">নিরীক্ষাকারী সংস্থা</label>
+    <select name="directorateType" formControlName="directorateType" class="form-select" (change)="onSelectionChange()">
+      <!-- <option *ngFor="let item of directorateType" value="{{ item.value  }}">
+        {{ item.key }}
+      </option> -->
+      <option *ngFor="let item of directorateType" value="{{ item.id }}">
+        {{ item.label  }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-lg-2" *ngIf="searchCriteriaViewOptions.objectionType">
+    <label for="objectionType">আপত্তির ধরণ</label>
+    <select name="objectionType" formControlName="objectionType" class="form-select" (change)="onSelectionChange()">
+      <!-- <option *ngFor="let item of objectionTypes" value="{{ item.value  }}">
+        {{ item.key  }}
+      </option> -->
+      <option *ngFor="let item of objectionTypes" value="{{ item.id }}">
+        {{ item.label }}
+      </option>
+    </select>
+  </div>
+
+  <!-- <div class="col-lg-3">
+    <label for="office">অফিস সমূহ</label>
+    <select name="office" formControlName="office" class="form-select" (change)="onSelectionChange()">
+      <option value="">Select</option>
+      <option *ngFor="let item of offices" value="{{ item.id }}">
+        <!-- <span *ngIf="item.layer === 'Zone'">&nbsp; -</span> --
+        <span *ngIf="item.layer === 'Circle'">#</span>
+        <span *ngIf="item.layer === 'Division'">* *</span>
+        {{ item.displayNameBn }}
+      </option>
+    </select>
+  </div> -->
+
+  <div class="col-lg-2">
+    <label for="financialYear">অর্থবছর</label>
+    <select name="financialYear" formControlName="financialYear" class="form-select" (change)="onSelectionChange()">
+      <option value="0">Select</option>
+      <option *ngFor="let item of financialYears" value="{{ item.year }}">
+        {{ item.text  }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-lg-2" *ngIf="searchCriteriaViewOptions.objectionStatus">
+    <label for="objectionStatus">আপত্তির অবস্থা</label>
+    <select name="objectionStatus" formControlName="objectionStatus" class="form-select" (change)="onSelectionChange()">
+      <option value="0">Select</option>
+      <option *ngFor="let item of objectionStatuses" value="{{ item.id  }}">
+        {{ item.name  }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-lg-3">
+    <label for="office">অফিস সমূহ</label>
+    <!-- <select name="office" formControlName="office" class="form-select" (change)="onSelectionChange()">
+      <option value="">Select</option>
+      <option *ngFor="let item of offices" value="{{ item.id }}">
+        <span *ngIf="item.layer === 'Circle'">#</span>
+        <span *ngIf="item.layer === 'Division'">* *</span>
+        {{ item.displayNameBn }}
+      </option>(change)="onColumnChange($event)"
+    </select> -->
+    <ng-select [items]="offices"
+                       [multiple]="true"
+                       #select
+                       bindLabel="displayNameBn"
+                       dropdownPosition="auto"
+                       bindValue="id"
+                       labelForId="description"
+                       placeholder="Select"
+                       [virtualScroll]="true"
+                       [selectableGroup]="true"
+                       [closeOnSelect]="false"
+                       loadingText="... Loading ..."
+                       formControlName="selectedOffices"
+                       notFoundText="No Items Found !!"
+                       (change)="onSelectionChange()"
+                       class="custom">
+
+              <ng-template ng-option-tmp
+                       groupBy="layer"
+                           let-item="item"
+                           let-item$="item$"
+                           let-index="index">
+                <!-- <input id="item-{{ index }}" type="checkbox" /> -->
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+              </ng-template>
+
+            </ng-select>
+            <!-- <button (click)="clearMultipleSelection()">CHECK &#709; &#8680;</button> -->
+  </div>
+
+</div>

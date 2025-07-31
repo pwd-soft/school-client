@@ -1,0 +1,20 @@
+<div class="clearfix d-print-none">
+  <div class="form-inline float-start">
+      <label class="padding-right-10">Records per page</label>
+      <select class="form-select mb-3 width-80" [(ngModel)]="pageSize" (ngModelChange)="pageSizeChanged($event)">
+          <option *ngFor="let pageSizeValue of pageSizeValues" [ngValue]="pageSizeValue">{{pageSizeValue}}</option>
+      </select>
+  </div>
+  <ngb-pagination
+          class="float-end"
+          [collectionSize]="collectionSize"
+          [pageSize]="pageSize"
+          [(page)]="page"
+          (pageChange)="pageChanged($event)"
+          [rotate]="true"
+          [maxSize]="5">
+  </ngb-pagination>
+</div>
+<div class="d-none d-print-block">
+  Showing page {{page}} of {{(totalPageCount)}}.
+</div>

@@ -1,0 +1,173 @@
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)"
+               size="default"
+               type="ball-spin-clockwise">
+               <p style="color: white">Uploading......</p>
+              </ngx-spinner>
+
+
+<ng-container>
+
+  <div class="card card-custom gutter-b mb-3">
+    <div class="card-header">
+      <div class="card-title">
+        <h5 class="card-label">
+          Upload Files
+          <!-- <span>{{nId}}</span> -->
+        </h5>
+      </div>
+      <div class="card-toolbar">
+        <!-- <button class="btn btn-primary mr-2"
+                (click)="save()"
+                *ngIf="upload.files?.length">
+          Save
+        </button> -->
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="form-group row" [formGroup]="formGroup">
+
+        <!-- <div class="col-4">
+          <label class="form-control" style="border:none">Document Type</label>
+        </div>
+
+        <div class="col-8">
+          <select name="documentType" formControlName="documentType" class="form-control form-select">
+            <option value="">Select</option>
+            <option *ngFor="let t of uploadTypes" value="{{ t.name }}">
+              {{ t.displayName }}
+            </option>
+          </select>
+        </div> -->
+
+      </div>
+
+      <div class="form-group row" style="margin-top: 15px;">
+
+        <div class="col-md-12">
+          <div class="droparea"
+               (dragover)="onDragOver($event)"
+               (drop)="onDrop($event)"
+               (dragleave)="onDragLeave($event)"
+               [class.active]="isActive">
+            <input type="file"
+                   accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.xls,.xlsx,.csv,.dwg,.zip,.rar,.7zip,.psd"
+                   name="userfiles"
+                   class="browse-file"
+                   (change)="onSelectedFile($event)"
+                   multiple />
+            <h4>
+              Choose files or <br />
+              Drag and drop files here
+            </h4>
+          </div>
+
+        </div>
+
+        <div class="col-md-12 text-center pt-3">
+          <!-- [disabled]='formGroup.controls.documentType.value == "" || formData == undefined' -->
+          <button href="#" class="btn btn-outline btn-outline-primary btn-active-primary"
+          (click)="onUpload()" [disabled]='formData == undefined'>
+            <i class="fas fa-upload"></i> Upload
+          </button>
+
+        </div>
+
+        <div class="col-md-12">
+
+          <div class="card mt-3 file-list" *ngIf="upload.files?.length">
+            <div class="card-header">File(s)</div>
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th class="sw-35">File Name</th>
+                  <th>File Size</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of upload.files;let i=index">
+                  <td>{{i+1}}</td>
+                  <td>
+                    {{ item.originalFileName }}
+                  </td>
+                  <td>
+                    {{ formatBytes(item.fileSize, 2) }}
+                  </td>
+                  <td>
+                    Upload Complete
+                  </td>
+                  <td>
+                    <a title="Delete item"
+                       class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                       (click)="deleteFromFile(item.path, item.fileName)">
+                      <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'"
+                            (cacheSVG)="cacheSVG"
+                            class="svg-icon svg-icon-md svg-icon-danger">
+                      </span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- <div class="card card-custom gutter-b mb-3">
+    <div class="card-header">
+      <div class="card-title">
+        <h5 class="card-label">Documents</h5>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive" *ngIf="attachments?.length">
+        <table class="table">
+          <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+          <tr *ngFor="let item of attachments; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.originalDocumentName }}</td>
+            <td>{{ item.documentType }}</td>
+            <td>
+
+              <a title="Delete item"
+                 class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                 (click)="remove(item.documentName, item.path)">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Trash.svg'"
+                      (cacheSVG)="cacheSVG"
+                      class="svg-icon svg-icon-md svg-icon-danger">
+                </span>
+              </a>
+              |
+              <a title="Download item"
+                 class="btn btn-icon btn-light btn-hover-danger btn-sm"
+                 (click)="download(item.path,item.originalDocumentName)">
+                <span [inlineSVG]="'./assets/media/svg/icons/General/Attachment1.svg'"
+                      (cacheSVG)="cacheSVG"
+                      class="svg-icon svg-icon-md svg-icon-danger">
+                </span>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+  </div> -->
+
+</ng-container>

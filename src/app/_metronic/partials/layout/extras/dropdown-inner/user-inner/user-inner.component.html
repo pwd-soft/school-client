@@ -1,0 +1,43 @@
+<ng-container *ngIf="user$ | async as _user">
+  <div class="menu-item px-3">
+    <div class="menu-content d-flex align-items-center px-3">
+      <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary" *ngIf="employeeId==0">
+        <ng-container *ngIf="employeeId==0">
+          <!--{{ _user.name }} {{ _user.given_name }}-->
+          {{name}}
+        </ng-container>
+      </a>
+    </div>
+  </div>
+
+  <ng-container *ngIf="employeeId>0">
+    <div class="menu-item px-5 my-1">
+      <a href="#" class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary">
+        {{name}}
+      </a>
+    </div>
+    <div class="separator my-2"></div>
+
+    <div class="menu-item px-5 my-1">
+      {{email}}<br />
+      {{post}}<br />
+      {{office}}
+    </div>
+  </ng-container>
+
+  <div class="separator my-2"></div>
+
+  <!--<div class="menu-item px-5 my-1">
+    <a class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5 cursor-pointer" (click)="changePass()">
+      Change Password
+    </a>
+  </div>-->
+
+  <div class="menu-item px-5">
+    <a routerLink="/auth/change-password" class="menu-link px-5 cursor-pointer">Change Password</a>
+  </div>
+
+  <div class="menu-item px-5">
+    <a (click)="logout()" class="menu-link px-5 cursor-pointer"> Sign Out </a>
+  </div>
+</ng-container>
