@@ -1,0 +1,101 @@
+
+<div class="card card-custom gutter-b mb-3">
+  <div class="card-header">
+    <div class="card-title">
+      <a routerLink="/audit/objections"
+         class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+         style="margin-right: 10px">
+        <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+              [inlineSVG]="'./assets/media/svg/icons/General/back-button-svgrepo-com.svg'"
+              (cacheSVG)="(cacheSVG)"></span>
+      </a>
+      <h5 class="card-label">
+        অফিসার ট্রান্সফার করুন
+      </h5>
+    </div>
+
+    <div class="card-toolbar">
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="card card-custom gutter-b mb-3" [formGroup]="fg">
+  <!-- <div class="card-header">
+    <div class="card-title">
+      <a routerLink="/audit/objections"
+         class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+         style="margin-right: 10px">
+        <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+              [inlineSVG]="'./assets/media/svg/icons/General/back-button-svgrepo-com.svg'"
+              (cacheSVG)="(cacheSVG)"></span>
+      </a>
+      <h5 class="card-label">
+        অফিসার ট্রান্সফার করুন
+      </h5>
+    </div>
+
+    <div class="card-toolbar">
+
+    </div>
+
+  </div> -->
+
+  <div class="card-body">
+    <tree-ngx (selectedItems)="selectedItems = $event"
+      [nodeItems]="nodeItems"
+      [options]="options"
+      (select)="onNodeSelect($event)"
+      (nameClick)="onNodeSelect2($event)">
+    </tree-ngx>
+    {{selectedItems}}
+  </div>
+
+
+  <div class="card-footer">
+
+  </div>
+
+</div>
+
+<div class="card card-custom gutter-b mb-3 test" [formGroup]="fg">
+  <div class="card-header">
+    <div class="card-title">
+      <a routerLink="/audit/objections"
+         class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+         style="margin-right: 10px">
+        <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+              [inlineSVG]="'./assets/media/svg/icons/General/back-button-svgrepo-com.svg'"
+              (cacheSVG)="(cacheSVG)"></span>
+      </a>
+      <h5 class="card-label">
+        অফিসার ট্রান্সফার করুন
+      </h5>
+    </div>
+
+    <div class="card-toolbar">
+
+    </div>
+
+  </div>
+
+  <div class="card-body">
+
+  </div>
+
+
+  <div class="card-footer">
+
+    <div class="row text-center">
+      <div class="col-12">
+        <button class="btn btn-primary mr-2" (click)="save()">
+          <i class="fa fa-save"></i> সেভ
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

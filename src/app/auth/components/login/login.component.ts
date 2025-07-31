@@ -108,9 +108,9 @@ export class LoginComponent implements OnInit, OnDestroy {
               //});
             });
 
-            this.approvalService.getUserByRoleByRoleName("AuditOfficeAdmin").subscribe(x=>{
-              localStorage.setItem("Auditee",JSON.stringify(x));
-            })
+            // this.approvalService.getUserByRoleByRoleName("AuditOfficeAdmin").subscribe(x=>{
+            //   localStorage.setItem("Auditee",JSON.stringify(x));
+            // })
 
             this.approvalService.latestOffice().subscribe(r => {
               if (localStorage.getItem("officeLatest") != r) {

@@ -7,11 +7,11 @@ const Routing: Routes = [
      loadChildren: () =>
        import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
    },
-  // {
-  //    path: 'audit',
-  //    loadChildren: () =>
-  //      import('../audit/audit.module').then((m) => m.AuditModule),
-  //  },
+  {
+     path: 'transfer',
+     loadChildren: () =>
+       import('../transfer/transfer.module').then((m) => m.TransferModule),
+   },
 
   {
     path: 'builder',
