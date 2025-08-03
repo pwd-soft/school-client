@@ -1,25 +1,24 @@
-
 <div class="card card-custom gutter-b mb-3">
   <div class="card-header">
     <div class="card-title">
-      <a routerLink="/audit/objections"
-         class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
-         style="margin-right: 10px">
-        <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
-              [inlineSVG]="'./assets/media/svg/icons/General/back-button-svgrepo-com.svg'"
-              (cacheSVG)="(cacheSVG)"></span>
+      <a
+        routerLink="/audit/objections"
+        class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+        style="margin-right: 10px"
+      >
+        <span
+          class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+          [inlineSVG]="
+            './assets/media/svg/icons/General/back-button-svgrepo-com.svg'
+          "
+          (cacheSVG)="(cacheSVG)"
+        ></span>
       </a>
-      <h5 class="card-label">
-        অফিসার ট্রান্সফার করুন
-      </h5>
+      <h5 class="card-label">উপ-সহকারি প্রকৌশলী বদলীকরণ</h5>
     </div>
 
-    <div class="card-toolbar">
-
-    </div>
-
+    <div class="card-toolbar"></div>
   </div>
-
 </div>
 
 <div class="card card-custom gutter-b mb-3" [formGroup]="fg">
@@ -44,58 +43,429 @@
   </div> -->
 
   <div class="card-body">
-    <tree-ngx (selectedItems)="selectedItems = $event"
+    <!-- <tree-ngx (selectedItems)="selectedItems = $event"
       [nodeItems]="nodeItems"
       [options]="options"
       (select)="onNodeSelect($event)"
       (nameClick)="onNodeSelect2($event)">
     </tree-ngx>
-    {{selectedItems}}
-  </div>
+    {{selectedItems}} -->
 
-
-  <div class="card-footer">
-
-  </div>
-
-</div>
-
-<div class="card card-custom gutter-b mb-3 test" [formGroup]="fg">
-  <div class="card-header">
-    <div class="card-title">
-      <a routerLink="/audit/objections"
-         class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
-         style="margin-right: 10px">
-        <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
-              [inlineSVG]="'./assets/media/svg/icons/General/back-button-svgrepo-com.svg'"
-              (cacheSVG)="(cacheSVG)"></span>
-      </a>
-      <h5 class="card-label">
-        অফিসার ট্রান্সফার করুন
-      </h5>
-    </div>
-
-    <div class="card-toolbar">
-
-    </div>
-
-  </div>
-
-  <div class="card-body">
-
-  </div>
-
-
-  <div class="card-footer">
-
-    <div class="row text-center">
-      <div class="col-12">
-        <button class="btn btn-primary mr-2" (click)="save()">
-          <i class="fa fa-save"></i> সেভ
-        </button>
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <h3 class="text-center">বর্তমান কর্মস্থল</h3>
+        </div>
+        <div class="row pt-3">
+          <div class="col-3 pt-3">জোন অফিস</div>
+          <div class="col-8">
+            <ng-select
+              [items]="fromZoneOffices"
+              #ngSelectComponent
+              [multiple]="false"
+              #select
+              bindLabel="displayNameBn"
+              dropdownPosition="auto"
+              bindValue="code"
+              labelForId="description"
+              placeholder="Select"
+              [virtualScroll]="true"
+              [selectableGroup]="true"
+              [closeOnSelect]="true"
+              [clearable]="true"
+              loadingText="... Loading ..."
+              formControlName="fromZone"
+              notFoundText="No Items Found !!"
+              (change)="onFromZoneChange($event)"
+              class="custom"
+            >
+              <!-- <ng-template
+                ng-option-tmp
+                groupBy="layer"
+                let-item="item"
+                let-item$="item$"
+                let-index="index"
+              >
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+              </ng-template> -->
+            </ng-select>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-3 pt-3">সার্কেল অফিস</div>
+          <div class="col-8">
+            <ng-select
+              [items]="fromCircleOffices"
+              #ngSelectComponent
+              [multiple]="false"
+              #select
+              bindLabel="displayNameBn"
+              dropdownPosition="auto"
+              bindValue="code"
+              labelForId="description"
+              placeholder="Select"
+              [virtualScroll]="true"
+              [selectableGroup]="true"
+              [closeOnSelect]="true"
+              [clearable]="true"
+              loadingText="... Loading ..."
+              formControlName="fromCircle"
+              notFoundText="No Items Found !!"
+              (change)="onFromCircleChange($event)"
+              class="custom"
+            >
+              <!-- <ng-template
+                ng-option-tmp
+                groupBy="layer"
+                let-item="item"
+                let-item$="item$"
+                let-index="index"
+              >
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+              </ng-template> -->
+            </ng-select>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-3 pt-3">ডিভিশন অফিস</div>
+          <div class="col-8">
+            <ng-select
+              [items]="fromDivisionOffices"
+              #ngSelectComponent
+              [multiple]="false"
+              #select
+              bindLabel="displayNameBn"
+              dropdownPosition="auto"
+              bindValue="code"
+              labelForId="description"
+              placeholder="Select"
+              [virtualScroll]="true"
+              [selectableGroup]="true"
+              [closeOnSelect]="true"
+              [clearable]="true"
+              loadingText="... Loading ..."
+              formControlName="fromDivision"
+              notFoundText="No Items Found !!"
+              (change)="onFromDivisionChange($event)"
+              class="custom"
+            >
+              <!-- <ng-template
+                ng-option-tmp
+                groupBy="layer"
+                let-item="item"
+                let-item$="item$"
+                let-index="index"
+              >
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+              </ng-template> -->
+            </ng-select>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-3 pt-3">সাব-ডিভিশন অফিস</div>
+          <div class="col-8">
+            <ng-select
+              [items]="fromSubDivisionOffices"
+              #ngSelectComponent
+              [multiple]="false"
+              #select
+              bindLabel="displayNameBn"
+              dropdownPosition="auto"
+              bindValue="code"
+              labelForId="description"
+              placeholder="Select"
+              [virtualScroll]="true"
+              [selectableGroup]="true"
+              [closeOnSelect]="true"
+              [clearable]="true"
+              loadingText="... Loading ..."
+              formControlName="fromSubDivision"
+              notFoundText="No Items Found !!"
+              (change)="onFromSubDivisionChange($event)"
+              class="custom"
+            >
+              <!-- <ng-template
+                ng-option-tmp
+                groupBy="layer"
+                let-item="item"
+                let-item$="item$"
+                let-index="index"
+              >
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+              </ng-template> -->
+            </ng-select>
+          </div>
+        </div>
+        <div class="row pt-6 text-center">
+          <div class="col-12">
+            <button
+              class="btn btn-primary mr-2"
+              (click)="reset('from')"
+            >
+              <i class="fa fa-undo"></i> Reset
+            </button>
+          </div>
+        </div>
+        <div class="row pt-6 text-center" *ngIf="showFromSpinner">
+          <div class="col-12">
+            <div>
+              <i class="fa fa-spinner fa-pulse fa-5x text-gray-900"></i>
+              <p class="pt-3">Please Wait ...</p>
+            </div>
+          </div>
+        </div>
+        <!-- {{ fromPostings | json }} -->
+        <div class="row pt-6" *ngIf="!showFromSpinner && fromPostings.length">
+          <div class="col-12">
+            <table table table-responsive>
+              <tr>
+                <th class="w-10">#</th>
+                <th>নাম ও পদবী</th>
+                <th class="w-20"></th>
+              </tr>
+              <tr *ngFor="let data of fromPostings; let i = index">
+                <td>{{ this.toLocal(i + 1) }}</td>
+                <td class="text-start">{{ extractEmployeeInfo(data) }}</td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <h3 class="text-center">পদায়নকৃত কর্মস্থল</h3>
+        </div>
+        <div class="row pt-3">
+          <div class="col-3 pt-3">জোন অফিস</div>
+          <div class="col-8">
+            <ng-select
+              [items]="toZoneOffices"
+              #ngSelectComponent
+              [multiple]="false"
+              #select
+              bindLabel="displayNameBn"
+              dropdownPosition="auto"
+              bindValue="code"
+              labelForId="description"
+              placeholder="Select"
+              [virtualScroll]="true"
+              [selectableGroup]="true"
+              [closeOnSelect]="true"
+              [clearable]="true"
+              loadingText="... Loading ..."
+              formControlName="toZone"
+              notFoundText="No Items Found !!"
+              (change)="onToZoneChange($event)"
+              class="custom"
+            >
+              <!-- <ng-template
+                ng-option-tmp
+                groupBy="layer"
+                let-item="item"
+                let-item$="item$"
+                let-index="index"
+              >
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+              </ng-template> -->
+            </ng-select>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-3 pt-3">সার্কেল অফিস</div>
+          <div class="col-8">
+            <ng-select
+              [items]="toCircleOffices"
+              #ngSelectComponent
+              [multiple]="false"
+              #select
+              bindLabel="displayNameBn"
+              dropdownPosition="auto"
+              bindValue="code"
+              labelForId="description"
+              placeholder="Select"
+              [virtualScroll]="true"
+              [selectableGroup]="true"
+              [closeOnSelect]="true"
+              [clearable]="true"
+              loadingText="... Loading ..."
+              formControlName="toCircle"
+              notFoundText="No Items Found !!"
+              (change)="onToCircleChange($event)"
+              class="custom"
+            >
+              <!-- <ng-template
+                ng-option-tmp
+                groupBy="layer"
+                let-item="item"
+                let-item$="item$"
+                let-index="index"
+              >
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+              </ng-template> -->
+            </ng-select>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-3 pt-3">ডিভিশন অফিস</div>
+          <div class="col-8">
+            <ng-select
+              [items]="toDivisionOffices"
+              #ngSelectComponent
+              [multiple]="false"
+              #select
+              bindLabel="displayNameBn"
+              dropdownPosition="auto"
+              bindValue="code"
+              labelForId="description"
+              placeholder="Select"
+              [virtualScroll]="true"
+              [selectableGroup]="true"
+              [closeOnSelect]="true"
+              [clearable]="true"
+              loadingText="... Loading ..."
+              formControlName="toDivision"
+              notFoundText="No Items Found !!"
+              (change)="onToDivisionChange($event)"
+              class="custom"
+            >
+              <!-- <ng-template
+                ng-option-tmp
+                groupBy="layer"
+                let-item="item"
+                let-item$="item$"
+                let-index="index"
+              >
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+              </ng-template> -->
+            </ng-select>
+          </div>
+        </div>
+        <div class="row pt-3">
+          <div class="col-3 pt-3">সাব-ডিভিশন অফিস</div>
+          <div class="col-8">
+            <ng-select
+              [items]="toSubDivisionOffices"
+              #ngSelectComponent
+              [multiple]="false"
+              #select
+              bindLabel="displayNameBn"
+              dropdownPosition="auto"
+              bindValue="code"
+              labelForId="description"
+              placeholder="Select"
+              [virtualScroll]="true"
+              [selectableGroup]="true"
+              [closeOnSelect]="true"
+              [clearable]="true"
+              loadingText="... Loading ..."
+              formControlName="toSubDivision"
+              notFoundText="No Items Found !!"
+              (change)="onToSubDivisionChange($event)"
+              class="custom"
+            >
+              <ng-template
+                ng-option-tmp
+                groupBy="layer"
+                let-item="item"
+                let-item$="item$"
+                let-index="index"
+              >
+                <span *ngIf="item.layer === 'Circle'">&ensp;&#8618;</span>
+                <span *ngIf="item.layer === 'Division'">&emsp;&#8658;</span>
+                {{ item.displayNameBn }}
+                {{ item.displayName }}
+              </ng-template>
+            </ng-select>
+          </div>
+        </div>
+        <div class="row pt-6 pb-6 text-center">
+          <div class="col-12">
+            <button
+              class="btn btn-primary mr-2"
+              (click)="reset('to')"
+            >
+              <i class="fa fa-undo"></i> Reset
+            </button>
+          </div>
+        </div>
+        <div class="row pt-6 text-center" *ngIf="showToSpinner">
+          <div class="col-12">
+            <div>
+              <i class="fa fa-spinner fa-pulse fa-5x text-gray-900"></i>
+              <p class="pt-3">Please Wait ...</p>
+            </div>
+          </div>
+        </div>
+        <!-- {{ toPostings | json }} -->
+        <div class="row pt-6" *ngIf="!showToSpinner && toPostings.length">
+          <div class="col-12">
+            <table table table-responsive>
+              <tr>
+                <th class="w-10">#</th>
+                <th>নাম ও পদবী</th>
+                <th class="w-20"></th>
+              </tr>
+              <tr *ngFor="let data of toPostings; let i = index">
+                <td>{{ this.toLocal(i + 1) }}</td>
+                <td class="text-start">{{ extractEmployeeInfo(data) }}</td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
+    <!-- <div class="card-footer">YO</div> -->
   </div>
-
 </div>
+
+<div class="card card-custom gutter-b mb-3" [formGroup]="fg">
+    <div class="card-header">
+      <div class="card-title">
+        <a
+          routerLink="/audit/objections"
+          class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+          style="margin-right: 10px"
+        >
+          <span
+            class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+            [inlineSVG]="
+              './assets/media/svg/icons/General/back-button-svgrepo-com.svg'
+            "
+            (cacheSVG)="(cacheSVG)"
+          ></span>
+        </a>
+        <h5 class="card-label">অফিসার ট্রান্সফার করুন</h5>
+      </div>
+
+      <div class="card-toolbar"></div>
+    </div>
+
+    <div class="card-body"></div>
+
+    <div class="card-footer">
+      <div class="row text-center">
+        <div class="col-12">
+          <button class="btn btn-primary mr-2" (click)="save()">
+            <i class="fa fa-save"></i> সেভ
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
