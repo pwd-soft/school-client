@@ -129,6 +129,8 @@ export class TransferPreparationComponent implements OnInit {
       toCircle: [''],
       toDivision: [''],
       toSubDivision: [''],
+      fromPost: [''],
+      toPost: [''],
     });
   }
 

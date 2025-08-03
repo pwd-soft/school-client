@@ -206,10 +206,7 @@
         </div>
         <div class="row pt-6 text-center">
           <div class="col-12">
-            <button
-              class="btn btn-primary mr-2"
-              (click)="reset('from')"
-            >
+            <button class="btn btn-primary mr-2" (click)="reset('from')">
               <i class="fa fa-undo"></i> Reset
             </button>
           </div>
@@ -224,7 +221,7 @@
         </div>
         <!-- {{ fromPostings | json }} -->
         <div class="row pt-6" *ngIf="!showFromSpinner && fromPostings.length">
-          <div class="col-12">
+          <!-- <div class="col-12">
             <table table table-responsive>
               <tr>
                 <th class="w-10">#</th>
@@ -237,6 +234,19 @@
                 <td></td>
               </tr>
             </table>
+          </div> -->
+          <div class="col-3 pt-3">নাম ও পদবী</div>
+          <div class="col-8">
+            <select
+              name="length"
+              formControlName="fromPost"
+              class="form-select"
+            >
+              <option value="">নির্বাচন করুন</option>
+              <option *ngFor="let item of fromPostings" value="{{ item.id }}">
+                {{ extractEmployeeInfo(item, false) }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
@@ -395,10 +405,7 @@
         </div>
         <div class="row pt-6 text-center">
           <div class="col-12">
-            <button
-              class="btn btn-primary mr-2"
-              (click)="reset('to')"
-            >
+            <button class="btn btn-primary mr-2" (click)="reset('to')">
               <i class="fa fa-undo"></i> Reset
             </button>
           </div>
@@ -413,7 +420,7 @@
         </div>
         <!-- {{ toPostings | json }} -->
         <div class="row pt-6" *ngIf="!showToSpinner && toPostings.length">
-          <div class="col-12">
+          <!-- <div class="col-12">
             <table table table-responsive>
               <tr>
                 <th class="w-10">#</th>
@@ -422,10 +429,26 @@
               </tr>
               <tr *ngFor="let data of toPostings; let i = index">
                 <td>{{ this.toLocal(i + 1) }}</td>
-                <td class="text-start">{{ extractEmployeeInfo(data, true) }}</td>
+                <td class="text-start">
+                  {{ extractEmployeeInfo(data, true) }}
+                </td>
                 <td></td>
               </tr>
             </table>
+          </div> -->
+
+          <div class="col-3 pt-3">নাম ও পদবী</div>
+          <div class="col-8">
+            <select
+              name="length"
+              formControlName="toPost"
+              class="form-select"
+            >
+              <option value="">নির্বাচন করুন</option>
+              <option *ngFor="let item of fromPostings" value="{{ item.id }}">
+                {{ extractEmployeeInfo(item, false) }}
+              </option>
+            </select>
           </div>
         </div>
       </div>
@@ -436,36 +459,36 @@
 </div>
 
 <div class="card card-custom gutter-b mb-3" [formGroup]="fg">
-    <div class="card-header">
-      <div class="card-title">
-        <a
-          routerLink="/audit/objections"
-          class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
-          style="margin-right: 10px"
-        >
-          <span
-            class="svg-icon svg-icon-3x svg-icon-primary mb-2"
-            [inlineSVG]="
-              './assets/media/svg/icons/General/back-button-svgrepo-com.svg'
-            "
-            (cacheSVG)="(cacheSVG)"
-          ></span>
-        </a>
-        <h5 class="card-label">অফিসার ট্রান্সফার করুন</h5>
-      </div>
-
-      <div class="card-toolbar"></div>
+  <div class="card-header">
+    <div class="card-title">
+      <a
+        routerLink="/audit/objections"
+        class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+        style="margin-right: 10px"
+      >
+        <span
+          class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+          [inlineSVG]="
+            './assets/media/svg/icons/General/back-button-svgrepo-com.svg'
+          "
+          (cacheSVG)="(cacheSVG)"
+        ></span>
+      </a>
+      <h5 class="card-label">অফিসার ট্রান্সফার করুন</h5>
     </div>
 
-    <div class="card-body"></div>
+    <div class="card-toolbar"></div>
+  </div>
 
-    <div class="card-footer">
-      <div class="row text-center">
-        <div class="col-12">
-          <button class="btn btn-primary mr-2" (click)="save()">
-            <i class="fa fa-save"></i> সেভ
-          </button>
-        </div>
+  <div class="card-body"></div>
+
+  <div class="card-footer">
+    <div class="row text-center">
+      <div class="col-12">
+        <button class="btn btn-primary mr-2" (click)="save()">
+          <i class="fa fa-save"></i> সেভ
+        </button>
       </div>
     </div>
   </div>
+</div>
