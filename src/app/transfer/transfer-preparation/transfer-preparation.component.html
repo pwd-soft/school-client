@@ -233,7 +233,7 @@
               </tr>
               <tr *ngFor="let data of fromPostings; let i = index">
                 <td>{{ this.toLocal(i + 1) }}</td>
-                <td class="text-start">{{ extractEmployeeInfo(data) }}</td>
+                <td class="text-start">{{ extractEmployeeInfo(data, false) }}</td>
                 <td></td>
               </tr>
             </table>
@@ -393,7 +393,7 @@
             </ng-select>
           </div>
         </div>
-        <div class="row pt-6 pb-6 text-center">
+        <div class="row pt-6 text-center">
           <div class="col-12">
             <button
               class="btn btn-primary mr-2"
@@ -422,7 +422,7 @@
               </tr>
               <tr *ngFor="let data of toPostings; let i = index">
                 <td>{{ this.toLocal(i + 1) }}</td>
-                <td class="text-start">{{ extractEmployeeInfo(data) }}</td>
+                <td class="text-start">{{ extractEmployeeInfo(data, true) }}</td>
                 <td></td>
               </tr>
             </table>

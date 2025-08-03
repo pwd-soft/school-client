@@ -1,6 +1,4 @@
-import { ReportFilterModel } from "src/app/proxy";
 import { OrganizationUnitDto } from "src/app/proxy/dto-models";
-import { DirectorateType, ObjectionType, ObjectionStatus } from "src/app/proxy/enum";
 import { PreparationService } from "../services/preparation.service";
 
 export class Common {

@@ -1,10 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PreparationService } from '../../shared/services/preparation.service';
 import { Router } from '@angular/router';
-import { ObjectionService, SummaryService } from 'src/app/proxy/services';
-import { ObjectionDto, SummaryDto } from 'src/app/proxy/dto-models';
-import { ObjectionFilterModel } from 'src/app/proxy';
-import { objectionTypeOptions, directorateTypeOptions, ObjectionStatus } from 'src/app/proxy/enum';
 import { SubSink } from 'subsink';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -20,10 +16,7 @@ export class DashboardComponent implements OnInit {
   isAuditAdmin: boolean = false;
   canView: boolean = false;
   showSubordinateOfficeResponses: boolean = true;
-  summary: SummaryDto = {} as SummaryDto;
   officeName: string = "";
-  objectionTypes: any[] = objectionTypeOptions;
-  directorateType: any[] = directorateTypeOptions;
   subs = new SubSink();
   sfiValue: string = '';
   nonSFIValue: string = '';
@@ -32,25 +25,23 @@ export class DashboardComponent implements OnInit {
 
   // objections: ObjectionDto[] = [];
 
-  filterModel:ObjectionFilterModel = {
-    officeCode: '',
-    financialYear: '',
-    objectionType: 0,
-    directorateType: 0,
-    objectionStatus: ObjectionStatus.None,
-    offset: 0,
-    limit: 5,
-    pageNo: 0,
-    pageSize: 0,
-    isDesc: false,
-  };
+  // filterModel:ObjectionFilterModel = {
+  //   officeCode: '',
+  //   financialYear: '',
+  //   objectionType: 0,
+  //   directorateType: 0,
+  //   objectionStatus: ObjectionStatus.None,
+  //   offset: 0,
+  //   limit: 5,
+  //   pageNo: 0,
+  //   pageSize: 0,
+  //   isDesc: false,
+  // };
 
   constructor(
     private prep:PreparationService,
     private router: Router,
-    private summaryService: SummaryService,
     private cdRef: ChangeDetectorRef,
-    private objectionService: ObjectionService,
     private spinnerService: NgxSpinnerService,
   ) { }
 
@@ -71,31 +62,31 @@ export class DashboardComponent implements OnInit {
     // this.loadObjections();
   }
 
-  loadSummaries() {
-    this.spinnerService.show();
-    this.filterModel.officeCode = this.prep.posting.userName;
-    this.summaryService.getByOfficeByOfficeCode(this.filterModel.officeCode).subscribe((x) => {
-      this.spinnerService.hide();
-      this.summary = x;
-      this.prepareSummaryCard();
-      this.officeName = this.prep.offices.find(x => x.code == this.filterModel.officeCode)?.displayNameBn;
-      this.cdRef.detectChanges();
-    })
-  }
+  // loadSummaries() {
+  //   this.spinnerService.show();
+  //   this.filterModel.officeCode = this.prep.posting.userName;
+  //   this.summaryService.getByOfficeByOfficeCode(this.filterModel.officeCode).subscribe((x) => {
+  //     this.spinnerService.hide();
+  //     this.summary = x;
+  //     this.prepareSummaryCard();
+  //     this.officeName = this.prep.offices.find(x => x.code == this.filterModel.officeCode)?.displayNameBn;
+  //     this.cdRef.detectChanges();
+  //   })
+  // }
 
-  prepareSummaryCard() {
-    let sfiInfo = this.summary.summaryLines[0];
-    this.sfiValue = `আপত্তি ${this.toLocal(sfiInfo.count.toString())} টি \nজড়িত টাকা ${this.toLocal(sfiInfo.value)}/- \nব্রডশীট জবাব প্রদান \nহয়েছে: ${this.toLocal(sfiInfo.broadSheet)} টি, হয় নাই: ${this.toLocal(sfiInfo.nonBroadSheet)} টি \nনিষ্পত্তি ${this.toLocal(sfiInfo.resolved)} টি`;
-    // \nব্রডশীট জবাব প্রদান করা
-    let nonSFIInfo = this.summary.summaryLines[1];
-    this.nonSFIValue = `আপত্তি ${this.toLocal(nonSFIInfo.count.toString())} টি \nজড়িত টাকা ${this.toLocal(nonSFIInfo.value)}/- \nব্রডশীট জবাব প্রদান \nহয়েছে: ${this.toLocal(nonSFIInfo.broadSheet)} টি, হয় নাই: ${this.toLocal(nonSFIInfo.nonBroadSheet)} টি \nনিষ্পত্তি ${this.toLocal(nonSFIInfo.resolved)} টি`;
+  // prepareSummaryCard() {
+  //   let sfiInfo = this.summary.summaryLines[0];
+  //   this.sfiValue = `আপত্তি ${this.toLocal(sfiInfo.count.toString())} টি \nজড়িত টাকা ${this.toLocal(sfiInfo.value)}/- \nব্রডশীট জবাব প্রদান \nহয়েছে: ${this.toLocal(sfiInfo.broadSheet)} টি, হয় নাই: ${this.toLocal(sfiInfo.nonBroadSheet)} টি \nনিষ্পত্তি ${this.toLocal(sfiInfo.resolved)} টি`;
+  //   // \nব্রডশীট জবাব প্রদান করা
+  //   let nonSFIInfo = this.summary.summaryLines[1];
+  //   this.nonSFIValue = `আপত্তি ${this.toLocal(nonSFIInfo.count.toString())} টি \nজড়িত টাকা ${this.toLocal(nonSFIInfo.value)}/- \nব্রডশীট জবাব প্রদান \nহয়েছে: ${this.toLocal(nonSFIInfo.broadSheet)} টি, হয় নাই: ${this.toLocal(nonSFIInfo.nonBroadSheet)} টি \nনিষ্পত্তি ${this.toLocal(nonSFIInfo.resolved)} টি`;
 
-    let draftInfo = this.summary.summaryLines[2];
-    this.draftValue = `আপত্তি ${this.toLocal(draftInfo.count.toString())} টি \nজড়িত টাকা ${this.toLocal(draftInfo.value)}/- \nব্রডশীট জবাব প্রদান  \nহয়েছে: ${this.toLocal(draftInfo.broadSheet)} টি, হয় নাই: ${this.toLocal(draftInfo.nonBroadSheet)} টি \nনিষ্পত্তি ${this.toLocal(draftInfo.resolved)} টি`;
+  //   let draftInfo = this.summary.summaryLines[2];
+  //   this.draftValue = `আপত্তি ${this.toLocal(draftInfo.count.toString())} টি \nজড়িত টাকা ${this.toLocal(draftInfo.value)}/- \nব্রডশীট জবাব প্রদান  \nহয়েছে: ${this.toLocal(draftInfo.broadSheet)} টি, হয় নাই: ${this.toLocal(draftInfo.nonBroadSheet)} টি \nনিষ্পত্তি ${this.toLocal(draftInfo.resolved)} টি`;
 
-    let totalInfo = this.summary.summaryLines[3];
-    this.totalValue = `আপত্তি ${this.toLocal(totalInfo.count.toString())} টি \nজড়িত টাকা ${this.toLocal(totalInfo.value)}/- \nব্রডশীট জবাব প্রদান  \nহয়েছে: ${this.toLocal(totalInfo.broadSheet)} টি, হয় নাই: ${this.toLocal(totalInfo.nonBroadSheet)} টি \nনিষ্পত্তি ${this.toLocal(totalInfo.resolved)} টি`;
-  }
+  //   let totalInfo = this.summary.summaryLines[3];
+  //   this.totalValue = `আপত্তি ${this.toLocal(totalInfo.count.toString())} টি \nজড়িত টাকা ${this.toLocal(totalInfo.value)}/- \nব্রডশীট জবাব প্রদান  \nহয়েছে: ${this.toLocal(totalInfo.broadSheet)} টি, হয় নাই: ${this.toLocal(totalInfo.nonBroadSheet)} টি \nনিষ্পত্তি ${this.toLocal(totalInfo.resolved)} টি`;
+  // }
 
   // loadObjections(){
   //   this.spinnerService.show();
@@ -122,12 +113,12 @@ export class DashboardComponent implements OnInit {
     return x == true ? "হয়েছে" : "হয় নাই ";
   }
 
-  enumToText(type: string, value: number):string{
-    if(type === 'directorate')
-      return directorateTypeOptions.find(o => o.value === +value)?.key;
-    if(type === 'objection')
-      return objectionTypeOptions.find(o => o.value === +value)?.key;
-  }
+  // enumToText(type: string, value: number):string{
+  //   if(type === 'directorate')
+  //     return directorateTypeOptions.find(o => o.value === +value)?.key;
+  //   if(type === 'objection')
+  //     return objectionTypeOptions.find(o => o.value === +value)?.key;
+  // }
 
 }
 

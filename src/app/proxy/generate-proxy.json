@@ -960,6 +960,71 @@
         }
       }
     },
+    "settingManagement": {
+      "rootPath": "settingManagement",
+      "remoteServiceName": "SettingManagement",
+      "controllers": {
+        "Volo.Abp.SettingManagement.EmailSettingsController": {
+          "controllerName": "EmailSettings",
+          "type": "Volo.Abp.SettingManagement.EmailSettingsController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.SettingManagement.IEmailSettingsAppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/setting-management/emailing",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.SettingManagement.EmailSettingsDto",
+                "typeSimple": "Volo.Abp.SettingManagement.EmailSettingsDto"
+              }
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "POST",
+              "url": "api/setting-management/emailing",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto, Volo.Abp.SettingManagement.Application.Contracts",
+                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        }
+      }
+    },
     "multi-tenancy": {
       "rootPath": "multi-tenancy",
       "remoteServiceName": "AbpTenantManagement",
@@ -1333,346 +1398,6 @@
         }
       }
     },
-    "abp": {
-      "rootPath": "abp",
-      "remoteServiceName": "abp",
-      "controllers": {
-        "Pages.Abp.MultiTenancy.AbpTenantController": {
-          "controllerName": "AbpTenant",
-          "type": "Pages.Abp.MultiTenancy.AbpTenantController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.IAbpTenantAppService"
-            }
-          ],
-          "actions": {
-            "FindTenantByNameAsyncByName": {
-              "uniqueName": "FindTenantByNameAsyncByName",
-              "name": "FindTenantByNameAsync",
-              "httpMethod": "GET",
-              "url": "api/abp/multi-tenancy/tenants/by-name/{name}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "name",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "name",
-                  "name": "name",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto",
-                "typeSimple": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto"
-              }
-            },
-            "FindTenantByIdAsyncById": {
-              "uniqueName": "FindTenantByIdAsyncById",
-              "name": "FindTenantByIdAsync",
-              "httpMethod": "GET",
-              "url": "api/abp/multi-tenancy/tenants/by-id/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto",
-                "typeSimple": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto"
-              }
-            }
-          }
-        },
-        "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.AbpApplicationConfigurationController": {
-          "controllerName": "AbpApplicationConfiguration",
-          "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.AbpApplicationConfigurationController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.IAbpApplicationConfigurationAppService"
-            }
-          ],
-          "actions": {
-            "GetAsync": {
-              "uniqueName": "GetAsync",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/abp/application-configuration",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ApplicationConfigurationDto",
-                "typeSimple": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ApplicationConfigurationDto"
-              }
-            }
-          }
-        },
-        "Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController": {
-          "controllerName": "AbpApiDefinition",
-          "type": "Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController",
-          "interfaces": [],
-          "actions": {
-            "GetByModel": {
-              "uniqueName": "GetByModel",
-              "name": "Get",
-              "httpMethod": "GET",
-              "url": "api/abp/api-definition",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "model",
-                  "typeAsString": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto, Volo.Abp.Http",
-                  "type": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto",
-                  "typeSimple": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "model",
-                  "name": "IncludeTypes",
-                  "jsonName": null,
-                  "type": "System.Boolean",
-                  "typeSimple": "boolean",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "model"
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel",
-                "typeSimple": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel"
-              }
-            }
-          }
-        }
-      }
-    },
-    "account": {
-      "rootPath": "account",
-      "remoteServiceName": "AbpAccount",
-      "controllers": {
-        "Volo.Abp.Account.AccountController": {
-          "controllerName": "Account",
-          "type": "Volo.Abp.Account.AccountController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Account.IAccountAppService"
-            }
-          ],
-          "actions": {
-            "RegisterAsyncByInput": {
-              "uniqueName": "RegisterAsyncByInput",
-              "name": "RegisterAsync",
-              "httpMethod": "POST",
-              "url": "api/account/register",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.Account.RegisterDto, Volo.Abp.Account.Application.Contracts",
-                  "type": "Volo.Abp.Account.RegisterDto",
-                  "typeSimple": "Volo.Abp.Account.RegisterDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "Volo.Abp.Account.RegisterDto",
-                  "typeSimple": "Volo.Abp.Account.RegisterDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Identity.IdentityUserDto",
-                "typeSimple": "Volo.Abp.Identity.IdentityUserDto"
-              }
-            },
-            "SendPasswordResetCodeAsyncByInput": {
-              "uniqueName": "SendPasswordResetCodeAsyncByInput",
-              "name": "SendPasswordResetCodeAsync",
-              "httpMethod": "POST",
-              "url": "api/account/send-password-reset-code",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.Account.SendPasswordResetCodeDto, Volo.Abp.Account.Application.Contracts",
-                  "type": "Volo.Abp.Account.SendPasswordResetCodeDto",
-                  "typeSimple": "Volo.Abp.Account.SendPasswordResetCodeDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "Volo.Abp.Account.SendPasswordResetCodeDto",
-                  "typeSimple": "Volo.Abp.Account.SendPasswordResetCodeDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            },
-            "ResetPasswordAsyncByInput": {
-              "uniqueName": "ResetPasswordAsyncByInput",
-              "name": "ResetPasswordAsync",
-              "httpMethod": "POST",
-              "url": "api/account/reset-password",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.Account.ResetPasswordDto, Volo.Abp.Account.Application.Contracts",
-                  "type": "Volo.Abp.Account.ResetPasswordDto",
-                  "typeSimple": "Volo.Abp.Account.ResetPasswordDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "Volo.Abp.Account.ResetPasswordDto",
-                  "typeSimple": "Volo.Abp.Account.ResetPasswordDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        }
-      }
-    },
-    "settingManagement": {
-      "rootPath": "settingManagement",
-      "remoteServiceName": "SettingManagement",
-      "controllers": {
-        "Volo.Abp.SettingManagement.EmailSettingsController": {
-          "controllerName": "EmailSettings",
-          "type": "Volo.Abp.SettingManagement.EmailSettingsController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.SettingManagement.IEmailSettingsAppService"
-            }
-          ],
-          "actions": {
-            "GetAsync": {
-              "uniqueName": "GetAsync",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/setting-management/emailing",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Volo.Abp.SettingManagement.EmailSettingsDto",
-                "typeSimple": "Volo.Abp.SettingManagement.EmailSettingsDto"
-              }
-            },
-            "UpdateAsyncByInput": {
-              "uniqueName": "UpdateAsyncByInput",
-              "name": "UpdateAsync",
-              "httpMethod": "POST",
-              "url": "api/setting-management/emailing",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto, Volo.Abp.SettingManagement.Application.Contracts",
-                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        }
-      }
-    },
     "app": {
       "rootPath": "app",
       "remoteServiceName": "Default",
@@ -2008,8 +1733,8 @@
                 }
               ],
               "returnValue": {
-                "type": "PWD.Audit.DtoModels.UserInfo",
-                "typeSimple": "PWD.Audit.DtoModels.UserInfo"
+                "type": "PWD.Audit.DtoModels.UserInfoDto",
+                "typeSimple": "PWD.Audit.DtoModels.UserInfoDto"
               }
             },
             "GetUserInfoByIdByUserId": {
@@ -2043,8 +1768,8 @@
                 }
               ],
               "returnValue": {
-                "type": "PWD.Audit.DtoModels.UserInfo",
-                "typeSimple": "PWD.Audit.DtoModels.UserInfo"
+                "type": "PWD.Audit.DtoModels.UserInfoDto",
+                "typeSimple": "PWD.Audit.DtoModels.UserInfoDto"
               }
             },
             "OfficeUsersByUserName": {
@@ -2220,61 +1945,6 @@
               "returnValue": {
                 "type": "System.Boolean",
                 "typeSimple": "boolean"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.AssociateAppService": {
-          "controllerName": "Associate",
-          "type": "PWD.Audit.Services.AssociateAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IAssociateAppService"
-            }
-          ],
-          "actions": {
-            "SearchAssociatesByAssociateFilter": {
-              "uniqueName": "SearchAssociatesByAssociateFilter",
-              "name": "SearchAssociates",
-              "httpMethod": "POST",
-              "url": "api/app/associate/search-associates",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "associateFilter",
-                  "typeAsString": "PWD.Audit.AssociateFilter, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.AssociateFilter",
-                  "typeSimple": "PWD.Audit.AssociateFilter",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "associateFilter",
-                  "name": "associateFilter",
-                  "jsonName": null,
-                  "type": "PWD.Audit.AssociateFilter",
-                  "typeSimple": "PWD.Audit.AssociateFilter",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.AssociateAndObjectionsDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.AssociateAndObjectionsDto]"
               }
             }
           }
@@ -2556,8 +2226,8 @@
               "parametersOnMethod": [
                 {
                   "name": "newAttachments",
-                  "typeAsString": "System.Collections.Generic.List`1[[PWD.Audit.DtoModels.AttachmentDto, PWD.Audit.Application.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.AttachmentDto>",
+                  "typeAsString": "System.Collections.Generic.IEnumerable`1[[PWD.Audit.DtoModels.AttachmentDto, PWD.Audit.Application.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.IEnumerable<PWD.Audit.DtoModels.AttachmentDto>",
                   "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]",
                   "isOptional": false,
                   "defaultValue": null
@@ -2568,7 +2238,7 @@
                   "nameOnMethod": "newAttachments",
                   "name": "newAttachments",
                   "jsonName": null,
-                  "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.AttachmentDto>",
+                  "type": "System.Collections.Generic.IEnumerable<PWD.Audit.DtoModels.AttachmentDto>",
                   "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]",
                   "isOptional": false,
                   "defaultValue": null,
@@ -2580,1136 +2250,6 @@
               "returnValue": {
                 "type": "System.Void",
                 "typeSimple": "System.Void"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.ObjectionAppService": {
-          "controllerName": "Objection",
-          "type": "PWD.Audit.Services.ObjectionAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IObjectionAppService"
-            }
-          ],
-          "actions": {
-            "CreateAsyncByObjectionInput": {
-              "uniqueName": "CreateAsyncByObjectionInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/objection",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "objectionInput",
-                  "typeAsString": "PWD.Audit.DtoModels.ObjectionDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ObjectionDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ObjectionDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "objectionInput",
-                  "name": "objectionInput",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ObjectionDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ObjectionDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ObjectionDto",
-                "typeSimple": "PWD.Audit.DtoModels.ObjectionDto"
-              }
-            },
-            "UpdateAsyncByObjectionInput": {
-              "uniqueName": "UpdateAsyncByObjectionInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/objection",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "objectionInput",
-                  "typeAsString": "PWD.Audit.DtoModels.ObjectionDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ObjectionDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ObjectionDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "objectionInput",
-                  "name": "objectionInput",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ObjectionDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ObjectionDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ObjectionDto",
-                "typeSimple": "PWD.Audit.DtoModels.ObjectionDto"
-              }
-            },
-            "GetByIdAsyncById": {
-              "uniqueName": "GetByIdAsyncById",
-              "name": "GetByIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/objection/{id}/by-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ObjectionDto",
-                "typeSimple": "PWD.Audit.DtoModels.ObjectionDto"
-              }
-            },
-            "GetListAsync": {
-              "uniqueName": "GetListAsync",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/app/objection",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ObjectionDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.ObjectionDto]"
-              }
-            },
-            "GetListByOfficeCodeAsyncByOfficeCode": {
-              "uniqueName": "GetListByOfficeCodeAsyncByOfficeCode",
-              "name": "GetListByOfficeCodeAsync",
-              "httpMethod": "GET",
-              "url": "api/app/objection/by-office-code",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "officeCode",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "officeCode",
-                  "name": "officeCode",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ObjectionDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.ObjectionDto]"
-              }
-            },
-            "SearchObjectionsByFilterCriteria": {
-              "uniqueName": "SearchObjectionsByFilterCriteria",
-              "name": "SearchObjections",
-              "httpMethod": "POST",
-              "url": "api/app/objection/search-objections",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "filterCriteria",
-                  "typeAsString": "PWD.Audit.ObjectionFilterModel, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.ObjectionFilterModel",
-                  "typeSimple": "PWD.Audit.ObjectionFilterModel",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "filterCriteria",
-                  "name": "filterCriteria",
-                  "jsonName": null,
-                  "type": "PWD.Audit.ObjectionFilterModel",
-                  "typeSimple": "PWD.Audit.ObjectionFilterModel",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ObjectionDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.ObjectionDto]"
-              }
-            },
-            "SearchObjectionsWithPagingByFilterCriteria": {
-              "uniqueName": "SearchObjectionsWithPagingByFilterCriteria",
-              "name": "SearchObjectionsWithPaging",
-              "httpMethod": "POST",
-              "url": "api/app/objection/search-objections-with-paging",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "filterCriteria",
-                  "typeAsString": "PWD.Audit.ObjectionFilterModel, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.ObjectionFilterModel",
-                  "typeSimple": "PWD.Audit.ObjectionFilterModel",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "filterCriteria",
-                  "name": "filterCriteria",
-                  "jsonName": null,
-                  "type": "PWD.Audit.ObjectionFilterModel",
-                  "typeSimple": "PWD.Audit.ObjectionFilterModel",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Attendance_Swagger.DtoModels.GenericListDto<PWD.Audit.DtoModels.ObjectionDto>",
-                "typeSimple": "PWD.Attendance_Swagger.DtoModels.GenericListDto<PWD.Audit.DtoModels.ObjectionDto>"
-              }
-            },
-            "DeleteAsyncById": {
-              "uniqueName": "DeleteAsyncById",
-              "name": "DeleteAsync",
-              "httpMethod": "DELETE",
-              "url": "api/app/objection/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            },
-            "GetIncomingResponseListAsyncByOfficeCode": {
-              "uniqueName": "GetIncomingResponseListAsyncByOfficeCode",
-              "name": "GetIncomingResponseListAsync",
-              "httpMethod": "GET",
-              "url": "api/app/objection/incoming-response-list",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "officeCode",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "officeCode",
-                  "name": "officeCode",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ObjectionDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.ObjectionDto]"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.ReportAppService": {
-          "controllerName": "Report",
-          "type": "PWD.Audit.Services.ReportAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IReportAppService"
-            }
-          ],
-          "actions": {
-            "DetailedReportByReportFilter": {
-              "uniqueName": "DetailedReportByReportFilter",
-              "name": "DetailedReport",
-              "httpMethod": "POST",
-              "url": "api/app/report/detailed-report",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "reportFilter",
-                  "typeAsString": "PWD.Audit.ReportFilterModel, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.ReportFilterModel",
-                  "typeSimple": "PWD.Audit.ReportFilterModel",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "reportFilter",
-                  "name": "reportFilter",
-                  "jsonName": null,
-                  "type": "PWD.Audit.ReportFilterModel",
-                  "typeSimple": "PWD.Audit.ReportFilterModel",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Attendance_Swagger.DtoModels.GenericListDto<PWD.Audit.DtoModels.ObjectionReportDto>",
-                "typeSimple": "PWD.Attendance_Swagger.DtoModels.GenericListDto<PWD.Audit.DtoModels.ObjectionReportDto>"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.ResponseAppService": {
-          "controllerName": "Response",
-          "type": "PWD.Audit.Services.ResponseAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IResponseAppService"
-            }
-          ],
-          "actions": {
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/response",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.ResponseHistoryDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto"
-              }
-            },
-            "DeleteAsyncById": {
-              "uniqueName": "DeleteAsyncById",
-              "name": "DeleteAsync",
-              "httpMethod": "DELETE",
-              "url": "api/app/response/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            },
-            "GetByIdAsyncById": {
-              "uniqueName": "GetByIdAsyncById",
-              "name": "GetByIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/response/{id}/by-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto"
-              }
-            },
-            "GetListAsync": {
-              "uniqueName": "GetListAsync",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/app/response",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ResponseHistoryDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.ResponseHistoryDto]"
-              }
-            },
-            "GetListByObjectionIdAsyncByObjectionId": {
-              "uniqueName": "GetListByObjectionIdAsyncByObjectionId",
-              "name": "GetListByObjectionIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/response/by-objection-id/{objectionId}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "objectionId",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "objectionId",
-                  "name": "objectionId",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ResponseHistoryDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.ResponseHistoryDto]"
-              }
-            },
-            "UpdateAsyncByInput": {
-              "uniqueName": "UpdateAsyncByInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/response",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.ResponseHistoryDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto"
-              }
-            },
-            "UpdateResponseStateAsyncByResponseStateDto": {
-              "uniqueName": "UpdateResponseStateAsyncByResponseStateDto",
-              "name": "UpdateResponseStateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/response/response-state",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "responseStateDto",
-                  "typeAsString": "PWD.Audit.DtoModels.ResponseStateDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ResponseStateDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseStateDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "responseStateDto",
-                  "name": "responseStateDto",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ResponseStateDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseStateDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ResponseStateDto",
-                "typeSimple": "PWD.Audit.DtoModels.ResponseStateDto"
-              }
-            },
-            "UpdateResponseStatusByInput": {
-              "uniqueName": "UpdateResponseStatusByInput",
-              "name": "UpdateResponseStatus",
-              "httpMethod": "PUT",
-              "url": "api/app/response/response-status",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.ResponseHistoryDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ResponseHistoryDto",
-                "typeSimple": "PWD.Audit.DtoModels.ResponseHistoryDto"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.ResponseCommentAppService": {
-          "controllerName": "ResponseComment",
-          "type": "PWD.Audit.Services.ResponseCommentAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IResponseCommentAppService"
-            }
-          ],
-          "actions": {
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/response-comment",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.ResponseCommentDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ResponseCommentDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseCommentDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ResponseCommentDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseCommentDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ResponseCommentDto",
-                "typeSimple": "PWD.Audit.DtoModels.ResponseCommentDto"
-              }
-            },
-            "GetByIdAsyncById": {
-              "uniqueName": "GetByIdAsyncById",
-              "name": "GetByIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/response-comment/{id}/by-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ResponseCommentDto",
-                "typeSimple": "PWD.Audit.DtoModels.ResponseCommentDto"
-              }
-            },
-            "GetListAsync": {
-              "uniqueName": "GetListAsync",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/app/response-comment",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ResponseCommentDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.ResponseCommentDto]"
-              }
-            },
-            "UpdateAsyncByInput": {
-              "uniqueName": "UpdateAsyncByInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/response-comment",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.ResponseCommentDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ResponseCommentDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseCommentDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ResponseCommentDto",
-                  "typeSimple": "PWD.Audit.DtoModels.ResponseCommentDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.ResponseCommentDto",
-                "typeSimple": "PWD.Audit.DtoModels.ResponseCommentDto"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.SummaryAppService": {
-          "controllerName": "Summary",
-          "type": "PWD.Audit.Services.SummaryAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.ISummaryAppService"
-            }
-          ],
-          "actions": {
-            "CreateAsyncBySummaryInput": {
-              "uniqueName": "CreateAsyncBySummaryInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/summary",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "SummaryInput",
-                  "typeAsString": "PWD.Audit.DtoModels.SummaryDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.SummaryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.SummaryDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "SummaryInput",
-                  "name": "SummaryInput",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.SummaryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.SummaryDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.SummaryDto",
-                "typeSimple": "PWD.Audit.DtoModels.SummaryDto"
-              }
-            },
-            "UpdateAsyncBySummaryInput": {
-              "uniqueName": "UpdateAsyncBySummaryInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/summary",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "SummaryInput",
-                  "typeAsString": "PWD.Audit.DtoModels.SummaryDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.SummaryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.SummaryDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "SummaryInput",
-                  "name": "SummaryInput",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.SummaryDto",
-                  "typeSimple": "PWD.Audit.DtoModels.SummaryDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.SummaryDto",
-                "typeSimple": "PWD.Audit.DtoModels.SummaryDto"
-              }
-            },
-            "AllOfficeSummary": {
-              "uniqueName": "AllOfficeSummary",
-              "name": "AllOfficeSummary",
-              "httpMethod": "POST",
-              "url": "api/app/summary/all-office-summary",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.SummaryDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.SummaryDto]"
-              }
-            },
-            "GetByOfficeByOfficeCode": {
-              "uniqueName": "GetByOfficeByOfficeCode",
-              "name": "GetByOffice",
-              "httpMethod": "GET",
-              "url": "api/app/summary/by-office",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "officeCode",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "officeCode",
-                  "name": "officeCode",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.SummaryDto",
-                "typeSimple": "PWD.Audit.DtoModels.SummaryDto"
-              }
-            },
-            "GetListAsync": {
-              "uniqueName": "GetListAsync",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/app/summary",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.SummaryDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.SummaryDto]"
-              }
-            },
-            "DeleteAsyncById": {
-              "uniqueName": "DeleteAsyncById",
-              "name": "DeleteAsync",
-              "httpMethod": "DELETE",
-              "url": "api/app/summary/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            },
-            "GenerateSummaryReportBySummaryReportCriteria": {
-              "uniqueName": "GenerateSummaryReportBySummaryReportCriteria",
-              "name": "GenerateSummaryReport",
-              "httpMethod": "POST",
-              "url": "api/app/summary/generate-summary-report",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "summaryReportCriteria",
-                  "typeAsString": "PWD.Audit.InputDtos.SummaryReportInputDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.InputDtos.SummaryReportInputDto",
-                  "typeSimple": "PWD.Audit.InputDtos.SummaryReportInputDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "summaryReportCriteria",
-                  "name": "summaryReportCriteria",
-                  "jsonName": null,
-                  "type": "PWD.Audit.InputDtos.SummaryReportInputDto",
-                  "typeSimple": "PWD.Audit.InputDtos.SummaryReportInputDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.SummaryReportDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.SummaryReportDto]"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.YearlyObjectionAppService": {
-          "controllerName": "YearlyObjection",
-          "type": "PWD.Audit.Services.YearlyObjectionAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IYearlyObjectionAppService"
-            }
-          ],
-          "actions": {
-            "GetByIdAsyncById": {
-              "uniqueName": "GetByIdAsyncById",
-              "name": "GetByIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/yearly-objection/{id}/by-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.YearlyObjectionDto",
-                "typeSimple": "PWD.Audit.DtoModels.YearlyObjectionDto"
-              }
-            },
-            "GetListByOfficeCodeAsyncByOfficeCode": {
-              "uniqueName": "GetListByOfficeCodeAsyncByOfficeCode",
-              "name": "GetListByOfficeCodeAsync",
-              "httpMethod": "GET",
-              "url": "api/app/yearly-objection/by-office-code",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "officeCode",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "officeCode",
-                  "name": "officeCode",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.YearlyObjectionDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.YearlyObjectionDto]"
-              }
-            },
-            "UpdateAsyncByInput": {
-              "uniqueName": "UpdateAsyncByInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/yearly-objection",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.YearlyObjectionDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.YearlyObjectionDto",
-                  "typeSimple": "PWD.Audit.DtoModels.YearlyObjectionDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.YearlyObjectionDto",
-                  "typeSimple": "PWD.Audit.DtoModels.YearlyObjectionDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.YearlyObjectionDto",
-                "typeSimple": "PWD.Audit.DtoModels.YearlyObjectionDto"
               }
             }
           }
@@ -3994,6 +2534,281 @@
                   "jsonName": null,
                   "type": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
                   "typeSimple": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        }
+      }
+    },
+    "abp": {
+      "rootPath": "abp",
+      "remoteServiceName": "abp",
+      "controllers": {
+        "Pages.Abp.MultiTenancy.AbpTenantController": {
+          "controllerName": "AbpTenant",
+          "type": "Pages.Abp.MultiTenancy.AbpTenantController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.IAbpTenantAppService"
+            }
+          ],
+          "actions": {
+            "FindTenantByNameAsyncByName": {
+              "uniqueName": "FindTenantByNameAsyncByName",
+              "name": "FindTenantByNameAsync",
+              "httpMethod": "GET",
+              "url": "api/abp/multi-tenancy/tenants/by-name/{name}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "name",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "name",
+                  "name": "name",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto",
+                "typeSimple": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto"
+              }
+            },
+            "FindTenantByIdAsyncById": {
+              "uniqueName": "FindTenantByIdAsyncById",
+              "name": "FindTenantByIdAsync",
+              "httpMethod": "GET",
+              "url": "api/abp/multi-tenancy/tenants/by-id/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto",
+                "typeSimple": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto"
+              }
+            }
+          }
+        },
+        "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.AbpApplicationConfigurationController": {
+          "controllerName": "AbpApplicationConfiguration",
+          "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.AbpApplicationConfigurationController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.IAbpApplicationConfigurationAppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/abp/application-configuration",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ApplicationConfigurationDto",
+                "typeSimple": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ApplicationConfigurationDto"
+              }
+            }
+          }
+        },
+        "Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController": {
+          "controllerName": "AbpApiDefinition",
+          "type": "Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController",
+          "interfaces": [],
+          "actions": {
+            "GetByModel": {
+              "uniqueName": "GetByModel",
+              "name": "Get",
+              "httpMethod": "GET",
+              "url": "api/abp/api-definition",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "model",
+                  "typeAsString": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto, Volo.Abp.Http",
+                  "type": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto",
+                  "typeSimple": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "model",
+                  "name": "IncludeTypes",
+                  "jsonName": null,
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": "model"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel",
+                "typeSimple": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "account": {
+      "rootPath": "account",
+      "remoteServiceName": "AbpAccount",
+      "controllers": {
+        "Volo.Abp.Account.AccountController": {
+          "controllerName": "Account",
+          "type": "Volo.Abp.Account.AccountController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Account.IAccountAppService"
+            }
+          ],
+          "actions": {
+            "RegisterAsyncByInput": {
+              "uniqueName": "RegisterAsyncByInput",
+              "name": "RegisterAsync",
+              "httpMethod": "POST",
+              "url": "api/account/register",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Account.RegisterDto, Volo.Abp.Account.Application.Contracts",
+                  "type": "Volo.Abp.Account.RegisterDto",
+                  "typeSimple": "Volo.Abp.Account.RegisterDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Account.RegisterDto",
+                  "typeSimple": "Volo.Abp.Account.RegisterDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Identity.IdentityUserDto",
+                "typeSimple": "Volo.Abp.Identity.IdentityUserDto"
+              }
+            },
+            "SendPasswordResetCodeAsyncByInput": {
+              "uniqueName": "SendPasswordResetCodeAsyncByInput",
+              "name": "SendPasswordResetCodeAsync",
+              "httpMethod": "POST",
+              "url": "api/account/send-password-reset-code",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Account.SendPasswordResetCodeDto, Volo.Abp.Account.Application.Contracts",
+                  "type": "Volo.Abp.Account.SendPasswordResetCodeDto",
+                  "typeSimple": "Volo.Abp.Account.SendPasswordResetCodeDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Account.SendPasswordResetCodeDto",
+                  "typeSimple": "Volo.Abp.Account.SendPasswordResetCodeDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            },
+            "ResetPasswordAsyncByInput": {
+              "uniqueName": "ResetPasswordAsyncByInput",
+              "name": "ResetPasswordAsync",
+              "httpMethod": "POST",
+              "url": "api/account/reset-password",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.Account.ResetPasswordDto, Volo.Abp.Account.Application.Contracts",
+                  "type": "Volo.Abp.Account.ResetPasswordDto",
+                  "typeSimple": "Volo.Abp.Account.ResetPasswordDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Account.ResetPasswordDto",
+                  "typeSimple": "Volo.Abp.Account.ResetPasswordDto",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -7378,7 +6193,7 @@
         }
       ]
     },
-    "PWD.Audit.DtoModels.UserInfo": {
+    "PWD.Audit.DtoModels.UserInfoDto": {
       "baseType": null,
       "isEnum": false,
       "enumNames": null,
@@ -7447,23 +6262,8 @@
           "type": "System.Guid",
           "typeSimple": "string",
           "isRequired": false
-        },
-        {
-          "name": "extraProperties",
-          "jsonName": null,
-          "type": "PWD.Audit.DtoModels.Extraproperties",
-          "typeSimple": "PWD.Audit.DtoModels.Extraproperties",
-          "isRequired": false
         }
       ]
-    },
-    "PWD.Audit.DtoModels.Extraproperties": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": []
     },
     "PWD.Audit.DtoModels.ColleagueDto": {
       "baseType": null,
@@ -7662,632 +6462,6 @@
         }
       ]
     },
-    "PWD.Audit.AssociateFilter": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "Name",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "BCSID",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.DtoModels.AssociateAndObjectionsDto": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "Associate",
-          "jsonName": null,
-          "type": "PWD.Audit.DtoModels.AssociateDto",
-          "typeSimple": "PWD.Audit.DtoModels.AssociateDto",
-          "isRequired": false
-        },
-        {
-          "name": "Objections",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.ObjectionDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.ObjectionDto]",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.DtoModels.AssociateDto": {
-      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "ObjectionId",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Name",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Designation",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Post",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Note",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "BCSID",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        }
-      ]
-    },
-    "Volo.Abp.Application.Dtos.FullAuditedEntityDto<T0>": {
-      "baseType": "Volo.Abp.Application.Dtos.AuditedEntityDto<TPrimaryKey>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": [
-        "TPrimaryKey"
-      ],
-      "properties": [
-        {
-          "name": "IsDeleted",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false
-        },
-        {
-          "name": "DeleterId",
-          "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
-          "isRequired": false
-        },
-        {
-          "name": "DeletionTime",
-          "jsonName": null,
-          "type": "System.DateTime?",
-          "typeSimple": "string?",
-          "isRequired": false
-        }
-      ]
-    },
-    "Volo.Abp.Application.Dtos.AuditedEntityDto<T0>": {
-      "baseType": "Volo.Abp.Application.Dtos.CreationAuditedEntityDto<TPrimaryKey>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": [
-        "TPrimaryKey"
-      ],
-      "properties": [
-        {
-          "name": "LastModificationTime",
-          "jsonName": null,
-          "type": "System.DateTime?",
-          "typeSimple": "string?",
-          "isRequired": false
-        },
-        {
-          "name": "LastModifierId",
-          "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
-          "isRequired": false
-        }
-      ]
-    },
-    "Volo.Abp.Application.Dtos.CreationAuditedEntityDto<T0>": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<TPrimaryKey>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": [
-        "TPrimaryKey"
-      ],
-      "properties": [
-        {
-          "name": "CreationTime",
-          "jsonName": null,
-          "type": "System.DateTime",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "CreatorId",
-          "jsonName": null,
-          "type": "System.Guid?",
-          "typeSimple": "string?",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.DtoModels.ObjectionDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "OfficeCode",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Date",
-          "jsonName": null,
-          "type": "System.DateTime",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "FinancialYear",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "ObjectionType",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.ObjectionType",
-          "typeSimple": "PWD.Audit.Enum.ObjectionType",
-          "isRequired": false
-        },
-        {
-          "name": "DirectorateType",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.DirectorateType",
-          "typeSimple": "PWD.Audit.Enum.DirectorateType",
-          "isRequired": false
-        },
-        {
-          "name": "Name",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Description",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Response",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Value",
-          "jsonName": null,
-          "type": "System.Double",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "ObjectionStatus",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.ObjectionStatus",
-          "typeSimple": "PWD.Audit.Enum.ObjectionStatus",
-          "isRequired": false
-        },
-        {
-          "name": "IsActive",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false
-        },
-        {
-          "name": "Note",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Associates",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.AssociateDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.AssociateDto]",
-          "isRequired": false
-        },
-        {
-          "name": "MemoNumber",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "MemoDate",
-          "jsonName": null,
-          "type": "System.DateTime",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "ObjectionMemoNumber",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "ObjectionDate",
-          "jsonName": null,
-          "type": "System.DateTime",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "AnswerCount",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Comments",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "ArticleNumber",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "IsIncomplete",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false
-        },
-        {
-          "name": "CurrentOffice",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "IsCentralEntry",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false
-        },
-        {
-          "name": "ResponseHistories",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.ResponseHistoryDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.ResponseHistoryDto]",
-          "isRequired": false
-        },
-        {
-          "name": "Attachments",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.AttachmentDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.Enum.ObjectionType": {
-      "baseType": "System.Enum",
-      "isEnum": true,
-      "enumNames": [
-        "None",
-        "NonSFI",
-        "SFI",
-        "Draft"
-      ],
-      "enumValues": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "genericArguments": null,
-      "properties": null
-    },
-    "PWD.Audit.Enum.DirectorateType": {
-      "baseType": "System.Enum",
-      "isEnum": true,
-      "enumNames": [
-        "None",
-        "Audit",
-        "Fapad"
-      ],
-      "enumValues": [
-        0,
-        1,
-        2
-      ],
-      "genericArguments": null,
-      "properties": null
-    },
-    "PWD.Audit.Enum.ObjectionStatus": {
-      "baseType": "System.Enum",
-      "isEnum": true,
-      "enumNames": [
-        "None",
-        "BroadSheetNotAnswered",
-        "BroadSheetAnswered",
-        "RequestedReAnswer",
-        "ReAnswered",
-        "Resolved",
-        "Other",
-        "RequestedReAnswerFromMinistry",
-        "RequestedReAnswerFromAGOffice"
-      ],
-      "enumValues": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8
-      ],
-      "genericArguments": null,
-      "properties": null
-    },
-    "PWD.Audit.DtoModels.ResponseHistoryDto": {
-      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "ObjectionId",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Response",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Recommendation",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "FileDataInput",
-          "jsonName": null,
-          "type": "[PWD.Audit.InputDtos.FileDataInput]",
-          "typeSimple": "[PWD.Audit.InputDtos.FileDataInput]",
-          "isRequired": false
-        },
-        {
-          "name": "User",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Status",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.ResponseStatus",
-          "typeSimple": "PWD.Audit.Enum.ResponseStatus",
-          "isRequired": false
-        },
-        {
-          "name": "ResponseComments",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.ResponseCommentDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.ResponseCommentDto]",
-          "isRequired": false
-        },
-        {
-          "name": "ResponseStates",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.ResponseStateDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.ResponseStateDto]",
-          "isRequired": false
-        },
-        {
-          "name": "Attachments",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.AttachmentDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.Enum.ResponseStatus": {
-      "baseType": "System.Enum",
-      "isEnum": true,
-      "enumNames": [
-        "None",
-        "Accepted",
-        "Rejected",
-        "AcceptedByMinistry",
-        "RejectedByMinistry"
-      ],
-      "enumValues": [
-        0,
-        1,
-        2,
-        3,
-        4
-      ],
-      "genericArguments": null,
-      "properties": null
-    },
-    "PWD.Audit.DtoModels.ResponseCommentDto": {
-      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "ResponseHistoryId",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Comment",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Office",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "User",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "PostingId",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.DtoModels.ResponseStateDto": {
-      "baseType": "Volo.Abp.Application.Dtos.FullAuditedEntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "ObjectionId",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "ResponseHistoryId",
-          "jsonName": null,
-          "type": "System.Int32?",
-          "typeSimple": "number?",
-          "isRequired": false
-        },
-        {
-          "name": "Note",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "IsModified",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false
-        },
-        {
-          "name": "Office",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "User",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "PostingId",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "IsLocked",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false
-        }
-      ]
-    },
     "PWD.Audit.DtoModels.AttachmentDto": {
       "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
       "isEnum": false,
@@ -8370,589 +6544,6 @@
       ],
       "genericArguments": null,
       "properties": null
-    },
-    "PWD.Audit.ObjectionFilterModel": {
-      "baseType": "PWD.Audit.FilterModel",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "OfficeCode",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "FinancialYear",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "ObjectionType",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.ObjectionType?",
-          "typeSimple": "PWD.Audit.Enum.ObjectionType?",
-          "isRequired": false
-        },
-        {
-          "name": "DirectorateType",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.DirectorateType?",
-          "typeSimple": "PWD.Audit.Enum.DirectorateType?",
-          "isRequired": false
-        },
-        {
-          "name": "ObjectionStatus",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.ObjectionStatus?",
-          "typeSimple": "PWD.Audit.Enum.ObjectionStatus?",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.FilterModel": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "Offset",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Limit",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "PageNo",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "PageSize",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "SortBy",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "SortOrder",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "IsDesc",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false
-        }
-      ]
-    },
-    "System.Nullable<T0>": {
-      "baseType": "System.ValueType",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": [
-        "T"
-      ],
-      "properties": [
-        {
-          "name": "HasValue",
-          "jsonName": null,
-          "type": "System.Boolean",
-          "typeSimple": "boolean",
-          "isRequired": false
-        },
-        {
-          "name": "Value",
-          "jsonName": null,
-          "type": "T",
-          "typeSimple": "T",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Attendance_Swagger.DtoModels.GenericListDto<T0>": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": [
-        "T"
-      ],
-      "properties": [
-        {
-          "name": "ListData",
-          "jsonName": null,
-          "type": "[T]",
-          "typeSimple": "[T]",
-          "isRequired": false
-        },
-        {
-          "name": "CountData",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.ReportFilterModel": {
-      "baseType": "PWD.Audit.FilterModel",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "DirectorateType",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.DirectorateType",
-          "typeSimple": "PWD.Audit.Enum.DirectorateType",
-          "isRequired": false
-        },
-        {
-          "name": "ObjectionType",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.ObjectionType",
-          "typeSimple": "PWD.Audit.Enum.ObjectionType",
-          "isRequired": false
-        },
-        {
-          "name": "ObjectionStatus",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.ObjectionStatus",
-          "typeSimple": "PWD.Audit.Enum.ObjectionStatus",
-          "isRequired": false
-        },
-        {
-          "name": "Offices",
-          "jsonName": null,
-          "type": "[System.Guid]",
-          "typeSimple": "[string]",
-          "isRequired": false
-        },
-        {
-          "name": "FinancialYear",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.DtoModels.ObjectionReportDto": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "OrgUnit",
-          "jsonName": null,
-          "type": "PWD.Audit.DtoModels.OrganizationUnitDto",
-          "typeSimple": "PWD.Audit.DtoModels.OrganizationUnitDto",
-          "isRequired": false
-        },
-        {
-          "name": "Objections",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.ObjectionDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.ObjectionDto]",
-          "isRequired": false
-        },
-        {
-          "name": "yearlyObjections",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.DtoModels.SummaryDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "OfficeCode",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "OfficeName",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Date",
-          "jsonName": null,
-          "type": "System.DateTime",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "FinancialYear",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "ReferenceNo",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Note",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "SummaryLines",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.SummaryLineDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.SummaryLineDto]",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.DtoModels.SummaryLineDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "SummaryId",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Type",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.ObjectionType",
-          "typeSimple": "PWD.Audit.Enum.ObjectionType",
-          "isRequired": false
-        },
-        {
-          "name": "TypeName",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Count",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Value",
-          "jsonName": null,
-          "type": "System.Double",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "BroadSheet",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "NonBroadSheet",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Resolved",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Note",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.InputDtos.SummaryReportInputDto": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "Type",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.SummaryReportType",
-          "typeSimple": "PWD.Audit.Enum.SummaryReportType",
-          "isRequired": false
-        },
-        {
-          "name": "SubType",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.SummaryReportSubType",
-          "typeSimple": "PWD.Audit.Enum.SummaryReportSubType",
-          "isRequired": false
-        },
-        {
-          "name": "Offices",
-          "jsonName": null,
-          "type": "[System.String]",
-          "typeSimple": "[string]",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.Enum.SummaryReportType": {
-      "baseType": "System.Enum",
-      "isEnum": true,
-      "enumNames": [
-        "PWD",
-        "Combined",
-        "Detailed",
-        "Officewise"
-      ],
-      "enumValues": [
-        1,
-        2,
-        3,
-        4
-      ],
-      "genericArguments": null,
-      "properties": null
-    },
-    "PWD.Audit.Enum.SummaryReportSubType": {
-      "baseType": "System.Enum",
-      "isEnum": true,
-      "enumNames": [
-        "Zonewise",
-        "Circlewise"
-      ],
-      "enumValues": [
-        1,
-        2
-      ],
-      "genericArguments": null,
-      "properties": null
-    },
-    "PWD.Audit.DtoModels.SummaryReportDto": {
-      "baseType": null,
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "Serial",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Name",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "PreviousObjectionNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "PreviousObjectionAmount",
-          "jsonName": null,
-          "type": "System.Double",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "CurrentObjectionNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "CurrentObjectionAmount",
-          "jsonName": null,
-          "type": "System.Double",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "SubTotalObjectionNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "SubTotalObjectionAmount",
-          "jsonName": null,
-          "type": "System.Double",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "PreviousBroadsheetNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "UnsetteledBroadsheetNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "CurrentObjectionSettlementNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "CurrentObjectionSettlementAmount",
-          "jsonName": null,
-          "type": "System.Double",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "NonSfiNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "SfiNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "DraftNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "TotalObjectionNumber",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "TotalObjectionAmount",
-          "jsonName": null,
-          "type": "System.Double",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "Comments",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.DtoModels.YearlyObjectionDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "OfficeCode",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "Year",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        },
-        {
-          "name": "NumberOfObjections",
-          "jsonName": null,
-          "type": "System.Int32",
-          "typeSimple": "number",
-          "isRequired": false
-        }
-      ]
     }
   }
 }

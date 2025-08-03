@@ -1,5 +1,3 @@
-import type { SummaryReportType } from '../enum/summary-report-type.enum';
-import type { SummaryReportSubType } from '../enum/summary-report-sub-type.enum';
 
 export interface FileDataInput {
   id: number;
@@ -22,10 +20,4 @@ export interface FileInput {
   fileSize: number;
   uploadDate?: string;
   isFileUploaded: boolean;
-}
-
-export interface SummaryReportInputDto {
-  type: SummaryReportType;
-  subType: SummaryReportSubType;
-  offices: string[];
 }

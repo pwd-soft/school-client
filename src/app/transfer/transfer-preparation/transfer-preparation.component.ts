@@ -296,7 +296,10 @@ export class TransferPreparationComponent implements OnInit {
     return (+i).toLocaleString('bn-BD');
   }
 
-  extractEmployeeInfo(posting: PostingConsumeDto) {
+  extractEmployeeInfo(posting: PostingConsumeDto, onlyPost: boolean) {
+    if (onlyPost) {
+      return `${posting.designationBn}\n${posting.officeBn}`;
+    }
     return `${posting.nameBn}\n${posting.designationBn}\n${posting.officeBn}`;
   }
 

@@ -1,6 +1,6 @@
 import { RestService } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { ChangePass, ColleagueDto, OrganizationUnitDto, PostingConsumeDto, PostingDto, UpdateRoleDto, UserInfo } from '../dto-models/models';
+import type { ChangePass, ColleagueDto, OrganizationUnitDto, PostingConsumeDto, PostingDto, UpdateRoleDto, UserInfoDto } from '../dto-models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -47,14 +47,14 @@ export class ApprovalService {
     { apiName: this.apiName });
 
   getUserInfoByIdByUserId = (userId: string) =>
-    this.restService.request<any, UserInfo>({
+    this.restService.request<any, UserInfoDto>({
       method: 'GET',
       url: `/api/app/approval/user-info-by-id/${userId}`,
     },
     { apiName: this.apiName });
 
   getUserInfoByUserName = (userName: string) =>
-    this.restService.request<any, UserInfo>({
+    this.restService.request<any, UserInfoDto>({
       method: 'GET',
       url: '/api/app/approval/user-info',
       params: { userName },
