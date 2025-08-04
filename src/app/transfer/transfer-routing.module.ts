@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TransferPreparationComponent } from './transfer-preparation/transfer-preparation.component';
+import { TransferListComponent } from './transfer-list/transfer-list.component';
 
 const routes: Routes = [
   { path: 'transfer-preparation',component:TransferPreparationComponent },
+  { path: 'transfer-list',component:TransferListComponent },
   // { path: 'objection/new',component:CreateObjectionComponent },
   // { path: 'objection/update/:id',component:CreateObjectionComponent },
   // { path: 'objection/view/:id',component:ViewObjectionComponent },

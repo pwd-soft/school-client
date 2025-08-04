@@ -1,5 +1,6 @@
 import type { EntityDto } from '@abp/ng.core';
 import type { AttachmentType } from '../enum/attachment-type.enum';
+import type { CadreType } from '../enum/cadre-type.enum';
 
 export interface AttachmentDto extends EntityDto<number> {
   objectionId: number;
@@ -33,10 +34,10 @@ export interface OrderDetailDto extends EntityDto<number> {
   employeeNameBn?: string;
   postFromId: number;
   postFromNameBn?: string;
-  postFromPost?: string;
+  postFromPostBn?: string;
   postFromOfficeBn?: string;
   postToId: number;
-  postToNameBn?: string;
+  postToPostBn?: string;
   postToOfficeBn?: string;
 }
 
@@ -44,6 +45,7 @@ export interface OrderDto extends EntityDto<number> {
   designation?: string;
   memoNo?: string;
   executeDate?: string;
+  cadreType: CadreType;
   orderDetails: OrderDetailDto[];
 }
 

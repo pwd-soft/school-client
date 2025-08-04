@@ -11,6 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from '../shared/shared.module';
 import { TreeNgxModule } from 'tree-ngx';
+import { TransferListComponent } from './transfer-list/transfer-list.component';
 
 @Injectable()
  export class CustomNgbDateAdapter extends NgbDateAdapter<string> {
@@ -62,7 +63,8 @@ import { TreeNgxModule } from 'tree-ngx';
 
 @NgModule({
   declarations: [
-    TransferPreparationComponent
+    TransferPreparationComponent,
+    TransferListComponent
   ],
   imports: [
     CommonModule,

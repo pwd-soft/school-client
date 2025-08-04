@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner/lib/ngx-spinner.service';
 import { from } from 'rxjs';
 import {
@@ -8,6 +9,7 @@ import {
   OrganizationUnitDto,
   PostingConsumeDto,
 } from 'src/app/proxy/dto-models/models';
+import { CadreType } from 'src/app/proxy/enum';
 import { OrderService } from 'src/app/proxy/services';
 import { ApprovalService } from 'src/app/proxy/services/approval.service';
 import { Common } from 'src/app/shared/common/common';
@@ -115,7 +117,8 @@ export class TransferPreparationComponent implements OnInit {
     private preparationService: PreparationService,
     private cdRef: ChangeDetectorRef,
     private approvalService: ApprovalService,
-    private orderService: OrderService, // private router: Router, // private toasterService: ToasterService, // private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
+    private orderService: OrderService,
+    private router: Router, // private toasterService: ToasterService, // private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
   ) {}
 
   ngOnInit(): void {
@@ -142,7 +145,7 @@ export class TransferPreparationComponent implements OnInit {
     });
   }
 
-  todaysDate(){
+  todaysDate() {
     return new Date();
   }
 
@@ -299,6 +302,7 @@ export class TransferPreparationComponent implements OnInit {
           this.toPostings = this.extractSAEs(postings);
           this.showToSpinner = false;
         }
+        // this.removeSelectedPostings();
         this.cdRef.detectChanges();
       });
   }
@@ -309,6 +313,23 @@ export class TransferPreparationComponent implements OnInit {
     );
     return saes;
   }
+
+  // removeSelectedPostings() {
+  //   this.orderDetails.forEach((order) => {
+  //     const objectIndex = this.fromPostings.findIndex(
+  //       (obj) => obj.postingId === order.postFromId
+  //     );
+  //     if (objectIndex > -1) {
+  //       this.fromPostings.splice(objectIndex, 1);
+  //     }
+  //     const toObjectIndex = this.toPostings.findIndex(
+  //       (obj) => obj.postingId === order.postToId
+  //     );
+  //     if (toObjectIndex > -1) {
+  //       this.toPostings.splice(toObjectIndex, 1);
+  //     }
+  //   });
+  // }
 
   toLocal(i: any): string {
     return (+i).toLocaleString('bn-BD');
@@ -353,6 +374,19 @@ export class TransferPreparationComponent implements OnInit {
     let toPost = this.toPostings.find(
       (post) => post.id === this.fg.controls.toPost.value
     );
+    const objectIndex = this.orderDetails.findIndex(
+      (obj) =>
+        obj.postFromId === fromPost.postingId &&
+        obj.postToId === toPost.postingId
+    );
+    if (objectIndex > -1) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'থামুন...',
+        text: 'উক্ত কর্মকর্তা তালিকায় আছেন!',
+      });
+      return;
+    }
     const orderDetail: OrderDetailDto = {
       employeeId: fromPost.id ? fromPost.id : '',
       employeeNameBn: fromPost.nameBn ? fromPost.nameBn : '',
@@ -360,7 +394,7 @@ export class TransferPreparationComponent implements OnInit {
       postFromNameBn: fromPost.designationBn ? fromPost.designationBn : '',
       postFromOfficeBn: fromPost.officeBn ? fromPost.officeBn : '',
       postToId: toPost.postingId ? toPost.postingId : 0,
-      postToNameBn: toPost.nameBn ? toPost.nameBn : '',
+      postToPostBn: toPost.designationBn ? toPost.designationBn : '',
       postToOfficeBn: toPost.officeBn ? toPost.officeBn : '',
       orderId: 0,
       sequence:
@@ -371,7 +405,23 @@ export class TransferPreparationComponent implements OnInit {
     this.orderDetails.push(orderDetail);
     this.fg.controls.fromPost.setValue('');
     this.fg.controls.toPost.setValue('');
+    // this.removeSelectedPostings();
   }
+
+  // removeAddedPostings(fromPostId: string, toPostId: string) {
+  //   const objectIndex = this.fromPostings.findIndex(
+  //     (obj) => obj.id === fromPostId
+  //   );
+  //   if (objectIndex > -1) {
+  //     this.fromPostings.splice(objectIndex, 1);
+  //   }
+  //   const toObjectIndex = this.toPostings.findIndex(
+  //     (obj) => obj.id === toPostId
+  //   );
+  //   if (toObjectIndex > -1) {
+  //     this.toPostings.splice(toObjectIndex, 1);
+  //   }
+  // }
 
   save() {
     if (!this.validateInput()) {
@@ -382,24 +432,28 @@ export class TransferPreparationComponent implements OnInit {
       memoNo: this.fg.controls.memoNo.value,
       executeDate: this.fg.controls.executeDate.value,
       orderDetails: this.orderDetails,
+      cadreType: CadreType.NonCadre,
     };
-    this.orderService.create(this.orderdto).subscribe(() => {
-      Swal.fire({
-        icon: 'success',
-        title: 'সফল',
-        text: 'সফলভাবে তৈরি হয়েছে!',
-      });
-    }, (error) => {
-      Swal.fire({
-        icon: 'error',
-        title: 'ত্রুটি',
-        text: 'দুঃখিত, অর্ডারটি তৈরি করতে সমস্যার সৃষ্টি হয়েছে!',
-      });
-    });
+    this.orderService.create(this.orderdto).subscribe(
+      () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'সফল',
+          text: 'সফলভাবে তৈরি হয়েছে!',
+        });
+        this.router.navigateByUrl('/transfer/transfer-list');
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'ত্রুটি',
+          text: 'দুঃখিত, অর্ডারটি তৈরি করতে সমস্যার সৃষ্টি হয়েছে!',
+        });
+      }
+    );
   }
 
   validateInput(): boolean {
-
     let isValid = true;
     // if (this.fg.controls.designation.value) {
     //   if (this.fg.controls.designation.value === '') {
@@ -435,7 +489,7 @@ export class TransferPreparationComponent implements OnInit {
       });
       isValid = false;
     }
-    return isValid;// validateInput(mode: string): boolean {
+    return isValid; // validateInput(mode: string): boolean {
     // switch (mode) {
     //   case 'order':
     //     let isValid = true;
@@ -512,4 +566,35 @@ export class TransferPreparationComponent implements OnInit {
   //     }
   //   }
   // }
+
+  delete(order: OrderDetailDto) {
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: "You won't be able to revert this!",
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#3085d6',
+    //   cancelButtonColor: '#d33',
+    //   confirmButtonText: 'Yes, delete it!',
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     Swal.fire({
+    //       title: 'Deleted!',
+    //       text: 'Your file has been deleted.',
+    //       icon: 'success',
+    //     });
+    //   }
+    // });
+    const objectIndex = this.orderDetails.findIndex(
+      (obj) =>
+        obj.postFromId === order.postFromId && obj.postToId === order.postToId
+    );
+    if (objectIndex > -1) {
+      this.orderDetails.splice(objectIndex, 1);
+    }
+    // this.removeSelectedPostings
+  }
+  test(){
+    this.router.navigateByUrl('/transfer/transfer-list');
+  }
 }

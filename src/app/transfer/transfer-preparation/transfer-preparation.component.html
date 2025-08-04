@@ -14,7 +14,7 @@
           (cacheSVG)="(cacheSVG)"
         ></span>
       </a>
-      <h5 class="card-label">উপ-সহকারি প্রকৌশলী বদলীকরণ</h5>
+      <h5 class="card-label">উপ-সহকারি প্রকৌশলী বদলীকরণ</h5> <a (click)="test()">TEST</a>
     </div>
 
     <div class="card-toolbar"></div>
@@ -235,7 +235,25 @@
               </tr>
             </table>
           </div> -->
-          <div class="col-2 pt-3">নাম ও পদবী</div>
+          <div class="row">
+            <div class="form-group">
+              <label>
+                নাম ও পদবী
+                <!-- <span class="text-danger">*</span> -->
+              </label>
+              <select
+                name="fromPost"
+                formControlName="fromPost"
+                class="form-select"
+              >
+                <option value="">নির্বাচন করুন</option>
+                 <option *ngFor="let item of fromPostings" value="{{ item.id }}">
+                {{ extractEmployeeInfo(item, false) }}
+              </option>
+              </select>
+            </div>
+          </div>
+          <!-- <div class="col-2 pt-3">নাম ও পদবী</div>
           <div class="col-10">
             <select
               name="length"
@@ -247,7 +265,7 @@
                 {{ extractEmployeeInfo(item, false) }}
               </option>
             </select>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="col-6">
@@ -440,7 +458,7 @@
           <div class="row">
             <div class="form-group">
               <label>
-                নাম ও পদবী
+                পদবী
                 <!-- <span class="text-danger">*</span> -->
               </label>
               <select
@@ -474,7 +492,7 @@
       <div class="row text-center">
         <div class="col-12">
           <button class="btn btn-primary mr-2" (click)="add()">
-            <i class="fa fa-plus"></i> লিস্টে যোগ করুন
+            <i class="fa fa-plus"></i> তালিকায় যোগ করুন
           </button>
         </div>
       </div>
@@ -491,6 +509,9 @@
 
   <div class="card-body">
     <div class="row">
+      <div class="col-12 text-center pb-5" *ngIf="!orderDetails?.length">
+        <h3 class="text-danger">কোন তথ্য যোগ করা হয়নি!</h3>
+      </div>
       <div class="col-12" *ngIf="orderDetails?.length">
         <table table table-responsive>
           <tr>
@@ -502,14 +523,25 @@
           </tr>
           <tr *ngFor="let data of orderDetails; let i = index">
             <td>{{ this.toLocal(i + 1) }}</td>
-            <td class="text-start">{{ data.employeeNameBn }}</td>
+            <td class="text-start">{{ data.employeeNameBn }}<br />{{ data.postFromNameBn }}</td>
             <td class="text-start">
               {{ data.postFromNameBn }}<br />{{ data.postFromOfficeBn }}
             </td>
             <td class="text-start">
-              {{ data.postToNameBn }}<br />{{ data.postToOfficeBn }}
+              {{ data.postToPostBn }}<br />{{ data.postToOfficeBn }}
             </td>
-            <td></td>
+            <td>
+              <a
+                title="তালিকা থেকে মুছুন"
+                class="btn btn-icon btn-light btn-active-danger fw-bolder cursor-pointer"
+                data-kt-menu-trigger="click"
+                data-kt-menu-placement="bottom-end"
+                data-kt-menu-flip="top-end"
+                (click)="delete(data)"
+              >
+                <i class="fas fa-trash"></i>
+              </a>
+            </td>
           </tr>
         </table>
       </div>
@@ -543,7 +575,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
   <div class="card-footer">
