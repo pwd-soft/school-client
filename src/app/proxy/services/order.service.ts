@@ -1,6 +1,7 @@
 import { RestService } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import type { OrderDetailDto, OrderDto } from '../dto-models/models';
+import type { CadreType } from '../enum/cadre-type.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,14 @@ export class OrderService {
     this.restService.request<any, OrderDto>({
       method: 'GET',
       url: `/api/app/order/${id}/by-id`,
+    },
+    { apiName: this.apiName });
+
+  getList = (cadreType: CadreType) =>
+    this.restService.request<any, OrderDto[]>({
+      method: 'GET',
+      url: '/api/app/order',
+      params: { cadreType },
     },
     { apiName: this.apiName });
 

@@ -66,8 +66,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   }
 
-  onTransferPreparationClick(){
+  onTransferListClick(){
+    this.prep.refresh();
+    this.router.navigateByUrl('/transfer/transfer-list');
+  }
 
+  onTransferPreparationClick(){
     this.prep.refresh();
     this.router.navigateByUrl('/transfer/transfer-preparation');
   }

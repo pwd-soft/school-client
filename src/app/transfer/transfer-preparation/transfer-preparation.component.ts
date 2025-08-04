@@ -118,7 +118,7 @@ export class TransferPreparationComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private approvalService: ApprovalService,
     private orderService: OrderService,
-    private router: Router, // private toasterService: ToasterService, // private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
+    private router: Router // private toasterService: ToasterService, // private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
   ) {}
 
   ngOnInit(): void {
@@ -593,8 +593,5 @@ export class TransferPreparationComponent implements OnInit {
       this.orderDetails.splice(objectIndex, 1);
     }
     // this.removeSelectedPostings
-  }
-  test(){
-    this.router.navigateByUrl('/transfer/transfer-list');
   }
 }
