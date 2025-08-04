@@ -51,7 +51,7 @@
     </tree-ngx>
     {{selectedItems}} -->
 
-    <div class="row">
+    <div class="row pb-3">
       <div class="col-6">
         <div class="row">
           <h3 class="text-center">বর্তমান কর্মস্থল</h3>
@@ -235,8 +235,8 @@
               </tr>
             </table>
           </div> -->
-          <div class="col-3 pt-3">নাম ও পদবী</div>
-          <div class="col-8">
+          <div class="col-2 pt-3">নাম ও পদবী</div>
+          <div class="col-10">
             <select
               name="length"
               formControlName="fromPost"
@@ -437,50 +437,114 @@
             </table>
           </div> -->
 
-          <div class="col-3 pt-3">নাম ও পদবী</div>
-          <div class="col-8">
-            <select
-              name="length"
-              formControlName="toPost"
-              class="form-select"
-            >
+          <div class="row">
+            <div class="form-group">
+              <label>
+                নাম ও পদবী
+                <!-- <span class="text-danger">*</span> -->
+              </label>
+              <select
+                name="length"
+                formControlName="toPost"
+                class="form-select"
+              >
+                <option value="">নির্বাচন করুন</option>
+                <option *ngFor="let item of toPostings" value="{{ item.id }}">
+                  {{ extractEmployeeInfo(item, true) }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <!-- <div class="col-1 pt-3"></div>
+          <div class="col-2 pt-3">নাম ও পদবী</div>
+          <div class="col-9">
+            <select name="length" formControlName="toPost" class="form-select">
               <option value="">নির্বাচন করুন</option>
               <option *ngFor="let item of fromPostings" value="{{ item.id }}">
                 {{ extractEmployeeInfo(item, false) }}
               </option>
             </select>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
 
-    <!-- <div class="card-footer">YO</div> -->
+    <div class="card-footer">
+      <div class="row text-center">
+        <div class="col-12">
+          <button class="btn btn-primary mr-2" (click)="add()">
+            <i class="fa fa-plus"></i> লিস্টে যোগ করুন
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="card card-custom gutter-b mb-3" [formGroup]="fg">
   <div class="card-header">
-    <div class="card-title">
-      <a
-        routerLink="/audit/objections"
-        class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
-        style="margin-right: 10px"
-      >
-        <span
-          class="svg-icon svg-icon-3x svg-icon-primary mb-2"
-          [inlineSVG]="
-            './assets/media/svg/icons/General/back-button-svgrepo-com.svg'
-          "
-          (cacheSVG)="(cacheSVG)"
-        ></span>
-      </a>
-      <h5 class="card-label">অফিসার ট্রান্সফার করুন</h5>
-    </div>
+    <div class="card-title">নতুন পদায়নের তালিকা ও আনুষঙ্গিক তথ্য</div>
 
     <div class="card-toolbar"></div>
   </div>
 
-  <div class="card-body"></div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12" *ngIf="orderDetails?.length">
+        <table table table-responsive>
+          <tr>
+            <th class="w-10">#</th>
+            <th>নাম ও পদবী</th>
+            <th>বর্তমান কর্মস্থল</th>
+            <th>পদায়নকৃত কর্মস্থল</th>
+            <th class="w-20"></th>
+          </tr>
+          <tr *ngFor="let data of orderDetails; let i = index">
+            <td>{{ this.toLocal(i + 1) }}</td>
+            <td class="text-start">{{ data.employeeNameBn }}</td>
+            <td class="text-start">
+              {{ data.postFromNameBn }}<br />{{ data.postFromOfficeBn }}
+            </td>
+            <td class="text-start">
+              {{ data.postToNameBn }}<br />{{ data.postToOfficeBn }}
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="row pt-4">
+      <div class="col-4">
+        <div class="form-group">
+          <label class="pb-2">পদ</label>
+          <input
+            type="text"
+            formControlName="designation"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label class="pb-2">স্মারক নং</label>
+          <input type="text" formControlName="memoNo" class="form-control" />
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="form-group">
+          <label class="pb-2">তারিখ</label>
+          <input
+            type="text"
+            formControlName="executeDate"
+            class="form-control"
+          />
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <div class="card-footer">
     <div class="row text-center">

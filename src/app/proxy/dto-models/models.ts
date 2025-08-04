@@ -26,6 +26,27 @@ export interface ColleagueDto {
   roleNames: string[];
 }
 
+export interface OrderDetailDto extends EntityDto<number> {
+  orderId: number;
+  sequence: number;
+  employeeId?: string;
+  employeeNameBn?: string;
+  postFromId: number;
+  postFromNameBn?: string;
+  postFromPost?: string;
+  postFromOfficeBn?: string;
+  postToId: number;
+  postToNameBn?: string;
+  postToOfficeBn?: string;
+}
+
+export interface OrderDto extends EntityDto<number> {
+  designation?: string;
+  memoNo?: string;
+  executeDate?: string;
+  orderDetails: OrderDetailDto[];
+}
+
 export interface OrgRoleConsumeDto {
   roleId?: string;
   organizationUnitId?: string;

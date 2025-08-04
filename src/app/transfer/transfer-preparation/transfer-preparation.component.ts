@@ -2,11 +2,18 @@ import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner/lib/ngx-spinner.service';
 import { from } from 'rxjs';
-import { OrganizationUnitDto, PostingConsumeDto } from 'src/app/proxy/dto-models/models';
+import {
+  OrderDetailDto,
+  OrderDto,
+  OrganizationUnitDto,
+  PostingConsumeDto,
+} from 'src/app/proxy/dto-models/models';
+import { OrderService } from 'src/app/proxy/services';
 import { ApprovalService } from 'src/app/proxy/services/approval.service';
 import { Common } from 'src/app/shared/common/common';
 import { PreparationService } from 'src/app/shared/services/preparation.service';
 import { SubSink } from 'subsink';
+import Swal from 'sweetalert2';
 import { TreeMode, TreeNgxComponent } from 'tree-ngx';
 
 @Component({
@@ -35,6 +42,8 @@ export class TransferPreparationComponent implements OnInit {
 
   fromPostings: PostingConsumeDto[] = [];
   toPostings: PostingConsumeDto[] = [];
+  orderDetails: OrderDetailDto[] = [];
+  orderdto: OrderDto = {} as OrderDto;
 
   showFromSpinner: boolean = false;
   showToSpinner: boolean = false;
@@ -105,13 +114,9 @@ export class TransferPreparationComponent implements OnInit {
     private fb: FormBuilder,
     private preparationService: PreparationService,
     private cdRef: ChangeDetectorRef,
-    private approvalService: ApprovalService
-  ) // private activatedRoute: ActivatedRoute,
-  // private router: Router,
-  // private toasterService: ToasterService,
-  // private spinnerService: NgxSpinnerService,
-  // private approvalService: ApprovalService,
-  {}
+    private approvalService: ApprovalService,
+    private orderService: OrderService, // private router: Router, // private toasterService: ToasterService, // private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
+  ) {}
 
   ngOnInit(): void {
     this.loadForm();
@@ -131,7 +136,14 @@ export class TransferPreparationComponent implements OnInit {
       toSubDivision: [''],
       fromPost: [''],
       toPost: [''],
+      designation: ['উপ-সহকারী প্রকৌশলী বদলীকরণ'],
+      memoNo: [''],
+      executeDate: [this.todaysDate()],
     });
+  }
+
+  todaysDate(){
+    return new Date();
   }
 
   getOfficesByLayers(mode: string) {
@@ -277,20 +289,24 @@ export class TransferPreparationComponent implements OnInit {
   }
 
   getPostings(officeCode: string, mode: string) {
-    this.approvalService.officePostingsByUserName(officeCode).subscribe((postings) => {
-      if (mode === 'from') {
-        this.fromPostings = this.extractSAEs(postings);
-        this.showFromSpinner = false;
-      } else {
-        this.toPostings = this.extractSAEs(postings);
-        this.showToSpinner = false;
-      }
-      this.cdRef.detectChanges();
-    });
+    this.approvalService
+      .officePostingsByUserName(officeCode)
+      .subscribe((postings) => {
+        if (mode === 'from') {
+          this.fromPostings = this.extractSAEs(postings);
+          this.showFromSpinner = false;
+        } else {
+          this.toPostings = this.extractSAEs(postings);
+          this.showToSpinner = false;
+        }
+        this.cdRef.detectChanges();
+      });
   }
 
   extractSAEs(postings: PostingConsumeDto[]) {
-    const saes = postings.filter((posting) => posting.post.includes('Sub-Assistant Engineer'));
+    const saes = postings.filter((posting) =>
+      posting.post.includes('Sub-Assistant Engineer')
+    );
     return saes;
   }
 
@@ -300,9 +316,9 @@ export class TransferPreparationComponent implements OnInit {
 
   extractEmployeeInfo(posting: PostingConsumeDto, onlyPost: boolean) {
     if (onlyPost) {
-      return `${posting.designationBn}\n${posting.officeBn}`;
+      return `${posting.designationBn} - ${posting.officeBn}`;
     }
-    return `${posting.nameBn}\n${posting.designationBn}\n${posting.officeBn}`;
+    return `${posting.nameBn} - ${posting.designationBn} - ${posting.officeBn}`;
   }
 
   // onTypeChange() {
@@ -314,7 +330,160 @@ export class TransferPreparationComponent implements OnInit {
   //     this.fg.controls.subType.setValue('0');
   // }
 
-  save() {}
+  add() {
+    if (this.fg.controls.fromPost.value === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'থামুন...',
+        text: 'বর্তমান কর্মস্থল নির্বাচন করুন!',
+      });
+      return;
+    }
+    if (this.fg.controls.toPost.value === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'থামুন...',
+        text: 'পদায়নকৃত কর্মস্থল নির্বাচন করুন!',
+      });
+      return;
+    }
+    let fromPost = this.fromPostings.find(
+      (post) => post.id === this.fg.controls.fromPost.value
+    );
+    let toPost = this.toPostings.find(
+      (post) => post.id === this.fg.controls.toPost.value
+    );
+    const orderDetail: OrderDetailDto = {
+      employeeId: fromPost.id ? fromPost.id : '',
+      employeeNameBn: fromPost.nameBn ? fromPost.nameBn : '',
+      postFromId: fromPost.postingId ? fromPost.postingId : 0,
+      postFromNameBn: fromPost.designationBn ? fromPost.designationBn : '',
+      postFromOfficeBn: fromPost.officeBn ? fromPost.officeBn : '',
+      postToId: toPost.postingId ? toPost.postingId : 0,
+      postToNameBn: toPost.nameBn ? toPost.nameBn : '',
+      postToOfficeBn: toPost.officeBn ? toPost.officeBn : '',
+      orderId: 0,
+      sequence:
+        this.officerDesignations.find(
+          (od) => od.designation === 'উপ-সহকারী প্রকৌশলী'
+        )?.orderId || 0,
+    };
+    this.orderDetails.push(orderDetail);
+    this.fg.controls.fromPost.setValue('');
+    this.fg.controls.toPost.setValue('');
+  }
+
+  save() {
+    if (!this.validateInput()) {
+      return;
+    }
+    this.orderdto = {
+      designation: this.fg.controls.designation.value,
+      memoNo: this.fg.controls.memoNo.value,
+      executeDate: this.fg.controls.executeDate.value,
+      orderDetails: this.orderDetails,
+    };
+    this.orderService.create(this.orderdto).subscribe(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'সফল',
+        text: 'সফলভাবে তৈরি হয়েছে!',
+      });
+    }, (error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'ত্রুটি',
+        text: 'দুঃখিত, অর্ডারটি তৈরি করতে সমস্যার সৃষ্টি হয়েছে!',
+      });
+    });
+  }
+
+  validateInput(): boolean {
+
+    let isValid = true;
+    // if (this.fg.controls.designation.value) {
+    //   if (this.fg.controls.designation.value === '') {
+    //     Swal.fire({
+    //       icon: 'warning',
+    //       title: 'থামুন...',
+    //       text: 'পদ করুন!',
+    //     });
+    // isValid = false;
+    //   }
+    // }
+    if (this.fg.controls.memoNo.value === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'থামুন...',
+        text: 'স্মারক নম্বর এন্ট্রি করুন!',
+      });
+      isValid = false;
+    }
+    if (this.fg.controls.executeDate.value === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'থামুন...',
+        text: 'তারিখ এন্ট্রি করুন!',
+      });
+      isValid = false;
+    }
+    if (this.orderDetails.length === 0) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'থামুন...',
+        text: 'কর্মকর্তা যোগ করুন!',
+      });
+      isValid = false;
+    }
+    return isValid;// validateInput(mode: string): boolean {
+    // switch (mode) {
+    //   case 'order':
+    //     let isValid = true;
+    //     // if (this.fg.controls.designation.value) {
+    //     //   if (this.fg.controls.designation.value === '') {
+    //     //     Swal.fire({
+    //     //       icon: 'warning',
+    //     //       title: 'থামুন...',
+    //     //       text: 'পদ করুন!',
+    //     //     });
+    //     // isValid = false;
+    //     //   }
+    //     // }
+    //     if (this.fg.controls.memoNo.value) {
+    //       if (this.fg.controls.memoNo.value === '') {
+    //         Swal.fire({
+    //           icon: 'warning',
+    //           title: 'থামুন...',
+    //           text: 'স্মারক নম্বর এন্ট্রি করুন!',
+    //         });
+    //         isValid = false;
+    //       }
+    //     }
+    //     if (this.fg.controls.executeDate.value) {
+    //       if (this.fg.controls.executeDate.value === '') {
+    //         Swal.fire({
+    //           icon: 'warning',
+    //           title: 'থামুন...',
+    //           text: 'তারিখ এন্ট্রি করুন!',
+    //         });
+    //         isValid = false;
+    //       }
+    //     }
+    //     return isValid;
+
+    //   case 'orderDetails':
+    //     if (this.orderDetails.length === 0) {
+    //       Swal.fire({
+    //         icon: 'warning',
+    //         title: 'থামুন...',
+    //         text: 'কর্মকর্তা যোগ করুন!',
+    //       });
+    //     }
+    //     return false;
+    //   default:
+    //     return false;
+    // }
+  }
 
   // onNodeSelect(event: any){
   //   console.log(event);
