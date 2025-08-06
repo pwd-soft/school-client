@@ -574,11 +574,32 @@
       <div class="col-4">
         <div class="form-group">
           <label class="pb-2">তারিখ</label>
-          <input
+          <!-- <input
             type="text"
             formControlName="executeDate"
             class="form-control"
-          />
+          /> -->
+          <div class="input-group">
+          <input
+            class="form-control form-control-lg form-control-solid"
+            placeholder="dd/mm/yyyy"
+            name="executeDate"
+            formControlName="executeDate"
+            ngbDatepicker
+            #executeDate="ngbDatepicker"
+            (click)="executeDate.toggle()" readonly
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-primary"
+                (click)="executeDate.toggle()"
+                type="button"
+              >
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+
+        </div>
         </div>
       </div>
     </div>

@@ -109,8 +109,7 @@
           <tr *ngFor="let item of orders; let i = index">
             <td>{{ toLocal(i + 1) }}</td>
             <td class="text-start p-2">{{ item.designation }}</td>
-            <td>1234-1234-1324-1234-1234-1234-12</td>
-            <!-- <td>{{ item.memoNo }}</td> -->
+            <td>{{ item.memoNo }}</td>
             <td>{{ convertDateToBengali(item.executeDate) }}</td>
             <!-- <td class="text-start p-2">
               <a href={{getViewRouting(item.id)}}>{{ item.name }}</a>

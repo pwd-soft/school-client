@@ -2,14 +2,4 @@ abp generate-proxy -t ng --url http://scheduleapi.mis1pwd.com
 abp generate-proxy -t ng --url https://localhost:44345
 
 
-Excavation
-
-
-	RCC
-	backfill & truck option to go down
-
-
-	2022-08-20
-	---------------------
-	pile cap irregular (area+periferi+height)
-
+SAMPLE ২৫.০০.০০০০.০৩৬.০১৮.২৭.০০১৩.২৪-২৪৮

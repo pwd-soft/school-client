@@ -11,10 +11,12 @@ import {
 import { CadreType } from 'src/app/proxy/enum';
 import { OrderService } from 'src/app/proxy/services';
 import { ApprovalService } from 'src/app/proxy/services/approval.service';
+import { Common } from 'src/app/shared/common/common';
 import { PreparationService } from 'src/app/shared/services/preparation.service';
 import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
 import { TreeMode, TreeNgxComponent } from 'tree-ngx';
+import moment from 'moment';
 
 @Component({
   selector: 'app-transfer-preparation',
@@ -117,7 +119,7 @@ export class TransferPreparationComponent implements OnInit {
     private approvalService: ApprovalService,
     private orderService: OrderService,
     private router: Router, // private toasterService: ToasterService,
-    private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
+    private spinnerService: NgxSpinnerService // private approvalService: ApprovalService,
   ) {}
 
   ngOnInit(): void {
@@ -140,7 +142,9 @@ export class TransferPreparationComponent implements OnInit {
       toPost: [''],
       designation: ['উপ-সহকারী প্রকৌশলী বদলীকরণ'],
       memoNo: [''],
-      executeDate: [this.todaysDate()],
+      // executeDate: [this.todaysDate()],
+      executeDate: [],
+      // objectionDate: [this.objection?.objectionDate ? Common.ParseDateForUI(this.objection.objectionDate.toString()) : Common.ParseDateForUI(new Date().toString())],
     });
   }
 
@@ -429,7 +433,11 @@ export class TransferPreparationComponent implements OnInit {
     this.orderdto = {
       designation: this.fg.controls.designation.value,
       memoNo: this.fg.controls.memoNo.value,
-      executeDate: this.fg.controls.executeDate.value,
+      // executeDate: this.fg.controls.executeDate.value,
+      executeDate: moment(
+        this.fg.controls.executeDate.value,
+        Common.defaultDateFormat
+      ).format(Common.responseDateFormat),
       orderDetails: this.orderDetails,
       cadreType: CadreType.NonCadre,
     };
