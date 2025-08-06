@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner/lib/ngx-spinner.service';
-import { from } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 import {
   OrderDetailDto,
   OrderDto,
@@ -12,7 +11,6 @@ import {
 import { CadreType } from 'src/app/proxy/enum';
 import { OrderService } from 'src/app/proxy/services';
 import { ApprovalService } from 'src/app/proxy/services/approval.service';
-import { Common } from 'src/app/shared/common/common';
 import { PreparationService } from 'src/app/shared/services/preparation.service';
 import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
@@ -118,7 +116,8 @@ export class TransferPreparationComponent implements OnInit {
     private cdRef: ChangeDetectorRef,
     private approvalService: ApprovalService,
     private orderService: OrderService,
-    private router: Router // private toasterService: ToasterService, // private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
+    private router: Router, // private toasterService: ToasterService,
+    private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
   ) {}
 
   ngOnInit(): void {
@@ -434,8 +433,10 @@ export class TransferPreparationComponent implements OnInit {
       orderDetails: this.orderDetails,
       cadreType: CadreType.NonCadre,
     };
+    this.spinnerService.show();
     this.orderService.create(this.orderdto).subscribe(
       () => {
+        this.spinnerService.hide();
         Swal.fire({
           icon: 'success',
           title: 'সফল',
@@ -444,6 +445,7 @@ export class TransferPreparationComponent implements OnInit {
         this.router.navigateByUrl('/transfer/transfer-list');
       },
       (error) => {
+        this.spinnerService.hide();
         Swal.fire({
           icon: 'error',
           title: 'ত্রুটি',
