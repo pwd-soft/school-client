@@ -28,7 +28,7 @@ export class ErrorsComponent implements OnInit {
 
   ngOnInit(): void {
     if(!this.prep.isOfficeAdmin() && !this.prep.isValid())
-      this.showDashboardButton = false;
+      this.showDashboardButton = true;
   }
 
   routeToDashboard() {

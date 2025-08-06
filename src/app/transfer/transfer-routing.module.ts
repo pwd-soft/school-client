@@ -4,7 +4,8 @@ import { TransferPreparationComponent } from './transfer-preparation/transfer-pr
 import { TransferListComponent } from './transfer-list/transfer-list.component';
 
 const routes: Routes = [
-  { path: 'transfer-preparation',component:TransferPreparationComponent },
+  { path: 'transfer-order',component:TransferPreparationComponent },
+  { path: 'transfer-order-edit/:id',component:TransferPreparationComponent },
   { path: 'transfer-list',component:TransferListComponent },
   // { path: 'objection/new',component:CreateObjectionComponent },
   // { path: 'objection/update/:id',component:CreateObjectionComponent },

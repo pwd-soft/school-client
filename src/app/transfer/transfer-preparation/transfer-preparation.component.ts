@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   OrderDetailDto,
@@ -27,6 +27,7 @@ export class TransferPreparationComponent implements OnInit {
   @ViewChild(TreeNgxComponent) tree: TreeNgxComponent;
   // @ViewChild(NgSelectComponent) ngSelectComponent: NgSelectComponent;
 
+  id: number = 0;
   subs = new SubSink();
   cacheSVG = true;
   fg: FormGroup;
@@ -119,13 +120,16 @@ export class TransferPreparationComponent implements OnInit {
     private approvalService: ApprovalService,
     private orderService: OrderService,
     private router: Router, // private toasterService: ToasterService,
-    private spinnerService: NgxSpinnerService // private approvalService: ApprovalService,
+    private spinnerService: NgxSpinnerService, // private approvalService: ApprovalService,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.id = +this.activatedRoute.snapshot.paramMap.get('id') || 0;
     this.loadForm();
     this.offices = this.preparationService.offices;
     this.getOfficesByLayers('all');
+    this.loadData();
   }
 
   loadForm() {
@@ -140,12 +144,28 @@ export class TransferPreparationComponent implements OnInit {
       toSubDivision: [''],
       fromPost: [''],
       toPost: [''],
-      designation: ['উপ-সহকারী প্রকৌশলী বদলীকরণ'],
-      memoNo: [''],
+      designation: [this.orderdto.designation || 'উপ-সহকারী প্রকৌশলী বদলীকরণ'],
+      memoNo: [this.orderdto.memoNo || ''],
       // executeDate: [this.todaysDate()],
-      executeDate: [],
+      executeDate: [this.orderdto?.executeDate ? Common.ParseDateForUI(this.orderdto.executeDate.toString()) : Common.ParseDateForUI(new Date().toString())],
       // objectionDate: [this.objection?.objectionDate ? Common.ParseDateForUI(this.objection.objectionDate.toString()) : Common.ParseDateForUI(new Date().toString())],
     });
+  }
+
+  loadData() {
+    if (this.id > 0) {
+      this.spinnerService.show();
+      this.orderService.getById(this.id).subscribe((response) => {
+        this.spinnerService.hide();console.log(response);
+        this.orderdto = response;
+        this.orderDetails = response.orderDetails;
+        this.loadForm();
+        this.cdRef.detectChanges();
+      }),
+        (error) => {
+          this.spinnerService.hide();
+        };
+    }
   }
 
   todaysDate() {

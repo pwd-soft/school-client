@@ -147,7 +147,7 @@
               </span>
             </td> -->
             <td>
-              <a
+              <!-- <a
                 title="বিস্তারিত"
                 class="btn btn-sm btn-icon btn-flex btn-light btn-active-primary fw-bolder cursor-pointer"
                 data-kt-menu-trigger="click"
@@ -157,29 +157,28 @@
               >
                 <i class="fas fa-info"></i>
               </a>
-              |
-              <a
+              | -->
+              <!-- <a
                 title="এডিট"
                 class="btn btn-sm btn-icon btn-flex btn-light btn-active-primary fw-bolder cursor-pointer"
                 data-kt-menu-trigger="click"
                 data-kt-menu-placement="bottom-end"
                 data-kt-menu-flip="top-end"
-                (click)="edit(item.id)"
+                href="transfer/transfer-order/{{ item.id }}"
               >
                 <i class="fas fa-edit"></i>
               </a>
-              <!-- |
+              | -->
               <a
                 title="চিঠি"
                 class="btn btn-sm btn-icon btn-flex btn-light btn-active-primary fw-bolder cursor-pointer"
                 data-kt-menu-trigger="click"
                 data-kt-menu-placement="bottom-end"
                 data-kt-menu-flip="top-end"
-                (click)="responses(item.id)"
+                (click)="generatePdf(item.id)"
               >
               <i class="fas fa-file-pdf"></i>
-              <i class="far fa-file-pdf"></i>
-              </a> -->
+              </a>
             </td>
           </tr>
         </table>
