@@ -99,88 +99,10 @@ export class TransferListComponent implements OnInit {
   getPdfTableHeader(): any[] {
     return [
       [
-        { text: 'ক্রম', style: 'headerTexts', rowSpan: 2 },
-        {
-          text: 'মন্ত্রনালয়/বিভাগ/দপ্তর/সংস্থার নাম',
-          style: 'headerTexts',
-          rowSpan: 2,
-        },
-        {
-          text: 'পূর্ববর্তী মাসের অডিট আপত্তির জের',
-          style: 'headerTexts',
-          colSpan: 2,
-        },
-        {},
-        {
-          text: 'বর্তমান মাসের অডিট আপত্তি',
-          style: 'headerTexts',
-          colSpan: 2,
-        },
-        {},
-        { text: 'মোট আপত্তির তথ্য', style: 'headerTexts', colSpan: 2 },
-        {},
-        {
-          text: 'গত মাসে প্রেরিত ব্রডশিট জবাবের সংখ্যা',
-          style: 'headerTexts',
-          rowSpan: 2,
-        },
-        {
-          text: 'অনিষ্পন্ন ব্রডশিট জবাবের সংখ্যা',
-          style: 'headerTexts',
-          rowSpan: 2,
-        },
-        {
-          text: 'বর্তমান মাসের অডিট আপত্তি নিষ্পত্তির তথ্য',
-          style: 'headerTexts',
-          colSpan: 2,
-        },
-        {},
-        { text: 'স্থিতি সংক্রান্ত তথ্য', style: 'headerTexts', colSpan: 5 },
-        {},
-        {},
-        {},
-        {},
-        { text: 'মন্তব্য', style: 'headerTexts', rowSpan: 2 },
-      ],
-      [
-        {},
-        {},
-        { text: 'সংখ্যা', style: 'headerTexts' },
-        { text: 'টাকার পরিমাণ', style: 'headerTexts' },
-        { text: 'সংখ্যা', style: 'headerTexts' },
-        { text: 'টাকার পরিমাণ', style: 'headerTexts' },
-        { text: 'সংখ্যা (৩+৫)', style: 'headerTexts' },
-        { text: 'টাকার পরিমাণ (৪+৬)', style: 'headerTexts' },
-        { text: '', style: 'headerTexts' },
-        { text: '', style: 'headerTexts' },
-        { text: 'সংখ্যা', style: 'headerTexts' },
-        { text: 'টাকার পরিমাণ', style: 'headerTexts' },
-        { text: 'ননএসএফআই আপত্তির সংখ্যা', style: 'headerTexts' },
-        { text: 'এসএফআই আপত্তির সংখ্যা', style: 'headerTexts' },
-        { text: 'রিপোর্টভুক্ত আপত্তির সংখ্যা', style: 'headerTexts' },
-        { text: 'মোট আপত্তির সংখ্যা (১৩+১৪+১৫-১১)', style: 'headerTexts' },
-        { text: 'মোট টাকার পরিমাণ', style: 'headerTexts' },
-        { text: '', style: 'headerTexts' },
-      ],
-      [
-        { text: '১', style: 'headerTexts' },
-        { text: '২', style: 'headerTexts' },
-        { text: '৩', style: 'headerTexts' },
-        { text: '৪', style: 'headerTexts' },
-        { text: '৫', style: 'headerTexts' },
-        { text: '৬', style: 'headerTexts' },
-        { text: '৭', style: 'headerTexts' },
-        { text: '৮', style: 'headerTexts' },
-        { text: '৯', style: 'headerTexts' },
-        { text: '১০', style: 'headerTexts' },
-        { text: '১১', style: 'headerTexts' },
-        { text: '১২', style: 'headerTexts' },
-        { text: '১৩', style: 'headerTexts' },
-        { text: '১৪', style: 'headerTexts' },
-        { text: '১৫', style: 'headerTexts' },
-        { text: '১৬', style: 'headerTexts' },
-        { text: '১৭', style: 'headerTexts' },
-        { text: '১৮', style: 'headerTexts' },
+        { text: 'ক্রম', style: 'headerTexts' },
+        { text: 'নাম ও পদবী', style: 'headerTexts' },
+        { text: 'বর্তমান কর্মস্থল', style: 'headerTexts' },
+        { text: 'পদায়নকৃত কর্মস্থল', style: 'headerTexts' },
       ],
     ];
   }
@@ -260,7 +182,7 @@ export class TransferListComponent implements OnInit {
   createDocument() {
     this.pdfDefinition = {
       pageSize: 'A4',
-      pageOrientation: 'landscape',
+      // pageOrientation: 'landscape',
       // watermark: {text:'Public Works Department',color: '#c9c7c7'},
       info: {
         title: 'Audit Report',
@@ -273,23 +195,25 @@ export class TransferListComponent implements OnInit {
           fontSize: 14,
         },
         {
-          text: 'প্রধান প্রকৌশলীর কার্যালয়\nগণপূর্ত মনিটরিং এন্ড অডিট সার্কেল,\nপূর্ত ভবন, ঢাকা।\nফোনঃ ০২২২৩৩৮২২০৭',
+          // text: 'প্রধান প্রকৌশলীর কার্যালয়\nগণপূর্ত মনিটরিং এন্ড অডিট সার্কেল,\nপূর্ত ভবন, ঢাকা।\nফোনঃ ০২২২৩৩৮২২০৭',
+          text: 'গণপূর্ত অধিদপ্তর\nপূর্ত ভবন, ঢাকা।\nফোনঃ ০২২২৩৩৮২২০৭',
           style: 'header2',
           alignment: 'center',
         },
-        '\n\nবিষয়ঃ মাসিক সমন্বয় সভার জন্য অডিট আপত্তি সংক্রান্ত তথ্য',
-        {
-          columns: [
-            [{ text: 'মাসের নামঃ __________________________________________' }],
-            [
-              {
-                text: 'টাকার পরিমাণঃ লক্ষ টাকায়',
-                alignment: 'right',
-              },
-            ],
-          ],
-          style: 'lineSpacing12',
-        },
+        '\n\n',
+        // '\n\nবিষয়ঃ মাসিক সমন্বয় সভার জন্য অডিট আপত্তি সংক্রান্ত তথ্য',
+        // {
+        //   columns: [
+        //     [{ text: 'মাসের নামঃ __________________________________________' }],
+        //     [
+        //       {
+        //         text: 'টাকার পরিমাণঃ লক্ষ টাকায়',
+        //         alignment: 'right',
+        //       },
+        //     ],
+        //   ],
+        //   style: 'lineSpacing12',
+        // },
         // {text: 'Column/row spans', pageBreak: 'before', style: 'subheader'},
         // {text: 'Column/row spans', style: 'subheader'},
         // 'Each cell-element can set a rowSpan or colSpan',
@@ -298,7 +222,8 @@ export class TransferListComponent implements OnInit {
           // color: '#444',
           // layout: 'lightHorizontalLines',
           table: {
-            widths: [15, '*', 25, 40, 25, 40, 25, 40, 25, 25, 25, 40, 30, 30, 30, 30, 40, 40],
+            // widths: [15, '*', 25, 40, 25, 40, 25, 40, 25, 25, 25, 40, 30, 30, 30, 30, 40, 40],
+            widths: [15, '*', 40, 40],
             headerRows: 3,
             // keepWithHeaderRows: 1,
             dontBreakRows: true,
