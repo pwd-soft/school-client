@@ -10,7 +10,6 @@ import { NgbDateAdapter, NgbDateStruct, NgbDateParserFormatter, NgbModalModule, 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from '../shared/shared.module';
-import { TreeNgxModule } from 'tree-ngx';
 import { TransferListComponent } from './transfer-list/transfer-list.component';
 
 @Injectable()
@@ -80,7 +79,6 @@ import { TransferListComponent } from './transfer-list/transfer-list.component';
     NgbModalModule,
     HttpClientModule,
     NgbDatepickerModule,
-    TreeNgxModule,
     // MatTabsModule,
     // MatDividerModule,
     // MatRadioModule,

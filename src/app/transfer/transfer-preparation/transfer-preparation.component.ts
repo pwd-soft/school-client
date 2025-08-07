@@ -15,7 +15,6 @@ import { Common } from 'src/app/shared/common/common';
 import { PreparationService } from 'src/app/shared/services/preparation.service';
 import { SubSink } from 'subsink';
 import Swal from 'sweetalert2';
-import { TreeMode, TreeNgxComponent } from 'tree-ngx';
 import moment from 'moment';
 
 @Component({
@@ -24,7 +23,6 @@ import moment from 'moment';
   styleUrls: ['./transfer-preparation.component.scss'],
 })
 export class TransferPreparationComponent implements OnInit {
-  @ViewChild(TreeNgxComponent) tree: TreeNgxComponent;
   // @ViewChild(NgSelectComponent) ngSelectComponent: NgSelectComponent;
 
   id: number = 0;
@@ -62,57 +60,6 @@ export class TransferPreparationComponent implements OnInit {
     { designation: 'অন্যান্য', order: 8, tag: 'Others' },
   ];
 
-  nodeItems = [
-    {
-      id: '0',
-      name: 'Heros',
-      children: [
-        {
-          id: '1',
-          name: 'Batman',
-          item: {
-            phrase: 'I am the batman',
-          },
-        },
-        {
-          id: '2',
-          name: 'Superman',
-          item: {
-            phrase: 'Man of steel',
-          },
-        },
-      ],
-    },
-    {
-      id: '3',
-      name: 'Villains',
-      children: [
-        {
-          id: '4',
-          name: 'Joker',
-          item: {
-            phrase: 'Why so serius',
-          },
-        },
-        {
-          id: '5',
-          name: 'Lex luthor',
-          item: {
-            phrase: 'I am the villain of this story',
-          },
-        },
-      ],
-    },
-  ];
-
-  options = {
-    mode: TreeMode.SingleSelect,
-    checkboxes: false,
-    alwaysEmitSelected: false,
-  };
-
-  selectedItems = [];
-
   constructor(
     private fb: FormBuilder,
     private preparationService: PreparationService,
@@ -147,7 +94,11 @@ export class TransferPreparationComponent implements OnInit {
       designation: [this.orderdto.designation || 'উপ-সহকারী প্রকৌশলী বদলীকরণ'],
       memoNo: [this.orderdto.memoNo || ''],
       // executeDate: [this.todaysDate()],
-      executeDate: [this.orderdto?.executeDate ? Common.ParseDateForUI(this.orderdto.executeDate.toString()) : Common.ParseDateForUI(new Date().toString())],
+      executeDate: [
+        this.orderdto?.executeDate
+          ? Common.ParseDateForUI(this.orderdto.executeDate.toString())
+          : Common.ParseDateForUI(new Date().toString()),
+      ],
       // objectionDate: [this.objection?.objectionDate ? Common.ParseDateForUI(this.objection.objectionDate.toString()) : Common.ParseDateForUI(new Date().toString())],
     });
   }
@@ -156,7 +107,8 @@ export class TransferPreparationComponent implements OnInit {
     if (this.id > 0) {
       this.spinnerService.show();
       this.orderService.getById(this.id).subscribe((response) => {
-        this.spinnerService.hide();console.log(response);
+        this.spinnerService.hide();
+        console.log(response);
         this.orderdto = response;
         this.orderDetails = response.orderDetails;
         this.loadForm();
@@ -364,15 +316,6 @@ export class TransferPreparationComponent implements OnInit {
     }
     return `${posting.nameBn} - ${posting.designationBn} - ${posting.officeBn}`;
   }
-
-  // onTypeChange() {
-  //   // this.ngSelectComponent.handleClearClick();
-  //   if (
-  //     +this.fg.controls.type.value === 1 ||
-  //     +this.fg.controls.type.value === 4
-  //   )
-  //     this.fg.controls.subType.setValue('0');
-  // }
 
   add() {
     if (this.fg.controls.fromPost.value === '') {
