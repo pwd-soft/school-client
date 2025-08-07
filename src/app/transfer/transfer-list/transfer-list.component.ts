@@ -223,8 +223,8 @@ export class TransferListComponent implements OnInit {
           // layout: 'lightHorizontalLines',
           table: {
             // widths: [15, '*', 25, 40, 25, 40, 25, 40, 25, 25, 25, 40, 30, 30, 30, 30, 40, 40],
-            widths: [15, '*', 40, 40],
-            headerRows: 3,
+            widths: [30, '*', 150, 150],
+            headerRows: 1,
             // keepWithHeaderRows: 1,
             dontBreakRows: true,
 
