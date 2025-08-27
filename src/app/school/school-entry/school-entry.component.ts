@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SchoolService } from '../../proxy/services';
 import { ActivatedRoute } from '@angular/router';
+import { SchoolDto } from '../../proxy/dto-models';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./school-entry.component.scss']
 })
 export class SchoolEntryComponent implements OnInit {
-  upazilaForm: FormGroup;
+  schoolForm: FormGroup;
+
   id: string = "";
 
   constructor(private fb: FormBuilder,
@@ -22,44 +24,23 @@ export class SchoolEntryComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id') || "";
     this.loadForm()
-    this.addSchool();
     this.loadData();
   }
 
   loadForm() {
-    this.upazilaForm = this.fb.group({
+    this.schoolForm = this.fb.group({
+      id: [0],
+      officeCode: [''],
+      sdOfficeCode: [''],
+      division: [''],
       district: ['', Validators.required],
-      upazila: ['', Validators.required],
-      schools: this.fb.array([]),
-      aueoName: ['', Validators.required],
-      aueoMobile: ['', [Validators.required, Validators.pattern(/^\d{10,15}$/)]],
-      saeAeName: ['', Validators.required],
-      saeAeMobile: ['', [Validators.required, Validators.pattern(/^\d{10,15}$/)]],
-      ueoName: ['', Validators.required],
-      ueoMobile: ['', [Validators.required, Validators.pattern(/^\d{10,15}$/)]]
-    });
-  }
-
-  loadData() {
-    this.schoolService.getById(this.id).subscribe((x) => {
-      console.log(x);
-      //this.upazilaForm.controls.
-      this.cdRef.detectChanges();
-    });
-  }
-
-  get schools(): FormArray {
-    return this.upazilaForm.get('schools') as FormArray;
-  }
-
-  addSchool(): void {
-    const schoolGroup = this.fb.group({
+      thana: ['', Validators.required],
+      sequence: [''],
       name: ['', Validators.required],
-      emisCode: ['', Validators.required],
-      upazila: ['', Validators.required],
-      district: ['', Validators.required],
-      headTeacherName: ['', Validators.required],
-      headTeacherMobile: ['', [Validators.required, Validators.pattern(/^\d{10,15}$/)]],
+      emis: ['', Validators.required],
+      headMaster: ['', Validators.required],
+      mobile: ['', [Validators.required, Validators.pattern(/^\d{10,15}$/)]],
+      isSaved: [false],
       totalLandDecimals: [0, [Validators.required, Validators.min(0)]],
       undisputedLandDecimals: [0, [Validators.required, Validators.min(0)]],
       hasLandComplications: [false, Validators.required],
@@ -89,27 +70,43 @@ export class SchoolEntryComponent implements OnInit {
       buildings: this.fb.array([]),
       studentCounts: this.fb.array([])
     });
-    this.schools.push(schoolGroup);
-    this.addBuilding(this.schools.length - 1);
-    this.addStudentCount(this.schools.length - 1, 'প্রি-প্রাইমারী (৪+)');
-    this.addStudentCount(this.schools.length - 1, 'প্রি-প্রাইমারী (৫+)');
-    this.addStudentCount(this.schools.length - 1, 'প্রথম শ্রেণী');
-    this.addStudentCount(this.schools.length - 1, 'দ্বিতীয় শ্রেণী');
-    this.addStudentCount(this.schools.length - 1, 'তৃতীয় শ্রেণী');
-    this.addStudentCount(this.schools.length - 1, 'চতুর্থ শ্রেণী');
-    this.addStudentCount(this.schools.length - 1, 'পঞ্চম শ্রেণী');
+
+    // Initialize student counts for predefined class levels
+    this.addStudentCount('প্রি-প্রাইমারী (৪+)');
+    this.addStudentCount('প্রি-প্রাইমারী (৫+)');
+    this.addStudentCount('প্রথম শ্রেণী');
+    this.addStudentCount('দ্বিতীয় শ্রেণী');
+    this.addStudentCount('তৃতীয় শ্রেণী');
+    this.addStudentCount('চতুর্থ শ্রেণী');
+    this.addStudentCount('পঞ্চম শ্রেণী');
+    this.addBuilding(); 
   }
 
-  removeSchool(index: number): void {
-    this.schools.removeAt(index);
+  loadData() {
+    this.schoolService.getById(this.id).subscribe((x:SchoolDto) => {
+      console.log(x);
+      this.schoolForm.controls.name.setValue(x.name);
+      this.schoolForm.controls.emis.setValue(x.emis);
+      this.schoolForm.controls.division.setValue(x.division);
+      this.schoolForm.controls.district.setValue(x.district);
+      this.schoolForm.controls.thana.setValue(x.thana);
+      this.schoolForm.controls.sequence.setValue(x.sequence);
+      //this.upazilaForm.controls.
+      this.cdRef.detectChanges();
+    });
   }
 
-  getBuildings(schoolIndex: number): FormArray {
-    return this.schools.at(schoolIndex).get('buildings') as FormArray;
+  get buildings(): FormArray {
+    return this.schoolForm.get('buildings') as FormArray;
   }
 
-  addBuilding(schoolIndex: number): void {
+  get studentCounts(): FormArray {
+    return this.schoolForm.get('studentCounts') as FormArray;
+  }
+
+  addBuilding(): void {
     const buildingGroup = this.fb.group({
+      id: [0],
       buildingNumber: [0, [Validators.required, Validators.min(1)]],
       constructionYear: [0, [Validators.required, Validators.min(1900)]],
       projectName: [''],
@@ -126,34 +123,33 @@ export class SchoolEntryComponent implements OnInit {
       comments: [''],
       lengthFeet: [0, [Validators.required, Validators.min(0)]],
       widthFeet: [0, [Validators.required, Validators.min(0)]],
-      isProposed: [false, Validators.required]
+      isProposed: [false, Validators.required],
+      schoolId: [0]
     });
-    this.getBuildings(schoolIndex).push(buildingGroup);
+    this.buildings.push(buildingGroup);
   }
 
-  removeBuilding(schoolIndex: number, buildingIndex: number): void {
-    this.getBuildings(schoolIndex).removeAt(buildingIndex);
+  removeBuilding(index: number): void {
+    this.buildings.removeAt(index);
   }
 
-  getStudentCounts(schoolIndex: number): FormArray {
-    return this.schools.at(schoolIndex).get('studentCounts') as FormArray;
-  }
-
-  addStudentCount(schoolIndex: number, classLevel: string): void {
+  addStudentCount(classLevel: string): void {
     const studentCountGroup = this.fb.group({
+      id: [0],
       classLevel: [classLevel, Validators.required],
-      studentNumber: [0, [Validators.required, Validators.min(0)]]
+      studentNumber: [0, [Validators.required, Validators.min(0)]],
+      schoolId: [0]
     });
-    this.getStudentCounts(schoolIndex).push(studentCountGroup);
+    this.studentCounts.push(studentCountGroup);
   }
 
-  removeStudentCount(schoolIndex: number, countIndex: number): void {
-    this.getStudentCounts(schoolIndex).removeAt(countIndex);
+  removeStudentCount(index: number): void {
+    this.studentCounts.removeAt(index);
   }
 
   onSubmit(): void {
-    if (this.upazilaForm.valid) {
-      this.schoolService.create(this.upazilaForm.value).subscribe(
+    if (this.schoolForm.valid) {
+      this.schoolService.create(this.schoolForm.value).subscribe(
         response => {
           console.log('Form saved successfully', response);
         },
@@ -162,7 +158,7 @@ export class SchoolEntryComponent implements OnInit {
         }
       );
     } else {
-      this.upazilaForm.markAllAsTouched();
+      this.schoolForm.markAllAsTouched();
     }
   }
 }

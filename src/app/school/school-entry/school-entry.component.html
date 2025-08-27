@@ -1,464 +1,440 @@
-<script type="text/javascript">
-  var gk_isXlsx = false;
-  var gk_xlsxFileLookup = {};
-  var gk_fileData = {};
-  function filledCell(cell) {
-    return cell !== '' && cell != null;
-  }
-  function loadFileData(filename) {
-    if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-      try {
-        var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-        var firstSheetName = workbook.SheetNames[0];
-        var worksheet = workbook.Sheets[firstSheetName];
-
-        // Convert sheet to JSON to filter blank rows
-        var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-        // Filter out blank rows (rows where all cells are empty, null, or undefined)
-        var filteredData = jsonData.filter(row => row.some(filledCell));
-
-        // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-        var headerRowIndex = filteredData.findIndex((row, index) =>
-          row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-        );
-        // Fallback
-        if (headerRowIndex === -1 || headerRowIndex > 25) {
-          headerRowIndex = 0;
-        }
-
-        // Convert filtered JSON back to CSV
-        var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-        csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-        return csv;
-      } catch (e) {
-        console.error(e);
-        return "";
-      }
-    }
-    return gk_fileData[filename] || "";
-  }
-</script><div class="container mt-5">
-  <h2 class="mb-4">তথ্য ছক</h2>
-  <form [formGroup]="upazilaForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label for="district">জেলা</label>
-        <input type="text" class="form-control" id="district" formControlName="district" [ngClass]="{'is-invalid': upazilaForm.get('district')?.invalid && upazilaForm.get('district')?.touched}">
-        <div class="invalid-feedback">জেলা প্রয়োজন।</div>
+<div class="container mt-5">
+  <!--<h2 class="mb-4">তথ্য ছক</h2>-->
+  <form [formGroup]="schoolForm" (ngSubmit)="onSubmit()">
+    <div class="card mb-4">
+      <!--<h5 class="card-title">বিদ্যালয়ের তথ্য</h5>-->
+      <div class="card-header">
+        <h2>তথ্য ছক</h2>
       </div>
-      <div class="col-md-6 mb-3">
-        <label for="upazila">উপজেলা</label>
-        <input type="text" class="form-control" id="upazila" formControlName="upazila" [ngClass]="{'is-invalid': upazilaForm.get('upazila')?.invalid && upazilaForm.get('upazila')?.touched}">
-        <div class="invalid-feedback">উপজেলা প্রয়োজন।</div>
+      <div class="card-header">
+        <h4>বিদ্যালয়ের তথ্য</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>বিদ্যালয়ের নাম</label>
+            <input type="text" class="form-control" formControlName="name" [ngClass]="{'is-invalid': schoolForm.get('name')?.invalid && schoolForm.get('name')?.touched}">
+            <div class="invalid-feedback">বিদ্যালয়ের নাম প্রয়োজন।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>ইএমআইএস কোড</label>
+            <input type="text" class="form-control" formControlName="emis" [ngClass]="{'is-invalid': schoolForm.get('emis')?.invalid && schoolForm.get('emis')?.touched}">
+            <div class="invalid-feedback">ইএমআইএস কোড প্রয়োজন।</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>বিভাগ</label>
+            <input type="text" class="form-control" formControlName="division">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>জেলা</label>
+            <input type="text" class="form-control" formControlName="district" [ngClass]="{'is-invalid': schoolForm.get('district')?.invalid && schoolForm.get('district')?.touched}">
+            <div class="invalid-feedback">জেলা প্রয়োজন।</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>উপজেলা</label>
+            <input type="text" class="form-control" formControlName="thana" [ngClass]="{'is-invalid': schoolForm.get('thana')?.invalid && schoolForm.get('thana')?.touched}">
+            <div class="invalid-feedback">উপজেলা প্রয়োজন।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>ক্রম</label>
+            <input type="text" class="form-control" formControlName="sequence">
+          </div>
+        </div>
+        <div class="row">
+
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>প্রধান শিক্ষকের নাম</label>
+            <input type="text" class="form-control" formControlName="headMaster" [ngClass]="{'is-invalid': schoolForm.get('headMaster')?.invalid && schoolForm.get('headMaster')?.touched}">
+            <div class="invalid-feedback">প্রধান শিক্ষকের নাম প্রয়োজন।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>মোবাইল নাম্বার</label>
+            <input type="text" class="form-control" formControlName="mobile" [ngClass]="{'is-invalid': schoolForm.get('mobile')?.invalid && schoolForm.get('mobile')?.touched}">
+            <div class="invalid-feedback">বৈধ মোবাইল নাম্বার প্রয়োজন (১০-১৫ সংখ্যা)।</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>অতিরিক্ত শ্রেণিকক্ষ নির্মাণের প্রয়োজনীয়তা থাকলে তা কিভাবে বাস্তবায়ন সম্ভব?</label>
+            <select class="form-select" formControlName="additionalRoomsMethod" [ngClass]="{'is-invalid': schoolForm.get('additionalRoomsMethod')?.invalid && schoolForm.get('additionalRoomsMethod')?.touched}">
+              <option value="New Building">বিদ্যালয় প্রাঙ্গণে পৃথকভাবে নতুন ভবন নির্মাণ</option>
+              <option value="Demolish Old">বিদ্যমান পুরাতন/জরাজীর্ণ ভবন ভেঙে নতুন ভবন নির্মাণ</option>
+              <option value="Vertical Expansion">বিদ্যমান ভবনে ঊর্ধ্বমুখী সম্প্রসারণের মাধ্যমে শ্রেণিকক্ষ নির্মাণ</option>
+            </select>
+            <div class="invalid-feedback">প্রয়োজন।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>পৃথকভাবে নতুন ভবন নির্মাণের জন্য জায়গা আছে কিনা?</label>
+            <select class="form-select" formControlName="spaceAvailableForNewBuilding" [ngClass]="{'is-invalid': schoolForm.get('spaceAvailableForNewBuilding')?.invalid && schoolForm.get('spaceAvailableForNewBuilding')?.touched}">
+              <option [value]="true">হ্যাঁ</option>
+              <option [value]="false">না</option>
+            </select>
+            <div class="invalid-feedback">প্রয়োজন।</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>ভবন নির্মাণ কালে অস্থায়ী ঘরের প্রয়োজন হবে কিনা?</label>
+            <select class="form-select" formControlName="needsTemporaryRoomsDuringConstruction" [ngClass]="{'is-invalid': schoolForm.get('needsTemporaryRoomsDuringConstruction')?.invalid && schoolForm.get('needsTemporaryRoomsDuringConstruction')?.touched}">
+              <option [value]="true">হ্যাঁ</option>
+              <option [value]="false">না</option>
+            </select>
+            <div class="invalid-feedback">প্রয়োজন।</div>
+          </div>
+          <!--<div class="col-md-6 mb-3">
+            <label>অতিরিক্ত শ্রেণিকক্ষ প্রয়োজন</label>
+            <input type="number" class="form-control" formControlName="additionalClassroomsRequired" [ngClass]="{'is-invalid': schoolForm.get('additionalClassroomsRequired')?.invalid && schoolForm.get('additionalClassroomsRequired')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>-->
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>বিদ্যালয়ের মোট জমির পরিমাণ কত শতক?</label>
+            <input type="number" class="form-control" formControlName="totalLandDecimals" [ngClass]="{'is-invalid': schoolForm.get('totalLandDecimals')?.invalid && schoolForm.get('totalLandDecimals')?.touched}">
+            <div class="invalid-feedback">মোট জমির পরিমাণ প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>নিস্কন্টক জমির পরিমাণ কত শতক?</label>
+            <input type="number" class="form-control" formControlName="undisputedLandDecimals" [ngClass]="{'is-invalid': schoolForm.get('undisputedLandDecimals')?.invalid && schoolForm.get('undisputedLandDecimals')?.touched}">
+            <div class="invalid-feedback">নিস্কন্টক জমির পরিমাণ প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>জমি সংক্রান্ত কোন জটিলতা/মামলা/বেদখল আছে কিনা?</label>
+            <select class="form-select" formControlName="hasLandComplications" [ngClass]="{'is-invalid': schoolForm.get('hasLandComplications')?.invalid && schoolForm.get('hasLandComplications')?.touched}">
+              <option [value]="true">হ্যাঁ</option>
+              <option [value]="false">না</option>
+            </select>
+            <div class="invalid-feedback">প্রয়োজন।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>জমি সংক্রান্ত জটিলতা থাকলে জমির পরিমাণ কত শতক?</label>
+            <input type="number" class="form-control" formControlName="complicatedLandDecimals" [ngClass]="{'is-invalid': schoolForm.get('complicatedLandDecimals')?.invalid && schoolForm.get('complicatedLandDecimals')?.touched}">
+            <div class="invalid-feedback">>= ০ হতে হবে।</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>বিদ্যালয়টির জমি সরকার/বিদ্যালয়ের নামে রেকর্ড আছে কিনা?</label>
+            <select class="form-select" formControlName="landRecordedInGovtName" [ngClass]="{'is-invalid': schoolForm.get('landRecordedInGovtName')?.invalid && schoolForm.get('landRecordedInGovtName')?.touched}">
+              <option [value]="true">হ্যাঁ</option>
+              <option [value]="false">না</option>
+            </select>
+            <div class="invalid-feedback">প্রয়োজন।</div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>বিদ্যালয়ের জমির সীমানা নির্ধারণ করা আছে কিনা?</label>
+            <select class="form-select" formControlName="boundaryDetermined" [ngClass]="{'is-invalid': schoolForm.get('boundaryDetermined')?.invalid && schoolForm.get('boundaryDetermined')?.touched}">
+              <option [value]="true">হ্যাঁ</option>
+              <option [value]="false">না</option>
+            </select>
+            <div class="invalid-feedback">প্রয়োজন।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>সীমানা প্রাচীরের প্রয়োজনীয়তা থাকলে কত ফুট প্রয়োজন?</label>
+            <input type="number" class="form-control" formControlName="boundaryWallNeededFeet" [ngClass]="{'is-invalid': schoolForm.get('boundaryWallNeededFeet')?.invalid && schoolForm.get('boundaryWallNeededFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>মোট শিক্ষকের পদ সংখ্যা</label>
+            <input type="number" class="form-control" formControlName="totalTeacherPosts" [ngClass]="{'is-invalid': schoolForm.get('totalTeacherPosts')?.invalid && schoolForm.get('totalTeacherPosts')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>কর্মরত শিক্ষকের সংখ্যা</label>
+            <input type="number" class="form-control" formControlName="workingTeachers" [ngClass]="{'is-invalid': schoolForm.get('workingTeachers')?.invalid && schoolForm.get('workingTeachers')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>বিদ্যালয়টি কোন শিফটে পরিচালিত হচ্ছে?</label>
+            <select class="form-select" formControlName="shiftType" [ngClass]="{'is-invalid': schoolForm.get('shiftType')?.invalid && schoolForm.get('shiftType')?.touched}">
+              <option value="Single">সিঙ্গেল শিফট</option>
+              <option value="Double">ডবল শিফট</option>
+            </select>
+            <div class="invalid-feedback">প্রয়োজন।</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>বিদ্যালয়টি নদী ভাঙন প্রবণ এলাকায় অবস্থিত কিনা?</label>
+            <select class="form-select" formControlName="isRiverErosionProne" [ngClass]="{'is-invalid': schoolForm.get('isRiverErosionProne')?.invalid && schoolForm.get('isRiverErosionProne')?.touched}">
+              <option [value]="true">হ্যাঁ</option>
+              <option [value]="false">না</option>
+            </select>
+            <div class="invalid-feedback">প্রয়োজন।</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>নদী থেকে কত দূরে অবস্থিত (মিটার)?</label>
+            <input type="number" class="form-control" formControlName="distanceFromRiverMeters" [ngClass]="{'is-invalid': schoolForm.get('distanceFromRiverMeters')?.invalid && schoolForm.get('distanceFromRiverMeters')?.touched}">
+            <div class="invalid-feedback">>= ০ হতে হবে।</div>
+          </div>
+        </div>
+        <div class="row">
+          <label>যদি বিদ্যালয়ের মাঠ উন্নয়নের জন্য মাটি ভরাটের প্রয়োজনীয়তা থাকে, তাহলে কত ঘনফুট মাটির প্রয়োজন? </label>
+        </div>
+        <div class="row">
+
+          <div class="col-md-3 mb-3">
+            <label>দৈর্ঘ্য (ফুট)</label>
+            <input type="number" class="form-control" formControlName="fieldLengthFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldLengthFeet')?.invalid && schoolForm.get('fieldLengthFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label>প্রস্থ (ফুট)</label>
+            <input type="number" class="form-control" formControlName="fieldWidthFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldWidthFeet')?.invalid && schoolForm.get('fieldWidthFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label>উচ্চতা (ফুট)</label>
+            <input type="number" class="form-control" formControlName="fieldHeightFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldHeightFeet')?.invalid && schoolForm.get('fieldHeightFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label>মাটি ভরাটের প্রয়োজনীয়তা (ঘনফুট)</label>
+            <input type="number" class="form-control" formControlName="soilFillingCubicFeet" [ngClass]="{'is-invalid': schoolForm.get('soilFillingCubicFeet')?.invalid && schoolForm.get('soilFillingCubicFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>সুপারিশ (যদি থাকে)</label>
+            <textarea class="form-control" formControlName="recommendation"></textarea>
+            <!--<input type="text" class="form-control" formControlName="recommendation">-->
+          </div>
+
+        </div>
+        <!--<div class="row">
+                  <div class="col-md-6 mb-3">
+                    <label>দৈর্ঘ্য (ফুট)</label>
+                    <input type="number" class="form-control" formControlName="fieldLengthFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldLengthFeet')?.invalid && schoolForm.get('fieldLengthFeet')?.touched}">
+                    <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label>প্রস্থ (ফুট)</label>
+                    <input type="number" class="form-control" formControlName="fieldWidthFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldWidthFeet')?.invalid && schoolForm.get('fieldWidthFeet')?.touched}">
+                    <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+          <label>উচ্চতা (ফুট)</label>
+          <input type="number" class="form-control" formControlName="fieldHeightFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldHeightFeet')?.invalid && schoolForm.get('fieldHeightFeet')?.touched}">
+          <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+        </div>
+                </div>-->
+        <div class="row">
+
+          <div class="col-md-3 mb-3">
+            <label>উত্তর (ফুট)</label>
+            <input type="number" class="form-control" formControlName="northBoundaryFeet" [ngClass]="{'is-invalid': schoolForm.get('northBoundaryFeet')?.invalid && schoolForm.get('northBoundaryFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label>দক্ষিণ (ফুট)</label>
+            <input type="number" class="form-control" formControlName="southBoundaryFeet" [ngClass]="{'is-invalid': schoolForm.get('southBoundaryFeet')?.invalid && schoolForm.get('southBoundaryFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label>পূর্ব (ফুট)</label>
+            <input type="number" class="form-control" formControlName="eastBoundaryFeet" [ngClass]="{'is-invalid': schoolForm.get('eastBoundaryFeet')?.invalid && schoolForm.get('eastBoundaryFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label>পশ্চিম (ফুট)</label>
+            <input type="number" class="form-control" formControlName="westBoundaryFeet" [ngClass]="{'is-invalid': schoolForm.get('westBoundaryFeet')?.invalid && schoolForm.get('westBoundaryFeet')?.touched}">
+            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+          </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
+
+          <div class="col-md-6 mb-3">
+            <label>বিশেষ মতামত (যদি থাকে)</label>
+            <textarea class="form-control" formControlName="specialComments"></textarea>
+          </div>
+        </div>
+
+
+
+
       </div>
     </div>
 
-    <h3 class="mt-4">বিদ্যালয়</h3>
-    <div formArrayName="schools">
-      <div *ngFor="let school of schools.controls; let i = index" [formGroupName]="i" class="card mb-3">
-        <div class="card-body">
-          <h4>বিদ্যালয় {{i + 1}}</h4>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>বিদ্যালয়ের নাম</label>
-              <input type="text" class="form-control" formControlName="name" [ngClass]="{'is-invalid': school.get('name')?.invalid && school.get('name')?.touched}">
-              <div class="invalid-feedback">বিদ্যালয়ের নাম প্রয়োজন।</div>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h4 class="mt-3">বিদ্যমান ভবন/স্থাপনা সংক্রান্ত তথ্য</h4>
+        <div formArrayName="buildings">
+          <div *ngFor="let building of buildings.controls; let b=index" [formGroupName]="b" class="border p-3 mb-3 rounded">
+            <h5>{{b + 1}}নং ভবন</h5>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label>ভবনের নির্মাণ সাল</label>
+                <input type="number" class="form-control" formControlName="constructionYear" [ngClass]="{'is-invalid': building.get('constructionYear')?.invalid && building.get('constructionYear')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ১৯০০ হতে হবে।</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>কোন প্রকল্পের আওতায় নির্মাণ</label>
+                <input type="text" class="form-control" formControlName="projectName">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>বিদ্যমান ভবনটি কত তলার ফাউন্ডেশন আছে</label>
+                <input type="number" class="form-control" formControlName="foundationFloors" [ngClass]="{'is-invalid': building.get('foundationFloors')?.invalid && building.get('foundationFloors')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              </div>
             </div>
-            <div class="col-md-6 mb-3">
-              <label>ইএমআইএস কোড</label>
-              <input type="text" class="form-control" formControlName="emisCode" [ngClass]="{'is-invalid': school.get('emisCode')?.invalid && school.get('emisCode')?.touched}">
-              <div class="invalid-feedback">ইএমআইএস কোড প্রয়োজন।</div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label>বর্তমানে ভবনটি কত তলা</label>
+                <input type="number" class="form-control" formControlName="currentFloors" [ngClass]="{'is-invalid': building.get('currentFloors')?.invalid && schoolForm.get('currentFloors')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>ব্যবহারযোগ্য কক্ষ সংখ্যা</label>
+                <input type="number" class="form-control" formControlName="usableRooms" [ngClass]="{'is-invalid': building.get('usableRooms')?.invalid && building.get('usableRooms')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>অব্যবহারযোগ্য কক্ষ সংখ্যা</label>
+                <input type="number" class="form-control" formControlName="unusableRooms" [ngClass]="{'is-invalid': building.get('unusableRooms')?.invalid && building.get('unusableRooms')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>উপজেলা</label>
-              <input type="text" class="form-control" formControlName="upazila" [ngClass]="{'is-invalid': school.get('upazila')?.invalid && school.get('upazila')?.touched}">
-              <div class="invalid-feedback">উপজেলা প্রয়োজন।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>জেলা</label>
-              <input type="text" class="form-control" formControlName="district" [ngClass]="{'is-invalid': school.get('district')?.invalid && school.get('district')?.touched}">
-              <div class="invalid-feedback">জেলা প্রয়োজন।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>প্রধান শিক্ষকের নাম</label>
-              <input type="text" class="form-control" formControlName="headTeacherName" [ngClass]="{'is-invalid': school.get('headTeacherName')?.invalid && school.get('headTeacherName')?.touched}">
-              <div class="invalid-feedback">প্রধান শিক্ষকের নাম প্রয়োজন।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>মোবাইল নাম্বার</label>
-              <input type="text" class="form-control" formControlName="headTeacherMobile" [ngClass]="{'is-invalid': school.get('headTeacherMobile')?.invalid && school.get('headTeacherMobile')?.touched}">
-              <div class="invalid-feedback">বৈধ মোবাইল নাম্বার প্রয়োজন (১০-১৫ সংখ্যা)।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>বিদ্যালয়ের মোট জমির পরিমাণ কত শতক?</label>
-              <input type="number" class="form-control" formControlName="totalLandDecimals" [ngClass]="{'is-invalid': school.get('totalLandDecimals')?.invalid && school.get('totalLandDecimals')?.touched}">
-              <div class="invalid-feedback">মোট জমির পরিমাণ প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>নিস্কন্টক জমির পরিমাণ কত শতক?</label>
-              <input type="number" class="form-control" formControlName="undisputedLandDecimals" [ngClass]="{'is-invalid': school.get('undisputedLandDecimals')?.invalid && school.get('undisputedLandDecimals')?.touched}">
-              <div class="invalid-feedback">নিস্কন্টক জমির পরিমাণ প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>জমি সংক্রান্ত কোন জটিলতা/মামলা/বেদখল আছে কিনা?</label>
-              <select class="form-select" formControlName="hasLandComplications" [ngClass]="{'is-invalid': school.get('hasLandComplications')?.invalid && school.get('hasLandComplications')?.touched}">
-                <option [value]="true">হ্যাঁ</option>
-                <option [value]="false">না</option>
-              </select>
-              <div class="invalid-feedback">প্রয়োজন।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>জমি সংক্রান্ত জটিলতা থাকলে জমির পরিমাণ কত শতক?</label>
-              <input type="number" class="form-control" formControlName="complicatedLandDecimals" [ngClass]="{'is-invalid': school.get('complicatedLandDecimals')?.invalid && school.get('complicatedLandDecimals')?.touched}">
-              <div class="invalid-feedback">>= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>বিদ্যালয়টির জমি সরকার/বিদ্যালয়ের নামে রেকর্ড আছে কিনা?</label>
-              <select class="form-select" formControlName="landRecordedInGovtName" [ngClass]="{'is-invalid': school.get('landRecordedInGovtName')?.invalid && school.get('landRecordedInGovtName')?.touched}">
-                <option [value]="true">হ্যাঁ</option>
-                <option [value]="false">না</option>
-              </select>
-              <div class="invalid-feedback">প্রয়োজন।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>বিদ্যালয়ের জমির সীমানা নির্ধারণ করা আছে কিনা?</label>
-              <select class="form-select" formControlName="boundaryDetermined" [ngClass]="{'is-invalid': school.get('boundaryDetermined')?.invalid && school.get('boundaryDetermined')?.touched}">
-                <option [value]="true">হ্যাঁ</option>
-                <option [value]="false">না</option>
-              </select>
-              <div class="invalid-feedback">প্রয়োজন।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>সীমানা প্রাচীরের প্রয়োজনীয়তা থাকলে কত ফুট প্রয়োজন?</label>
-              <input type="number" class="form-control" formControlName="boundaryWallNeededFeet" [ngClass]="{'is-invalid': school.get('boundaryWallNeededFeet')?.invalid && school.get('boundaryWallNeededFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>মোট শিক্ষকের পদ সংখ্যা</label>
-              <input type="number" class="form-control" formControlName="totalTeacherPosts" [ngClass]="{'is-invalid': school.get('totalTeacherPosts')?.invalid && school.get('totalTeacherPosts')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>কর্মরত শিক্ষকের সংখ্যা</label>
-              <input type="number" class="form-control" formControlName="workingTeachers" [ngClass]="{'is-invalid': school.get('workingTeachers')?.invalid && school.get('workingTeachers')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>বিদ্যালয়টি কোন শিফটে পরিচালিত হচ্ছে?</label>
-              <select class="form-select" formControlName="shiftType" [ngClass]="{'is-invalid': school.get('shiftType')?.invalid && school.get('shiftType')?.touched}">
-                <option value="Single">সিঙ্গেল শিফট</option>
-                <option value="Double">ডবল শিফট</option>
-              </select>
-              <div class="invalid-feedback">প্রয়োজন।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>বিদ্যালয়টি নদী ভাঙন প্রবণ এলাকায় অবস্থিত কিনা?</label>
-              <select class="form-select" formControlName="isRiverErosionProne" [ngClass]="{'is-invalid': school.get('isRiverErosionProne')?.invalid && school.get('isRiverErosionProne')?.touched}">
-                <option [value]="true">হ্যাঁ</option>
-                <option [value]="false">না</option>
-              </select>
-              <div class="invalid-feedback">প্রয়োজন।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>নদী থেকে কত দূরে অবস্থিত (মিটার)?</label>
-              <input type="number" class="form-control" formControlName="distanceFromRiverMeters" [ngClass]="{'is-invalid': school.get('distanceFromRiverMeters')?.invalid && school.get('distanceFromRiverMeters')?.touched}">
-              <div class="invalid-feedback">>= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>অতিরিক্ত শ্রেণিকক্ষ নির্মাণের প্রয়োজনীয়তা থাকলে তা কিভাবে বাস্তবায়ন সম্ভব?</label>
-              <select class="form-select" formControlName="additionalRoomsMethod" [ngClass]="{'is-invalid': school.get('additionalRoomsMethod')?.invalid && school.get('additionalRoomsMethod')?.touched}">
-                <option value="New Building">বিদ্যালয় প্রাঙ্গণে পৃথকভাবে নতুন ভবন নির্মাণ</option>
-                <option value="Demolish Old">বিদ্যমান পুরাতন/জরাজীর্ণ ভবন ভেঙে নতুন ভবন নির্মাণ</option>
-                <option value="Vertical Expansion">বিদ্যমান ভবনে ঊর্ধ্বমুখী সম্প্রসারণের মাধ্যমে শ্রেণিকক্ষ নির্মাণ</option>
-              </select>
-              <div class="invalid-feedback">প্রয়োজন।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>পৃথকভাবে নতুন ভবন নির্মাণের জন্য জায়গা আছে কিনা?</label>
-              <select class="form-select" formControlName="spaceAvailableForNewBuilding" [ngClass]="{'is-invalid': school.get('spaceAvailableForNewBuilding')?.invalid && school.get('spaceAvailableForNewBuilding')?.touched}">
-                <option [value]="true">হ্যাঁ</option>
-                <option [value]="false">না</option>
-              </select>
-              <div class="invalid-feedback">প্রয়োজন।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>ভবন নির্মাণ কালে অস্থায়ী ঘরের প্রয়োজন হবে কিনা?</label>
-              <select class="form-select" formControlName="needsTemporaryRoomsDuringConstruction" [ngClass]="{'is-invalid': school.get('needsTemporaryRoomsDuringConstruction')?.invalid && school.get('needsTemporaryRoomsDuringConstruction')?.touched}">
-                <option [value]="true">হ্যাঁ</option>
-                <option [value]="false">না</option>
-              </select>
-              <div class="invalid-feedback">প্রয়োজন।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>অতিরিক্ত শ্রেণিকক্ষ প্রয়োজন</label>
-              <input type="number" class="form-control" formControlName="additionalClassroomsRequired" [ngClass]="{'is-invalid': school.get('additionalClassroomsRequired')?.invalid && school.get('additionalClassroomsRequired')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>সুপারিশ (যদি থাকে)</label>
-              <input type="text" class="form-control" formControlName="recommendation">
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>মাটি ভরাটের প্রয়োজনীয়তা (ঘনফুট)</label>
-              <input type="number" class="form-control" formControlName="soilFillingCubicFeet" [ngClass]="{'is-invalid': school.get('soilFillingCubicFeet')?.invalid && school.get('soilFillingCubicFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>দৈর্ঘ্য (ফুট)</label>
-              <input type="number" class="form-control" formControlName="fieldLengthFeet" [ngClass]="{'is-invalid': school.get('fieldLengthFeet')?.invalid && school.get('fieldLengthFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>প্রস্থ (ফুট)</label>
-              <input type="number" class="form-control" formControlName="fieldWidthFeet" [ngClass]="{'is-invalid': school.get('fieldWidthFeet')?.invalid && school.get('fieldWidthFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>উচ্চতা (ফুট)</label>
-              <input type="number" class="form-control" formControlName="fieldHeightFeet" [ngClass]="{'is-invalid': school.get('fieldHeightFeet')?.invalid && school.get('fieldHeightFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>উত্তর (ফুট)</label>
-              <input type="number" class="form-control" formControlName="northBoundaryFeet" [ngClass]="{'is-invalid': school.get('northBoundaryFeet')?.invalid && school.get('northBoundaryFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>দক্ষিণ (ফুট)</label>
-              <input type="number" class="form-control" formControlName="southBoundaryFeet" [ngClass]="{'is-invalid': school.get('southBoundaryFeet')?.invalid && school.get('southBoundaryFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>পূর্ব (ফুট)</label>
-              <input type="number" class="form-control" formControlName="eastBoundaryFeet" [ngClass]="{'is-invalid': school.get('eastBoundaryFeet')?.invalid && school.get('eastBoundaryFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label>পশ্চিম (ফুট)</label>
-              <input type="number" class="form-control" formControlName="westBoundaryFeet" [ngClass]="{'is-invalid': school.get('westBoundaryFeet')?.invalid && school.get('westBoundaryFeet')?.touched}">
-              <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>বিশেষ মতামত (যদি থাকে)</label>
-              <textarea class="form-control" formControlName="specialComments"></textarea>
-            </div>
-          </div>
+            <div class="row">
 
-          <h4 class="mt-3">বিদ্যমান ভবন/স্থাপনা সংক্রান্ত তথ্য</h4>
-          <div formArrayName="buildings">
-            <div *ngFor="let building of getBuildings(i).controls; let b = index" [formGroupName]="b" class="border p-3 mb-3 rounded">
-              <h5>{{b + 1}}নং ভবন</h5>
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label>ভবন নং</label>
-                  <input type="number" class="form-control" formControlName="buildingNumber" [ngClass]="{'is-invalid': building.get('buildingNumber')?.invalid && building.get('buildingNumber')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ১ হতে হবে।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>ভবনের নির্মাণ সাল</label>
-                  <input type="number" class="form-control" formControlName="constructionYear" [ngClass]="{'is-invalid': building.get('constructionYear')?.invalid && building.get('constructionYear')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ১৯০০ হতে হবে।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>কোন প্রকল্পের আওতায় নির্মাণ</label>
-                  <input type="text" class="form-control" formControlName="projectName">
-                </div>
+              <div class="col-md-4 mb-3">
+                <label>ভবনটি ঝুঁকিপূর্ণ কিনা?</label>
+                <select class="form-select" formControlName="isRisky" [ngClass]="{'is-invalid': building.get('isRisky')?.invalid && building.get('isRisky')?.touched}">
+                  <option [value]="true">হ্যাঁ</option>
+                  <option [value]="false">না</option>
+                </select>
+                <div class="invalid-feedback">প্রয়োজন।</div>
               </div>
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label>বিদ্যমান ভবনটি কত তলার ফাউন্ডেশন আছে</label>
-                  <input type="number" class="form-control" formControlName="foundationFloors" [ngClass]="{'is-invalid': building.get('foundationFloors')?.invalid && building.get('foundationFloors')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>বর্তমানে ভবনটি কত তলা</label>
-                  <input type="number" class="form-control" formControlName="currentFloors" [ngClass]="{'is-invalid': building.get('currentFloors')?.invalid && building.get('currentFloors')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>ব্যবহারযোগ্য কক্ষ সংখ্যা</label>
-                  <input type="number" class="form-control" formControlName="usableRooms" [ngClass]="{'is-invalid': building.get('usableRooms')?.invalid && building.get('usableRooms')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-                </div>
+              <div class="col-md-4 mb-3">
+                <label>ভবনটি পরিত্যাক্ত ঘোষণা করা হয়েছে কিনা?</label>
+                <select class="form-select" formControlName="isAbandoned" [ngClass]="{'is-invalid': building.get('isAbandoned')?.invalid && building.get('isAbandoned')?.touched}">
+                  <option [value]="true">হ্যাঁ</option>
+                  <option [value]="false">না</option>
+                </select>
+                <div class="invalid-feedback">প্রয়োজন।</div>
               </div>
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label>অব্যবহারযোগ্য কক্ষ সংখ্যা</label>
-                  <input type="number" class="form-control" formControlName="unusableRooms" [ngClass]="{'is-invalid': building.get('unusableRooms')?.invalid && building.get('unusableRooms')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>ভবনটি ঝুঁকিপূর্ণ কিনা?</label>
-                  <select class="form-select" formControlName="isRisky" [ngClass]="{'is-invalid': building.get('isRisky')?.invalid && building.get('isRisky')?.touched}">
-                    <option [value]="true">হ্যাঁ</option>
-                    <option [value]="false">না</option>
-                  </select>
-                  <div class="invalid-feedback">প্রয়োজন।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>ভবনটি পরিত্যাক্ত ঘোষণা করা হয়েছে কিনা?</label>
-                  <select class="form-select" formControlName="isAbandoned" [ngClass]="{'is-invalid': building.get('isAbandoned')?.invalid && building.get('isAbandoned')?.touched}">
-                    <option [value]="true">হ্যাঁ</option>
-                    <option [value]="false">না</option>
-                  </select>
-                  <div class="invalid-feedback">প্রয়োজন।</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label>ঝুঁকিপূর্ণ ঘোষণা করা হয়েছে কিনা?</label>
-                  <select class="form-select" formControlName="isDamagedDeclared" [ngClass]="{'is-invalid': building.get('isDamagedDeclared')?.invalid && building.get('isDamagedDeclared')?.touched}">
-                    <option [value]="true">হ্যাঁ</option>
-                    <option [value]="false">না</option>
-                  </select>
-                  <div class="invalid-feedback">প্রয়োজন।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>ভবনটি নির্মাণাধীন কিনা?</label>
-                  <select class="form-select" formControlName="isUnderConstruction" [ngClass]="{'is-invalid': building.get('isUnderConstruction')?.invalid && building.get('isUnderConstruction')?.touched}">
-                    <option [value]="true">হ্যাঁ</option>
-                    <option [value]="false">না</option>
-                  </select>
-                  <div class="invalid-feedback">প্রয়োজন।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>গত ৫ বছরে সম্প্রসারণ/মেরামত হয়েছে?</label>
-                  <select class="form-select" formControlName="expandedOrRepairedLast5Years" [ngClass]="{'is-invalid': building.get('expandedOrRepairedLast5Years')?.invalid && building.get('expandedOrRepairedLast5Years')?.touched}">
-                    <option [value]="true">হ্যাঁ</option>
-                    <option [value]="false">না</option>
-                  </select>
-                  <div class="invalid-feedback">প্রয়োজন।</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label>পাক্কা/সেমিপাক্কা/টিনশেড</label>
-                  <input type="text" class="form-control" formControlName="buildingType" [ngClass]="{'is-invalid': building.get('buildingType')?.invalid && building.get('buildingType')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>মন্তব্য</label>
-                  <input type="text" class="form-control" formControlName="comments">
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>পরিমাপ (দৈর্ঘ্য ফুট)</label>
-                  <input type="number" class="form-control" formControlName="lengthFeet" [ngClass]="{'is-invalid': building.get('lengthFeet')?.invalid && building.get('lengthFeet')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4 mb-3">
-                  <label>পরিমাপ (প্রস্থ ফুট)</label>
-                  <input type="number" class="form-control" formControlName="widthFeet" [ngClass]="{'is-invalid': building.get('widthFeet')?.invalid && building.get('widthFeet')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label>প্রস্তাবিত ভবন কিনা?</label>
-                  <select class="form-select" formControlName="isProposed" [ngClass]="{'is-invalid': building.get('isProposed')?.invalid && building.get('isProposed')?.touched}">
-                    <option [value]="true">হ্যাঁ</option>
-                    <option [value]="false">না</option>
-                  </select>
-                  <div class="invalid-feedback">প্রয়োজন।</div>
-                </div>
-              </div>
-              <button type="button" class="btn btn-danger btn-sm">ভবন মুছুন</button>
             </div>
-          </div>
-          <button type="button" class="btn btn-secondary mb-3" (click)="addBuilding(i)">ভবন যোগ করুন</button>
+            <!--<div class="row">
+              <div class="col-md-4 mb-3">
+                <label>ঝুঁকিপূর্ণ ঘোষণা করা হয়েছে কিনা?</label>
+                <select class="form-select" formControlName="isDamagedDeclared" [ngClass]="{'is-invalid': building.get('isDamagedDeclared')?.invalid && building.get('isDamagedDeclared')?.touched}">
+                  <option [value]="true">হ্যাঁ</option>
+                  <option [value]="false">না</option>
+                </select>
+                <div class="invalid-feedback">প্রয়োজন।</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>ভবনটি নির্মাণাধীন কিনা?</label>
+                <select class="form-select" formControlName="isUnderConstruction" [ngClass]="{'is-invalid': building.get('isUnderConstruction')?.invalid && building.get('isUnderConstruction')?.touched}">
+                  <option [value]="true">হ্যাঁ</option>
+                  <option [value]="false">না</option>
+                </select>
+                <div class="invalid-feedback">প্রয়োজন।</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>গত ৫ বছরে সম্প্রসারণ/মেরামত হয়েছে?</label>
+                <select class="form-select" formControlName="expandedOrRepairedLast5Years" [ngClass]="{'is-invalid': building.get('expandedOrRepairedLast5Years')?.invalid && building.get('expandedOrRepairedLast5Years')?.touched}">
+                  <option [value]="true">হ্যাঁ</option>
+                  <option [value]="false">না</option>
+                </select>
+                <div class="invalid-feedback">প্রয়োজন।</div>
+              </div>
+            </div>-->
+            <div class="row">
+              <!--<div class="col-md-4 mb-3">
+                <label>পাক্কা/সেমিপাক্কা/টিনশেড</label>
+                <input type="text" class="form-control" formControlName="buildingType" [ngClass]="{'is-invalid': building.get('buildingType')?.invalid && building.get('buildingType')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন।</div>
+              </div>-->
 
-          <h4 class="mt-3">ছাত্র/ছাত্রী সংক্রান্ত তথ্য</h4>
-          <div formArrayName="studentCounts">
-            <div *ngFor="let count of getStudentCounts(i).controls; let c = index" [formGroupName]="c" class="border p-3 mb-3 rounded">
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label>শ্রেণী</label>
-                  <input type="text" class="form-control" formControlName="classLevel" readonly [ngClass]="{'is-invalid': count.get('classLevel')?.invalid && count.get('classLevel')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন।</div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label>ছাত্র/ছাত্রী সংখ্যা</label>
-                  <input type="number" class="form-control" formControlName="studentNumber" [ngClass]="{'is-invalid': count.get('studentNumber')?.invalid && count.get('studentNumber')?.touched}">
-                  <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              <div class="col-md-4 mb-3">
+                <label>পরিমাপ (দৈর্ঘ্য ফুট)</label>
+                <input type="number" class="form-control" formControlName="lengthFeet" [ngClass]="{'is-invalid': building.get('lengthFeet')?.invalid && building.get('lengthFeet')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>পরিমাপ (প্রস্থ ফুট)</label>
+                <input type="number" class="form-control" formControlName="widthFeet" [ngClass]="{'is-invalid': building.get('widthFeet')?.invalid && building.get('widthFeet')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-md-4 mb-3">
+                <label>মন্তব্য</label>
+                <input type="text" class="form-control" formControlName="comments">
+              </div>
+              <div class="col-md-4 mb-3">
+                <label>প্রস্তাবিত ভবন কিনা?</label>
+                <select class="form-select" formControlName="isProposed" [ngClass]="{'is-invalid': building.get('isProposed')?.invalid && building.get('isProposed')?.touched}">
+                  <option [value]="true">হ্যাঁ</option>
+                  <option [value]="false">না</option>
+                </select>
+                <div class="invalid-feedback">প্রয়োজন।</div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-danger btn-sm" (click)="removeBuilding(b)">ভবন মুছুন</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-secondary mb-3" (click)="addBuilding()">ভবন যোগ করুন</button>
+      </div>
+    </div>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h4 class="mt-3">ছাত্র/ছাত্রী সংক্রান্ত তথ্য</h4>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>শ্রেণী</label>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="studentNumber" class="col-auto me-2">ছাত্র/ছাত্রী সংখ্যা</label>
+          </div>
+        </div>
+        <div formArrayName="studentCounts">
+
+          <div *ngFor="let count of studentCounts.controls; let c=index" [formGroupName]="c" class="border p-3 mb-3 rounded">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <!--<label>শ্রেণী</label>-->
+                <input type="text" class="form-control" formControlName="classLevel" readonly [ngClass]="{'is-invalid': count.get('classLevel')?.invalid && count.get('classLevel')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন।</div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="row d-flex align-items-center">
+                  <div class="col-auto">
+                    <input type="number" id="studentNumber" class="form-control" formControlName="studentNumber" [ngClass]="{'is-invalid': count.get('studentNumber')?.invalid && count.get('studentNumber')?.touched}">
+                    <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <button type="button" class="btn btn-danger" (click)="removeSchool(i)">বিদ্যালয় মুছুন</button>
         </div>
       </div>
     </div>
-    <button type="button" class="btn btn-primary mb-4" (click)="addSchool()">বিদ্যালয় যোগ করুন</button>
-
-    <h3 class="mt-4">স্বাক্ষর ও যোগাযোগ</h3>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label>সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার</label>
-        <input type="text" class="form-control" formControlName="aueoName" [ngClass]="{'is-invalid': upazilaForm.get('aueoName')?.invalid && upazilaForm.get('aueoName')?.touched}">
-        <div class="invalid-feedback">প্রয়োজন।</div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>মোবাইল নাম্বার</label>
-        <input type="text" class="form-control" formControlName="aueoMobile" [ngClass]="{'is-invalid': upazilaForm.get('aueoMobile')?.invalid && upazilaForm.get('aueoMobile')?.touched}">
-        <div class="invalid-feedback">বৈধ মোবাইল নাম্বার প্রয়োজন (১০-১৫ সংখ্যা)।</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label>উপ-সহকারী প্রকৌশলী/সহকারী প্রকৌশলী</label>
-        <input type="text" class="form-control" formControlName="saeAeName" [ngClass]="{'is-invalid': upazilaForm.get('saeAeName')?.invalid && upazilaForm.get('saeAeName')?.touched}">
-        <div class="invalid-feedback">প্রয়োজন।</div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>মোবাইল নাম্বার</label>
-        <input type="text" class="form-control" formControlName="saeAeMobile" [ngClass]="{'is-invalid': upazilaForm.get('saeAeMobile')?.invalid && upazilaForm.get('saeAeMobile')?.touched}">
-        <div class="invalid-feedback">বৈধ মোবাইল নাম্বার প্রয়োজন (১০-১৫ সংখ্যা)।</div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 mb-3">
-        <label>উপজেলা প্রাথমিক শিক্ষা অফিসার</label>
-        <input type="text" class="form-control" formControlName="ueoName" [ngClass]="{'is-invalid': upazilaForm.get('ueoName')?.invalid && upazilaForm.get('ueoName')?.touched}">
-        <div class="invalid-feedback">প্রয়োজন।</div>
-      </div>
-      <div class="col-md-6 mb-3">
-        <label>মোবাইল নাম্বার</label>
-        <input type="text" class="form-control" formControlName="ueoMobile" [ngClass]="{'is-invalid': upazilaForm.get('ueoMobile')?.invalid && upazilaForm.get('ueoMobile')?.touched}">
-        <div class="invalid-feedback">বৈধ মোবাইল নাম্বার প্রয়োজন (১০-১৫ সংখ্যা)।</div>
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-success btn-lg" [disabled]="upazilaForm.invalid">ডাটাবেসে সংরক্ষণ করুন</button>
+    <button type="submit" class="btn btn-success btn-lg">ডাটাবেসে সংরক্ষণ করুন</button>
   </form>
 </div>
 <!--<p>school-entry works!</p>-->
+<!--[disabled]="schoolForm.invalid"-->
