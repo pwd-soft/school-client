@@ -1,8 +1,8 @@
 import { Injectable, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TransferRoutingModule } from './transfer-routing.module';
-import { TransferPreparationComponent } from './transfer-preparation/transfer-preparation.component';
+import { SchoolRoutingModule } from './school-routing.module';
+//import { TransferPreparationComponent } from './transfer-preparation/transfer-preparation.component';
 import { InlineSVGModule } from 'ng-inline-svg-2';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -10,7 +10,8 @@ import { NgbDateAdapter, NgbDateStruct, NgbDateParserFormatter, NgbModalModule, 
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from '../shared/shared.module';
-import { TransferListComponent } from './transfer-list/transfer-list.component';
+import { SchoolEntryComponent } from './school-entry/school-entry.component';
+//import { TransferListComponent } from './transfer-list/transfer-list.component';
 
 @Injectable()
  export class CustomNgbDateAdapter extends NgbDateAdapter<string> {
@@ -62,12 +63,14 @@ import { TransferListComponent } from './transfer-list/transfer-list.component';
 
 @NgModule({
   declarations: [
-    TransferPreparationComponent,
-    TransferListComponent
+    //TransferPreparationComponent,
+    SchoolEntryComponent,
+    //TransferListComponent
   ],
   imports: [
     CommonModule,
-    TransferRoutingModule,
+    SchoolRoutingModule,
+    //TransferRoutingModule,
     InlineSVGModule.forRoot(),
     SharedModule,
     CommonModule,
@@ -89,4 +92,4 @@ import { TransferListComponent } from './transfer-list/transfer-list.component';
     {provide: NgbDateParserFormatter, useClass: CustomNgbDateParserFormatter},
   ],
 })
-export class TransferModule { }
+export class SchoolModule { }

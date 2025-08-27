@@ -7,10 +7,11 @@ const Routing: Routes = [
      loadChildren: () =>
        import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
    },
+ 
   {
-     path: 'transfer',
+     path: 'school',
      loadChildren: () =>
-       import('../transfer/transfer.module').then((m) => m.TransferModule),
+       import('../school/school.module').then((m) => m.SchoolModule),
    },
 
   {

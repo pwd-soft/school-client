@@ -1,6 +1,5 @@
 import type { EntityDto } from '@abp/ng.core';
 import type { AttachmentType } from '../enum/attachment-type.enum';
-import type { CadreType } from '../enum/cadre-type.enum';
 
 export interface AttachmentDto extends EntityDto<number> {
   objectionId: number;
@@ -11,6 +10,28 @@ export interface AttachmentDto extends EntityDto<number> {
   path?: string;
   fileSize: number;
   isFileUploaded: boolean;
+}
+
+export interface BuildingDto extends EntityDto<number> {
+  buildingNumber: number;
+  constructionYear: number;
+  projectName?: string;
+  foundationFloors: number;
+  currentFloors: number;
+  usableRooms: number;
+  unusableRooms: number;
+  isRisky: boolean;
+  isAbandoned: boolean;
+  isDamagedDeclared: boolean;
+  isUnderConstruction: boolean;
+  expandedOrRepairedLast5Years: boolean;
+  buildingType?: string;
+  comments?: string;
+  lengthFeet: number;
+  widthFeet: number;
+  isProposed: boolean;
+  schoolId: number;
+  school: SchoolDto;
 }
 
 export interface ChangePass {
@@ -25,28 +46,6 @@ export interface ColleagueDto {
   name?: string;
   surName?: string;
   roleNames: string[];
-}
-
-export interface OrderDetailDto extends EntityDto<number> {
-  orderId: number;
-  sequence: number;
-  employeeId?: string;
-  employeeNameBn?: string;
-  postFromId: number;
-  postFromNameBn?: string;
-  postFromPostBn?: string;
-  postFromOfficeBn?: string;
-  postToId: number;
-  postToPostBn?: string;
-  postToOfficeBn?: string;
-}
-
-export interface OrderDto extends EntityDto<number> {
-  designation?: string;
-  memoNo?: string;
-  executeDate?: string;
-  cadreType: CadreType;
-  orderDetails: OrderDetailDto[];
 }
 
 export interface OrgRoleConsumeDto {
@@ -98,6 +97,55 @@ export interface PostingDto extends EntityDto<number> {
   orgUniId?: string;
   userId?: string;
   userName?: string;
+}
+
+export interface SchoolDto extends EntityDto<number> {
+  officeCode?: string;
+  sdOfficeCode?: string;
+  division?: string;
+  district?: string;
+  thana?: string;
+  sequence?: string;
+  name?: string;
+  emis?: string;
+  headMaster?: string;
+  mobile?: string;
+  isSaved: boolean;
+  totalLandDecimals: number;
+  undisputedLandDecimals: number;
+  hasLandComplications: boolean;
+  complicatedLandDecimals: number;
+  landRecordedInGovtName: boolean;
+  boundaryDetermined: boolean;
+  boundaryWallNeededFeet: number;
+  totalTeacherPosts: number;
+  workingTeachers: number;
+  shiftType?: string;
+  isRiverErosionProne: boolean;
+  distanceFromRiverMeters: number;
+  additionalRoomsMethod?: string;
+  spaceAvailableForNewBuilding: boolean;
+  needsTemporaryRoomsDuringConstruction: boolean;
+  additionalClassroomsRequired: number;
+  recommendation?: string;
+  soilFillingCubicFeet: number;
+  fieldLengthFeet: number;
+  fieldWidthFeet: number;
+  fieldHeightFeet: number;
+  northBoundaryFeet: number;
+  southBoundaryFeet: number;
+  eastBoundaryFeet: number;
+  westBoundaryFeet: number;
+  specialComments?: string;
+  buildings: BuildingDto[];
+  studentCounts: StudentCountDto[];
+}
+
+export interface StudentCountDto extends EntityDto<number> {
+  classLevel?: string;
+  studentNumber: number;
+  schoolId: number;
+  school: SchoolDto;
 }
 
 export interface UpdateRoleDto {

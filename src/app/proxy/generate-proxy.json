@@ -3,1177 +3,6 @@
     "app"
   ],
   "modules": {
-    "app": {
-      "rootPath": "app",
-      "remoteServiceName": "Default",
-      "controllers": {
-        "PWD.Audit.Controllers.FileController": {
-          "controllerName": "File",
-          "type": "PWD.Audit.Controllers.FileController",
-          "interfaces": [],
-          "actions": {
-            "FileInputTest": {
-              "uniqueName": "FileInputTest",
-              "name": "FileInputTest",
-              "httpMethod": "GET",
-              "url": "api/File/FileInputTest",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "PWD.Audit.InputDtos.FileInput",
-                "typeSimple": "PWD.Audit.InputDtos.FileInput"
-              }
-            },
-            "FileDataInputTest": {
-              "uniqueName": "FileDataInputTest",
-              "name": "FileDataInputTest",
-              "httpMethod": "GET",
-              "url": "api/File/FileDataInputTest",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "PWD.Audit.InputDtos.FileDataInput",
-                "typeSimple": "PWD.Audit.InputDtos.FileDataInput"
-              }
-            },
-            "FileUpload": {
-              "uniqueName": "FileUpload",
-              "name": "FileUpload",
-              "httpMethod": "POST",
-              "url": "api/File/Upload",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
-                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
-              }
-            },
-            "DeleteFromFileByInput": {
-              "uniqueName": "DeleteFromFileByInput",
-              "name": "DeleteFromFile",
-              "httpMethod": "POST",
-              "url": "api/File/DeleteFromFile",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.InputDtos.FileDeleteInput, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.InputDtos.FileDeleteInput",
-                  "typeSimple": "PWD.Audit.InputDtos.FileDeleteInput",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.InputDtos.FileDeleteInput",
-                  "typeSimple": "PWD.Audit.InputDtos.FileDeleteInput",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
-                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
-              }
-            },
-            "DeleteFilesByDeleteInputs": {
-              "uniqueName": "DeleteFilesByDeleteInputs",
-              "name": "DeleteFiles",
-              "httpMethod": "POST",
-              "url": "api/File/DeleteFiles",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "deleteInputs",
-                  "typeAsString": "System.Collections.Generic.List`1[[PWD.Audit.InputDtos.FileDeleteInput, PWD.Audit.Application.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.List<PWD.Audit.InputDtos.FileDeleteInput>",
-                  "typeSimple": "[PWD.Audit.InputDtos.FileDeleteInput]",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "deleteInputs",
-                  "name": "deleteInputs",
-                  "jsonName": null,
-                  "type": "System.Collections.Generic.List<PWD.Audit.InputDtos.FileDeleteInput>",
-                  "typeSimple": "[PWD.Audit.InputDtos.FileDeleteInput]",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
-                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.ApprovalAppService": {
-          "controllerName": "Approval",
-          "type": "PWD.Audit.Services.ApprovalAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IApprovalAppService"
-            }
-          ],
-          "actions": {
-            "GetPostingByUserName": {
-              "uniqueName": "GetPostingByUserName",
-              "name": "GetPosting",
-              "httpMethod": "GET",
-              "url": "api/app/approval/posting",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "userName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "userName",
-                  "name": "userName",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.PostingDto",
-                "typeSimple": "PWD.Audit.DtoModels.PostingDto"
-              }
-            },
-            "UpdatePostingByUserName": {
-              "uniqueName": "UpdatePostingByUserName",
-              "name": "UpdatePosting",
-              "httpMethod": "PUT",
-              "url": "api/app/approval/posting",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "userName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "userName",
-                  "name": "userName",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.PostingDto",
-                "typeSimple": "PWD.Audit.DtoModels.PostingDto"
-              }
-            },
-            "GetPostingByIdById": {
-              "uniqueName": "GetPostingByIdById",
-              "name": "GetPostingById",
-              "httpMethod": "GET",
-              "url": "api/app/approval/{id}/posting-by-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.PostingDto",
-                "typeSimple": "PWD.Audit.DtoModels.PostingDto"
-              }
-            },
-            "GetPostingListByIdByIds": {
-              "uniqueName": "GetPostingListByIdByIds",
-              "name": "GetPostingListById",
-              "httpMethod": "GET",
-              "url": "api/app/approval/posting-list-by-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "ids",
-                  "typeAsString": "System.Collections.Generic.List`1[[System.Int32, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.List<System.Int32>",
-                  "typeSimple": "[number]",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "ids",
-                  "name": "ids",
-                  "jsonName": null,
-                  "type": "System.Collections.Generic.List<System.Int32>",
-                  "typeSimple": "[number]",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.PostingDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.PostingDto]"
-              }
-            },
-            "LatestOffice": {
-              "uniqueName": "LatestOffice",
-              "name": "LatestOffice",
-              "httpMethod": "GET",
-              "url": "api/app/approval/latest-office",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "System.DateTime",
-                "typeSimple": "string"
-              }
-            },
-            "GetOffices": {
-              "uniqueName": "GetOffices",
-              "name": "GetOffices",
-              "httpMethod": "GET",
-              "url": "api/app/approval/offices",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.OrganizationUnitDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.OrganizationUnitDto]"
-              }
-            },
-            "GetUserInfoByUserName": {
-              "uniqueName": "GetUserInfoByUserName",
-              "name": "GetUserInfo",
-              "httpMethod": "GET",
-              "url": "api/app/approval/user-info",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "userName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "userName",
-                  "name": "userName",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.UserInfoDto",
-                "typeSimple": "PWD.Audit.DtoModels.UserInfoDto"
-              }
-            },
-            "GetUserInfoByIdByUserId": {
-              "uniqueName": "GetUserInfoByIdByUserId",
-              "name": "GetUserInfoById",
-              "httpMethod": "GET",
-              "url": "api/app/approval/user-info-by-id/{userId}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "userId",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "userId",
-                  "name": "userId",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.UserInfoDto",
-                "typeSimple": "PWD.Audit.DtoModels.UserInfoDto"
-              }
-            },
-            "OfficeUsersByUserName": {
-              "uniqueName": "OfficeUsersByUserName",
-              "name": "OfficeUsers",
-              "httpMethod": "GET",
-              "url": "api/app/approval/office-users",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "userName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "userName",
-                  "name": "userName",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ColleagueDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.ColleagueDto]"
-              }
-            },
-            "OfficePostingsByUserName": {
-              "uniqueName": "OfficePostingsByUserName",
-              "name": "OfficePostings",
-              "httpMethod": "GET",
-              "url": "api/app/approval/office-postings",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "userName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "userName",
-                  "name": "userName",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.PostingConsumeDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.PostingConsumeDto]"
-              }
-            },
-            "UpdatePasswordByInput": {
-              "uniqueName": "UpdatePasswordByInput",
-              "name": "UpdatePassword",
-              "httpMethod": "POST",
-              "url": "api/app/approval/update-password",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.ChangePass, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.ChangePass",
-                  "typeSimple": "PWD.Audit.DtoModels.ChangePass",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.ChangePass",
-                  "typeSimple": "PWD.Audit.DtoModels.ChangePass",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Boolean",
-                "typeSimple": "boolean"
-              }
-            },
-            "GetUserByRoleByRoleName": {
-              "uniqueName": "GetUserByRoleByRoleName",
-              "name": "GetUserByRole",
-              "httpMethod": "GET",
-              "url": "api/app/approval/user-by-role",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "roleName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "roleName",
-                  "name": "roleName",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<System.String>",
-                "typeSimple": "[string]"
-              }
-            },
-            "UpdateUserRoleByUpdateRole": {
-              "uniqueName": "UpdateUserRoleByUpdateRole",
-              "name": "UpdateUserRole",
-              "httpMethod": "PUT",
-              "url": "api/app/approval/user-role",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "updateRole",
-                  "typeAsString": "PWD.Audit.DtoModels.UpdateRoleDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.UpdateRoleDto",
-                  "typeSimple": "PWD.Audit.DtoModels.UpdateRoleDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "updateRole",
-                  "name": "updateRole",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.UpdateRoleDto",
-                  "typeSimple": "PWD.Audit.DtoModels.UpdateRoleDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Boolean",
-                "typeSimple": "boolean"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.AttachmentAppService": {
-          "controllerName": "Attachment",
-          "type": "PWD.Audit.Services.AttachmentAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IAttachmentAppService"
-            }
-          ],
-          "actions": {
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/attachment",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.AttachmentDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.AttachmentDto",
-                  "typeSimple": "PWD.Audit.DtoModels.AttachmentDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.AttachmentDto",
-                  "typeSimple": "PWD.Audit.DtoModels.AttachmentDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.AttachmentDto",
-                "typeSimple": "PWD.Audit.DtoModels.AttachmentDto"
-              }
-            },
-            "DeleteAsyncById": {
-              "uniqueName": "DeleteAsyncById",
-              "name": "DeleteAsync",
-              "httpMethod": "DELETE",
-              "url": "api/app/attachment/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            },
-            "GetByIdAsyncById": {
-              "uniqueName": "GetByIdAsyncById",
-              "name": "GetByIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/attachment/{id}/by-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.AttachmentDto",
-                "typeSimple": "PWD.Audit.DtoModels.AttachmentDto"
-              }
-            },
-            "GetListResponseIdAsyncByIdAndType": {
-              "uniqueName": "GetListResponseIdAsyncByIdAndType",
-              "name": "GetListResponseIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/attachment/{id}/response-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "type",
-                  "typeAsString": "PWD.Audit.Enum.AttachmentType, PWD.Audit.Domain.Shared",
-                  "type": "PWD.Audit.Enum.AttachmentType",
-                  "typeSimple": "PWD.Audit.Enum.AttachmentType",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "type",
-                  "name": "type",
-                  "jsonName": null,
-                  "type": "PWD.Audit.Enum.AttachmentType",
-                  "typeSimple": "PWD.Audit.Enum.AttachmentType",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.AttachmentDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]"
-              }
-            },
-            "GetListByObjectionIdAsyncByIdAndType": {
-              "uniqueName": "GetListByObjectionIdAsyncByIdAndType",
-              "name": "GetListByObjectionIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/attachment/{id}/by-objection-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "type",
-                  "typeAsString": "PWD.Audit.Enum.AttachmentType, PWD.Audit.Domain.Shared",
-                  "type": "PWD.Audit.Enum.AttachmentType",
-                  "typeSimple": "PWD.Audit.Enum.AttachmentType",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "type",
-                  "name": "type",
-                  "jsonName": null,
-                  "type": "PWD.Audit.Enum.AttachmentType",
-                  "typeSimple": "PWD.Audit.Enum.AttachmentType",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.AttachmentDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]"
-              }
-            },
-            "UpdateAsyncByInput": {
-              "uniqueName": "UpdateAsyncByInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/app/attachment",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.AttachmentDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.AttachmentDto",
-                  "typeSimple": "PWD.Audit.DtoModels.AttachmentDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.AttachmentDto",
-                  "typeSimple": "PWD.Audit.DtoModels.AttachmentDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.AttachmentDto",
-                "typeSimple": "PWD.Audit.DtoModels.AttachmentDto"
-              }
-            },
-            "InsertBulkAsyncByNewAttachments": {
-              "uniqueName": "InsertBulkAsyncByNewAttachments",
-              "name": "InsertBulkAsync",
-              "httpMethod": "POST",
-              "url": "api/app/attachment/bulk",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "newAttachments",
-                  "typeAsString": "System.Collections.Generic.IEnumerable`1[[PWD.Audit.DtoModels.AttachmentDto, PWD.Audit.Application.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.IEnumerable<PWD.Audit.DtoModels.AttachmentDto>",
-                  "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "newAttachments",
-                  "name": "newAttachments",
-                  "jsonName": null,
-                  "type": "System.Collections.Generic.IEnumerable<PWD.Audit.DtoModels.AttachmentDto>",
-                  "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        },
-        "PWD.Audit.Services.OrderAppService": {
-          "controllerName": "Order",
-          "type": "PWD.Audit.Services.OrderAppService",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.Validation.IValidationEnabled"
-            },
-            {
-              "type": "Volo.Abp.Auditing.IAuditingEnabled"
-            },
-            {
-              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
-            },
-            {
-              "type": "PWD.Audit.Interfaces.IOrderAppService"
-            }
-          ],
-          "actions": {
-            "CreateAsyncByInput": {
-              "uniqueName": "CreateAsyncByInput",
-              "name": "CreateAsync",
-              "httpMethod": "POST",
-              "url": "api/app/order",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "PWD.Audit.DtoModels.OrderDto, PWD.Audit.Application.Contracts",
-                  "type": "PWD.Audit.DtoModels.OrderDto",
-                  "typeSimple": "PWD.Audit.DtoModels.OrderDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "PWD.Audit.DtoModels.OrderDto",
-                  "typeSimple": "PWD.Audit.DtoModels.OrderDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.OrderDto",
-                "typeSimple": "PWD.Audit.DtoModels.OrderDto"
-              }
-            },
-            "GetByIdAsyncById": {
-              "uniqueName": "GetByIdAsyncById",
-              "name": "GetByIdAsync",
-              "httpMethod": "GET",
-              "url": "api/app/order/{id}/by-id",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Int32, System.Private.CoreLib",
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Int32",
-                  "typeSimple": "number",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "PWD.Audit.DtoModels.OrderDto",
-                "typeSimple": "PWD.Audit.DtoModels.OrderDto"
-              }
-            },
-            "GetListAsyncByCadreType": {
-              "uniqueName": "GetListAsyncByCadreType",
-              "name": "GetListAsync",
-              "httpMethod": "GET",
-              "url": "api/app/order",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "cadreType",
-                  "typeAsString": "PWD.Audit.Enum.CadreType, PWD.Audit.Domain.Shared",
-                  "type": "PWD.Audit.Enum.CadreType",
-                  "typeSimple": "PWD.Audit.Enum.CadreType",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "cadreType",
-                  "name": "cadreType",
-                  "jsonName": null,
-                  "type": "PWD.Audit.Enum.CadreType",
-                  "typeSimple": "PWD.Audit.Enum.CadreType",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.OrderDto>",
-                "typeSimple": "[PWD.Audit.DtoModels.OrderDto]"
-              }
-            },
-            "InsertManyAsyncByInput": {
-              "uniqueName": "InsertManyAsyncByInput",
-              "name": "InsertManyAsync",
-              "httpMethod": "POST",
-              "url": "api/app/order/many",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "System.Collections.Generic.List`1[[PWD.Audit.DtoModels.OrderDetailDto, PWD.Audit.Application.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
-                  "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.OrderDetailDto>",
-                  "typeSimple": "[PWD.Audit.DtoModels.OrderDetailDto]",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.OrderDetailDto>",
-                  "typeSimple": "[PWD.Audit.DtoModels.OrderDetailDto]",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        }
-      }
-    },
-    "abp": {
-      "rootPath": "abp",
-      "remoteServiceName": "abp",
-      "controllers": {
-        "Pages.Abp.MultiTenancy.AbpTenantController": {
-          "controllerName": "AbpTenant",
-          "type": "Pages.Abp.MultiTenancy.AbpTenantController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.IAbpTenantAppService"
-            }
-          ],
-          "actions": {
-            "FindTenantByNameAsyncByName": {
-              "uniqueName": "FindTenantByNameAsyncByName",
-              "name": "FindTenantByNameAsync",
-              "httpMethod": "GET",
-              "url": "api/abp/multi-tenancy/tenants/by-name/{name}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "name",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "name",
-                  "name": "name",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto",
-                "typeSimple": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto"
-              }
-            },
-            "FindTenantByIdAsyncById": {
-              "uniqueName": "FindTenantByIdAsyncById",
-              "name": "FindTenantByIdAsync",
-              "httpMethod": "GET",
-              "url": "api/abp/multi-tenancy/tenants/by-id/{id}",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "id",
-                  "typeAsString": "System.Guid, System.Private.CoreLib",
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "id",
-                  "name": "id",
-                  "jsonName": null,
-                  "type": "System.Guid",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": [],
-                  "bindingSourceId": "Path",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto",
-                "typeSimple": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto"
-              }
-            }
-          }
-        },
-        "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.AbpApplicationConfigurationController": {
-          "controllerName": "AbpApplicationConfiguration",
-          "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.AbpApplicationConfigurationController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.IAbpApplicationConfigurationAppService"
-            }
-          ],
-          "actions": {
-            "GetAsync": {
-              "uniqueName": "GetAsync",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/abp/application-configuration",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ApplicationConfigurationDto",
-                "typeSimple": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ApplicationConfigurationDto"
-              }
-            }
-          }
-        },
-        "Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController": {
-          "controllerName": "AbpApiDefinition",
-          "type": "Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController",
-          "interfaces": [],
-          "actions": {
-            "GetByModel": {
-              "uniqueName": "GetByModel",
-              "name": "Get",
-              "httpMethod": "GET",
-              "url": "api/abp/api-definition",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "model",
-                  "typeAsString": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto, Volo.Abp.Http",
-                  "type": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto",
-                  "typeSimple": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "model",
-                  "name": "IncludeTypes",
-                  "jsonName": null,
-                  "type": "System.Boolean",
-                  "typeSimple": "boolean",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": "model"
-                }
-              ],
-              "returnValue": {
-                "type": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel",
-                "typeSimple": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel"
-              }
-            }
-          }
-        }
-      }
-    },
     "identity": {
       "rootPath": "identity",
       "remoteServiceName": "AbpIdentity",
@@ -2131,36 +960,28 @@
         }
       }
     },
-    "permissionManagement": {
-      "rootPath": "permissionManagement",
-      "remoteServiceName": "AbpPermissionManagement",
+    "abp": {
+      "rootPath": "abp",
+      "remoteServiceName": "abp",
       "controllers": {
-        "Volo.Abp.PermissionManagement.PermissionsController": {
-          "controllerName": "Permissions",
-          "type": "Volo.Abp.PermissionManagement.PermissionsController",
+        "Pages.Abp.MultiTenancy.AbpTenantController": {
+          "controllerName": "AbpTenant",
+          "type": "Pages.Abp.MultiTenancy.AbpTenantController",
           "interfaces": [
             {
-              "type": "Volo.Abp.PermissionManagement.IPermissionAppService"
+              "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.IAbpTenantAppService"
             }
           ],
           "actions": {
-            "GetAsyncByProviderNameAndProviderKey": {
-              "uniqueName": "GetAsyncByProviderNameAndProviderKey",
-              "name": "GetAsync",
+            "FindTenantByNameAsyncByName": {
+              "uniqueName": "FindTenantByNameAsyncByName",
+              "name": "FindTenantByNameAsync",
               "httpMethod": "GET",
-              "url": "api/permission-management/permissions",
+              "url": "api/abp/multi-tenancy/tenants/by-name/{name}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
-                  "name": "providerName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "providerKey",
+                  "name": "name",
                   "typeAsString": "System.String, System.Private.CoreLib",
                   "type": "System.String",
                   "typeSimple": "string",
@@ -2170,98 +991,177 @@
               ],
               "parameters": [
                 {
-                  "nameOnMethod": "providerName",
-                  "name": "providerName",
+                  "nameOnMethod": "name",
+                  "name": "name",
                   "jsonName": null,
                   "type": "System.String",
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
-                {
-                  "nameOnMethod": "providerKey",
-                  "name": "providerKey",
-                  "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
                   "descriptorName": ""
                 }
               ],
               "returnValue": {
-                "type": "Volo.Abp.PermissionManagement.GetPermissionListResultDto",
-                "typeSimple": "Volo.Abp.PermissionManagement.GetPermissionListResultDto"
+                "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto",
+                "typeSimple": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto"
               }
             },
-            "UpdateAsyncByProviderNameAndProviderKeyAndInput": {
-              "uniqueName": "UpdateAsyncByProviderNameAndProviderKeyAndInput",
-              "name": "UpdateAsync",
-              "httpMethod": "PUT",
-              "url": "api/permission-management/permissions",
+            "FindTenantByIdAsyncById": {
+              "uniqueName": "FindTenantByIdAsyncById",
+              "name": "FindTenantByIdAsync",
+              "httpMethod": "GET",
+              "url": "api/abp/multi-tenancy/tenants/by-id/{id}",
               "supportedVersions": [],
               "parametersOnMethod": [
                 {
-                  "name": "providerName",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
                   "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "providerKey",
-                  "typeAsString": "System.String, System.Private.CoreLib",
-                  "type": "System.String",
-                  "typeSimple": "string",
-                  "isOptional": false,
-                  "defaultValue": null
-                },
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.PermissionManagement.UpdatePermissionsDto, Volo.Abp.PermissionManagement.Application.Contracts",
-                  "type": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
-                  "typeSimple": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
                   "isOptional": false,
                   "defaultValue": null
                 }
               ],
               "parameters": [
                 {
-                  "nameOnMethod": "providerName",
-                  "name": "providerName",
+                  "nameOnMethod": "id",
+                  "name": "id",
                   "jsonName": null,
-                  "type": "System.String",
+                  "type": "System.Guid",
                   "typeSimple": "string",
                   "isOptional": false,
                   "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "ModelBinding",
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
                   "descriptorName": ""
-                },
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto",
+                "typeSimple": "Volo.Abp.AspNetCore.Mvc.MultiTenancy.FindTenantResultDto"
+              }
+            }
+          }
+        },
+        "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.AbpApplicationConfigurationController": {
+          "controllerName": "AbpApplicationConfiguration",
+          "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.AbpApplicationConfigurationController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.IAbpApplicationConfigurationAppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/abp/application-configuration",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ApplicationConfigurationDto",
+                "typeSimple": "Volo.Abp.AspNetCore.Mvc.ApplicationConfigurations.ApplicationConfigurationDto"
+              }
+            }
+          }
+        },
+        "Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController": {
+          "controllerName": "AbpApiDefinition",
+          "type": "Volo.Abp.AspNetCore.Mvc.ApiExploring.AbpApiDefinitionController",
+          "interfaces": [],
+          "actions": {
+            "GetByModel": {
+              "uniqueName": "GetByModel",
+              "name": "Get",
+              "httpMethod": "GET",
+              "url": "api/abp/api-definition",
+              "supportedVersions": [],
+              "parametersOnMethod": [
                 {
-                  "nameOnMethod": "providerKey",
-                  "name": "providerKey",
+                  "name": "model",
+                  "typeAsString": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto, Volo.Abp.Http",
+                  "type": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto",
+                  "typeSimple": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModelRequestDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "model",
+                  "name": "IncludeTypes",
                   "jsonName": null,
-                  "type": "System.String",
-                  "typeSimple": "string",
+                  "type": "System.Boolean",
+                  "typeSimple": "boolean",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
                   "bindingSourceId": "ModelBinding",
-                  "descriptorName": ""
-                },
+                  "descriptorName": "model"
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel",
+                "typeSimple": "Volo.Abp.Http.Modeling.ApplicationApiDescriptionModel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "settingManagement": {
+      "rootPath": "settingManagement",
+      "remoteServiceName": "SettingManagement",
+      "controllers": {
+        "Volo.Abp.SettingManagement.EmailSettingsController": {
+          "controllerName": "EmailSettings",
+          "type": "Volo.Abp.SettingManagement.EmailSettingsController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.SettingManagement.IEmailSettingsAppService"
+            }
+          ],
+          "actions": {
+            "GetAsync": {
+              "uniqueName": "GetAsync",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/setting-management/emailing",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Volo.Abp.SettingManagement.EmailSettingsDto",
+                "typeSimple": "Volo.Abp.SettingManagement.EmailSettingsDto"
+              }
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "POST",
+              "url": "api/setting-management/emailing",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto, Volo.Abp.SettingManagement.Application.Contracts",
+                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
                 {
                   "nameOnMethod": "input",
                   "name": "input",
                   "jsonName": null,
-                  "type": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
-                  "typeSimple": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
+                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -2651,6 +1551,1101 @@
         }
       }
     },
+    "app": {
+      "rootPath": "app",
+      "remoteServiceName": "Default",
+      "controllers": {
+        "PWD.Audit.Controllers.FileController": {
+          "controllerName": "File",
+          "type": "PWD.Audit.Controllers.FileController",
+          "interfaces": [],
+          "actions": {
+            "FileInputTest": {
+              "uniqueName": "FileInputTest",
+              "name": "FileInputTest",
+              "httpMethod": "GET",
+              "url": "api/File/FileInputTest",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "PWD.Audit.InputDtos.FileInput",
+                "typeSimple": "PWD.Audit.InputDtos.FileInput"
+              }
+            },
+            "FileDataInputTest": {
+              "uniqueName": "FileDataInputTest",
+              "name": "FileDataInputTest",
+              "httpMethod": "GET",
+              "url": "api/File/FileDataInputTest",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "PWD.Audit.InputDtos.FileDataInput",
+                "typeSimple": "PWD.Audit.InputDtos.FileDataInput"
+              }
+            },
+            "FileUpload": {
+              "uniqueName": "FileUpload",
+              "name": "FileUpload",
+              "httpMethod": "POST",
+              "url": "api/File/Upload",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
+                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
+              }
+            },
+            "DeleteFromFileByInput": {
+              "uniqueName": "DeleteFromFileByInput",
+              "name": "DeleteFromFile",
+              "httpMethod": "POST",
+              "url": "api/File/DeleteFromFile",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "PWD.Audit.InputDtos.FileDeleteInput, PWD.Audit.Application.Contracts",
+                  "type": "PWD.Audit.InputDtos.FileDeleteInput",
+                  "typeSimple": "PWD.Audit.InputDtos.FileDeleteInput",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "PWD.Audit.InputDtos.FileDeleteInput",
+                  "typeSimple": "PWD.Audit.InputDtos.FileDeleteInput",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
+                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
+              }
+            },
+            "DeleteFilesByDeleteInputs": {
+              "uniqueName": "DeleteFilesByDeleteInputs",
+              "name": "DeleteFiles",
+              "httpMethod": "POST",
+              "url": "api/File/DeleteFiles",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "deleteInputs",
+                  "typeAsString": "System.Collections.Generic.List`1[[PWD.Audit.InputDtos.FileDeleteInput, PWD.Audit.Application.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.List<PWD.Audit.InputDtos.FileDeleteInput>",
+                  "typeSimple": "[PWD.Audit.InputDtos.FileDeleteInput]",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "deleteInputs",
+                  "name": "deleteInputs",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.List<PWD.Audit.InputDtos.FileDeleteInput>",
+                  "typeSimple": "[PWD.Audit.InputDtos.FileDeleteInput]",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Microsoft.AspNetCore.Mvc.IActionResult",
+                "typeSimple": "Microsoft.AspNetCore.Mvc.IActionResult"
+              }
+            }
+          }
+        },
+        "PWD.Audit.Services.ApprovalAppService": {
+          "controllerName": "Approval",
+          "type": "PWD.Audit.Services.ApprovalAppService",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
+            },
+            {
+              "type": "PWD.Audit.Interfaces.IApprovalAppService"
+            }
+          ],
+          "actions": {
+            "GetPostingByUserName": {
+              "uniqueName": "GetPostingByUserName",
+              "name": "GetPosting",
+              "httpMethod": "GET",
+              "url": "api/app/approval/posting",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userName",
+                  "name": "userName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.PostingDto",
+                "typeSimple": "PWD.Audit.DtoModels.PostingDto"
+              }
+            },
+            "UpdatePostingByUserName": {
+              "uniqueName": "UpdatePostingByUserName",
+              "name": "UpdatePosting",
+              "httpMethod": "PUT",
+              "url": "api/app/approval/posting",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userName",
+                  "name": "userName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.PostingDto",
+                "typeSimple": "PWD.Audit.DtoModels.PostingDto"
+              }
+            },
+            "GetPostingByIdById": {
+              "uniqueName": "GetPostingByIdById",
+              "name": "GetPostingById",
+              "httpMethod": "GET",
+              "url": "api/app/approval/{id}/posting-by-id",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.PostingDto",
+                "typeSimple": "PWD.Audit.DtoModels.PostingDto"
+              }
+            },
+            "GetPostingListByIdByIds": {
+              "uniqueName": "GetPostingListByIdByIds",
+              "name": "GetPostingListById",
+              "httpMethod": "GET",
+              "url": "api/app/approval/posting-list-by-id",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "ids",
+                  "typeAsString": "System.Collections.Generic.List`1[[System.Int32, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.List<System.Int32>",
+                  "typeSimple": "[number]",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "ids",
+                  "name": "ids",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.List<System.Int32>",
+                  "typeSimple": "[number]",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.PostingDto>",
+                "typeSimple": "[PWD.Audit.DtoModels.PostingDto]"
+              }
+            },
+            "LatestOffice": {
+              "uniqueName": "LatestOffice",
+              "name": "LatestOffice",
+              "httpMethod": "GET",
+              "url": "api/app/approval/latest-office",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.DateTime",
+                "typeSimple": "string"
+              }
+            },
+            "GetOffices": {
+              "uniqueName": "GetOffices",
+              "name": "GetOffices",
+              "httpMethod": "GET",
+              "url": "api/app/approval/offices",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.OrganizationUnitDto>",
+                "typeSimple": "[PWD.Audit.DtoModels.OrganizationUnitDto]"
+              }
+            },
+            "GetUserInfoByUserName": {
+              "uniqueName": "GetUserInfoByUserName",
+              "name": "GetUserInfo",
+              "httpMethod": "GET",
+              "url": "api/app/approval/user-info",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userName",
+                  "name": "userName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.UserInfoDto",
+                "typeSimple": "PWD.Audit.DtoModels.UserInfoDto"
+              }
+            },
+            "GetUserInfoByIdByUserId": {
+              "uniqueName": "GetUserInfoByIdByUserId",
+              "name": "GetUserInfoById",
+              "httpMethod": "GET",
+              "url": "api/app/approval/user-info-by-id/{userId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userId",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userId",
+                  "name": "userId",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.UserInfoDto",
+                "typeSimple": "PWD.Audit.DtoModels.UserInfoDto"
+              }
+            },
+            "OfficeUsersByUserName": {
+              "uniqueName": "OfficeUsersByUserName",
+              "name": "OfficeUsers",
+              "httpMethod": "GET",
+              "url": "api/app/approval/office-users",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userName",
+                  "name": "userName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.ColleagueDto>",
+                "typeSimple": "[PWD.Audit.DtoModels.ColleagueDto]"
+              }
+            },
+            "OfficePostingsByUserName": {
+              "uniqueName": "OfficePostingsByUserName",
+              "name": "OfficePostings",
+              "httpMethod": "GET",
+              "url": "api/app/approval/office-postings",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userName",
+                  "name": "userName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.PostingConsumeDto>",
+                "typeSimple": "[PWD.Audit.DtoModels.PostingConsumeDto]"
+              }
+            },
+            "UpdatePasswordByInput": {
+              "uniqueName": "UpdatePasswordByInput",
+              "name": "UpdatePassword",
+              "httpMethod": "POST",
+              "url": "api/app/approval/update-password",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "PWD.Audit.DtoModels.ChangePass, PWD.Audit.Application.Contracts",
+                  "type": "PWD.Audit.DtoModels.ChangePass",
+                  "typeSimple": "PWD.Audit.DtoModels.ChangePass",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "PWD.Audit.DtoModels.ChangePass",
+                  "typeSimple": "PWD.Audit.DtoModels.ChangePass",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              }
+            },
+            "GetUserByRoleByRoleName": {
+              "uniqueName": "GetUserByRoleByRoleName",
+              "name": "GetUserByRole",
+              "httpMethod": "GET",
+              "url": "api/app/approval/user-by-role",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "roleName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "roleName",
+                  "name": "roleName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<System.String>",
+                "typeSimple": "[string]"
+              }
+            },
+            "UpdateUserRoleByUpdateRole": {
+              "uniqueName": "UpdateUserRoleByUpdateRole",
+              "name": "UpdateUserRole",
+              "httpMethod": "PUT",
+              "url": "api/app/approval/user-role",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "updateRole",
+                  "typeAsString": "PWD.Audit.DtoModels.UpdateRoleDto, PWD.Audit.Application.Contracts",
+                  "type": "PWD.Audit.DtoModels.UpdateRoleDto",
+                  "typeSimple": "PWD.Audit.DtoModels.UpdateRoleDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "updateRole",
+                  "name": "updateRole",
+                  "jsonName": null,
+                  "type": "PWD.Audit.DtoModels.UpdateRoleDto",
+                  "typeSimple": "PWD.Audit.DtoModels.UpdateRoleDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Boolean",
+                "typeSimple": "boolean"
+              }
+            }
+          }
+        },
+        "PWD.Audit.Services.AttachmentAppService": {
+          "controllerName": "Attachment",
+          "type": "PWD.Audit.Services.AttachmentAppService",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
+            },
+            {
+              "type": "PWD.Audit.Interfaces.IAttachmentAppService"
+            }
+          ],
+          "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/attachment",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "PWD.Audit.DtoModels.AttachmentDto, PWD.Audit.Application.Contracts",
+                  "type": "PWD.Audit.DtoModels.AttachmentDto",
+                  "typeSimple": "PWD.Audit.DtoModels.AttachmentDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "PWD.Audit.DtoModels.AttachmentDto",
+                  "typeSimple": "PWD.Audit.DtoModels.AttachmentDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.AttachmentDto",
+                "typeSimple": "PWD.Audit.DtoModels.AttachmentDto"
+              }
+            },
+            "DeleteAsyncById": {
+              "uniqueName": "DeleteAsyncById",
+              "name": "DeleteAsync",
+              "httpMethod": "DELETE",
+              "url": "api/app/attachment/{id}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            },
+            "GetByIdAsyncById": {
+              "uniqueName": "GetByIdAsyncById",
+              "name": "GetByIdAsync",
+              "httpMethod": "GET",
+              "url": "api/app/attachment/{id}/by-id",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.AttachmentDto",
+                "typeSimple": "PWD.Audit.DtoModels.AttachmentDto"
+              }
+            },
+            "GetListResponseIdAsyncByIdAndType": {
+              "uniqueName": "GetListResponseIdAsyncByIdAndType",
+              "name": "GetListResponseIdAsync",
+              "httpMethod": "GET",
+              "url": "api/app/attachment/{id}/response-id",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "type",
+                  "typeAsString": "PWD.Audit.Enum.AttachmentType, PWD.Audit.Domain.Shared",
+                  "type": "PWD.Audit.Enum.AttachmentType",
+                  "typeSimple": "PWD.Audit.Enum.AttachmentType",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "type",
+                  "name": "type",
+                  "jsonName": null,
+                  "type": "PWD.Audit.Enum.AttachmentType",
+                  "typeSimple": "PWD.Audit.Enum.AttachmentType",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.AttachmentDto>",
+                "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]"
+              }
+            },
+            "GetListByObjectionIdAsyncByIdAndType": {
+              "uniqueName": "GetListByObjectionIdAsyncByIdAndType",
+              "name": "GetListByObjectionIdAsync",
+              "httpMethod": "GET",
+              "url": "api/app/attachment/{id}/by-objection-id",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "type",
+                  "typeAsString": "PWD.Audit.Enum.AttachmentType, PWD.Audit.Domain.Shared",
+                  "type": "PWD.Audit.Enum.AttachmentType",
+                  "typeSimple": "PWD.Audit.Enum.AttachmentType",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "type",
+                  "name": "type",
+                  "jsonName": null,
+                  "type": "PWD.Audit.Enum.AttachmentType",
+                  "typeSimple": "PWD.Audit.Enum.AttachmentType",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<PWD.Audit.DtoModels.AttachmentDto>",
+                "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]"
+              }
+            },
+            "UpdateAsyncByInput": {
+              "uniqueName": "UpdateAsyncByInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/attachment",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "PWD.Audit.DtoModels.AttachmentDto, PWD.Audit.Application.Contracts",
+                  "type": "PWD.Audit.DtoModels.AttachmentDto",
+                  "typeSimple": "PWD.Audit.DtoModels.AttachmentDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "PWD.Audit.DtoModels.AttachmentDto",
+                  "typeSimple": "PWD.Audit.DtoModels.AttachmentDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.AttachmentDto",
+                "typeSimple": "PWD.Audit.DtoModels.AttachmentDto"
+              }
+            },
+            "InsertBulkAsyncByNewAttachments": {
+              "uniqueName": "InsertBulkAsyncByNewAttachments",
+              "name": "InsertBulkAsync",
+              "httpMethod": "POST",
+              "url": "api/app/attachment/bulk",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "newAttachments",
+                  "typeAsString": "System.Collections.Generic.IEnumerable`1[[PWD.Audit.DtoModels.AttachmentDto, PWD.Audit.Application.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib",
+                  "type": "System.Collections.Generic.IEnumerable<PWD.Audit.DtoModels.AttachmentDto>",
+                  "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "newAttachments",
+                  "name": "newAttachments",
+                  "jsonName": null,
+                  "type": "System.Collections.Generic.IEnumerable<PWD.Audit.DtoModels.AttachmentDto>",
+                  "typeSimple": "[PWD.Audit.DtoModels.AttachmentDto]",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        },
+        "PWD.Audit.Services.SchoolAppService": {
+          "controllerName": "School",
+          "type": "PWD.Audit.Services.SchoolAppService",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.Validation.IValidationEnabled"
+            },
+            {
+              "type": "Volo.Abp.Auditing.IAuditingEnabled"
+            },
+            {
+              "type": "Volo.Abp.GlobalFeatures.IGlobalFeatureCheckingEnabled"
+            },
+            {
+              "type": "PWD.Audit.Interfaces.ISchoolAppService"
+            }
+          ],
+          "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/school",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "PWD.Audit.InputDtos.SchoolInputDto, PWD.Audit.Application.Contracts",
+                  "type": "PWD.Audit.InputDtos.SchoolInputDto",
+                  "typeSimple": "PWD.Audit.InputDtos.SchoolInputDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "PWD.Audit.InputDtos.SchoolInputDto",
+                  "typeSimple": "PWD.Audit.InputDtos.SchoolInputDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.SchoolDto",
+                "typeSimple": "PWD.Audit.DtoModels.SchoolDto"
+              }
+            },
+            "GetByIdAsyncById": {
+              "uniqueName": "GetByIdAsyncById",
+              "name": "GetByIdAsync",
+              "httpMethod": "GET",
+              "url": "api/app/school/{id}/by-id",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "PWD.Audit.DtoModels.SchoolDto",
+                "typeSimple": "PWD.Audit.DtoModels.SchoolDto"
+              }
+            }
+          }
+        }
+      }
+    },
+    "permissionManagement": {
+      "rootPath": "permissionManagement",
+      "remoteServiceName": "AbpPermissionManagement",
+      "controllers": {
+        "Volo.Abp.PermissionManagement.PermissionsController": {
+          "controllerName": "Permissions",
+          "type": "Volo.Abp.PermissionManagement.PermissionsController",
+          "interfaces": [
+            {
+              "type": "Volo.Abp.PermissionManagement.IPermissionAppService"
+            }
+          ],
+          "actions": {
+            "GetAsyncByProviderNameAndProviderKey": {
+              "uniqueName": "GetAsyncByProviderNameAndProviderKey",
+              "name": "GetAsync",
+              "httpMethod": "GET",
+              "url": "api/permission-management/permissions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "providerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "providerKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "providerName",
+                  "name": "providerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "providerKey",
+                  "name": "providerKey",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.PermissionManagement.GetPermissionListResultDto",
+                "typeSimple": "Volo.Abp.PermissionManagement.GetPermissionListResultDto"
+              }
+            },
+            "UpdateAsyncByProviderNameAndProviderKeyAndInput": {
+              "uniqueName": "UpdateAsyncByProviderNameAndProviderKeyAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/permission-management/permissions",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "providerName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "providerKey",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "Volo.Abp.PermissionManagement.UpdatePermissionsDto, Volo.Abp.PermissionManagement.Application.Contracts",
+                  "type": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "typeSimple": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "providerName",
+                  "name": "providerName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "providerKey",
+                  "name": "providerKey",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "typeSimple": "Volo.Abp.PermissionManagement.UpdatePermissionsDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              }
+            }
+          }
+        }
+      }
+    },
     "featureManagement": {
       "rootPath": "featureManagement",
       "remoteServiceName": "AbpFeatureManagement",
@@ -2782,71 +2777,6 @@
                   "jsonName": null,
                   "type": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
                   "typeSimple": "Volo.Abp.FeatureManagement.UpdateFeaturesDto",
-                  "isOptional": false,
-                  "defaultValue": null,
-                  "constraintTypes": null,
-                  "bindingSourceId": "Body",
-                  "descriptorName": ""
-                }
-              ],
-              "returnValue": {
-                "type": "System.Void",
-                "typeSimple": "System.Void"
-              }
-            }
-          }
-        }
-      }
-    },
-    "settingManagement": {
-      "rootPath": "settingManagement",
-      "remoteServiceName": "SettingManagement",
-      "controllers": {
-        "Volo.Abp.SettingManagement.EmailSettingsController": {
-          "controllerName": "EmailSettings",
-          "type": "Volo.Abp.SettingManagement.EmailSettingsController",
-          "interfaces": [
-            {
-              "type": "Volo.Abp.SettingManagement.IEmailSettingsAppService"
-            }
-          ],
-          "actions": {
-            "GetAsync": {
-              "uniqueName": "GetAsync",
-              "name": "GetAsync",
-              "httpMethod": "GET",
-              "url": "api/setting-management/emailing",
-              "supportedVersions": [],
-              "parametersOnMethod": [],
-              "parameters": [],
-              "returnValue": {
-                "type": "Volo.Abp.SettingManagement.EmailSettingsDto",
-                "typeSimple": "Volo.Abp.SettingManagement.EmailSettingsDto"
-              }
-            },
-            "UpdateAsyncByInput": {
-              "uniqueName": "UpdateAsyncByInput",
-              "name": "UpdateAsync",
-              "httpMethod": "POST",
-              "url": "api/setting-management/emailing",
-              "supportedVersions": [],
-              "parametersOnMethod": [
-                {
-                  "name": "input",
-                  "typeAsString": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto, Volo.Abp.SettingManagement.Application.Contracts",
-                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "isOptional": false,
-                  "defaultValue": null
-                }
-              ],
-              "parameters": [
-                {
-                  "nameOnMethod": "input",
-                  "name": "input",
-                  "jsonName": null,
-                  "type": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
-                  "typeSimple": "Volo.Abp.SettingManagement.UpdateEmailSettingsDto",
                   "isOptional": false,
                   "defaultValue": null,
                   "constraintTypes": null,
@@ -6705,148 +6635,945 @@
       "genericArguments": null,
       "properties": null
     },
-    "PWD.Audit.DtoModels.OrderDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
+    "PWD.Audit.InputDtos.SchoolInputDto": {
+      "baseType": null,
       "isEnum": false,
       "enumNames": null,
       "enumValues": null,
       "genericArguments": null,
       "properties": [
         {
-          "name": "Designation",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "MemoNo",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "ExecuteDate",
-          "jsonName": null,
-          "type": "System.DateTime",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "CadreType",
-          "jsonName": null,
-          "type": "PWD.Audit.Enum.CadreType",
-          "typeSimple": "PWD.Audit.Enum.CadreType",
-          "isRequired": false
-        },
-        {
-          "name": "OrderDetails",
-          "jsonName": null,
-          "type": "[PWD.Audit.DtoModels.OrderDetailDto]",
-          "typeSimple": "[PWD.Audit.DtoModels.OrderDetailDto]",
-          "isRequired": false
-        }
-      ]
-    },
-    "PWD.Audit.Enum.CadreType": {
-      "baseType": "System.Enum",
-      "isEnum": true,
-      "enumNames": [
-        "None",
-        "Cadre",
-        "NonCadre"
-      ],
-      "enumValues": [
-        0,
-        1,
-        2
-      ],
-      "genericArguments": null,
-      "properties": null
-    },
-    "PWD.Audit.DtoModels.OrderDetailDto": {
-      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
-      "isEnum": false,
-      "enumNames": null,
-      "enumValues": null,
-      "genericArguments": null,
-      "properties": [
-        {
-          "name": "OrderId",
+          "name": "Id",
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "OfficeCode",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "SDOfficeCode",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Division",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "District",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Thana",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
           "isRequired": false
         },
         {
           "name": "Sequence",
           "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Name",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "EMIS",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "HeadMaster",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Mobile",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "IsSaved",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "TotalLandDecimals",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "UndisputedLandDecimals",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "HasLandComplications",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "ComplicatedLandDecimals",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "LandRecordedInGovtName",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "BoundaryDetermined",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "BoundaryWallNeededFeet",
+          "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
           "isRequired": false
         },
         {
-          "name": "EmployeeId",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "EmployeeNameBn",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "PostFromId",
+          "name": "TotalTeacherPosts",
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
           "isRequired": false
         },
         {
-          "name": "PostFromNameBn",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "PostFromPostBn",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "PostFromOfficeBn",
-          "jsonName": null,
-          "type": "System.String",
-          "typeSimple": "string",
-          "isRequired": false
-        },
-        {
-          "name": "PostToId",
+          "name": "WorkingTeachers",
           "jsonName": null,
           "type": "System.Int32",
           "typeSimple": "number",
           "isRequired": false
         },
         {
-          "name": "PostToPostBn",
+          "name": "ShiftType",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
           "isRequired": false
         },
         {
-          "name": "PostToOfficeBn",
+          "name": "IsRiverErosionProne",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "DistanceFromRiverMeters",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "AdditionalRoomsMethod",
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "SpaceAvailableForNewBuilding",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "NeedsTemporaryRoomsDuringConstruction",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "AdditionalClassroomsRequired",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "Recommendation",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "SoilFillingCubicFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "FieldLengthFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "FieldWidthFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "FieldHeightFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "NorthBoundaryFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "SouthBoundaryFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "EastBoundaryFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "WestBoundaryFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "SpecialComments",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Buildings",
+          "jsonName": null,
+          "type": "[PWD.Audit.InputDtos.BuildingInputDto]",
+          "typeSimple": "[PWD.Audit.InputDtos.BuildingInputDto]",
+          "isRequired": false
+        },
+        {
+          "name": "StudentCounts",
+          "jsonName": null,
+          "type": "[PWD.Audit.InputDtos.StudentCountInputDto]",
+          "typeSimple": "[PWD.Audit.InputDtos.StudentCountInputDto]",
+          "isRequired": false
+        }
+      ]
+    },
+    "PWD.Audit.InputDtos.BuildingInputDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Id",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "BuildingNumber",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "ConstructionYear",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "ProjectName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "FoundationFloors",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "CurrentFloors",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "UsableRooms",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "UnusableRooms",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "IsRisky",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "IsAbandoned",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "IsDamagedDeclared",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "IsUnderConstruction",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "ExpandedOrRepairedLast5Years",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "BuildingType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Comments",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "LengthFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "WidthFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "IsProposed",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "SchoolId",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "School",
+          "jsonName": null,
+          "type": "PWD.Audit.InputDtos.SchoolInputDto",
+          "typeSimple": "PWD.Audit.InputDtos.SchoolInputDto",
+          "isRequired": false
+        }
+      ]
+    },
+    "PWD.Audit.InputDtos.StudentCountInputDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "Id",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "ClassLevel",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "StudentNumber",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "SchoolId",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "School",
+          "jsonName": null,
+          "type": "PWD.Audit.InputDtos.SchoolInputDto",
+          "typeSimple": "PWD.Audit.InputDtos.SchoolInputDto",
+          "isRequired": false
+        }
+      ]
+    },
+    "PWD.Audit.DtoModels.SchoolDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "OfficeCode",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "SDOfficeCode",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Division",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "District",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Thana",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Sequence",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Name",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "EMIS",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "HeadMaster",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Mobile",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "IsSaved",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "TotalLandDecimals",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "UndisputedLandDecimals",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "HasLandComplications",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "ComplicatedLandDecimals",
+          "jsonName": null,
+          "type": "System.Decimal",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "LandRecordedInGovtName",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "BoundaryDetermined",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "BoundaryWallNeededFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "TotalTeacherPosts",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "WorkingTeachers",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "ShiftType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "IsRiverErosionProne",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "DistanceFromRiverMeters",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "AdditionalRoomsMethod",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "SpaceAvailableForNewBuilding",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "NeedsTemporaryRoomsDuringConstruction",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "AdditionalClassroomsRequired",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "Recommendation",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "SoilFillingCubicFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "FieldLengthFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "FieldWidthFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "FieldHeightFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "NorthBoundaryFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "SouthBoundaryFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "EastBoundaryFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "WestBoundaryFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "SpecialComments",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Buildings",
+          "jsonName": null,
+          "type": "[PWD.Audit.DtoModels.BuildingDto]",
+          "typeSimple": "[PWD.Audit.DtoModels.BuildingDto]",
+          "isRequired": false
+        },
+        {
+          "name": "StudentCounts",
+          "jsonName": null,
+          "type": "[PWD.Audit.DtoModels.StudentCountDto]",
+          "typeSimple": "[PWD.Audit.DtoModels.StudentCountDto]",
+          "isRequired": false
+        }
+      ]
+    },
+    "PWD.Audit.DtoModels.BuildingDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "BuildingNumber",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "ConstructionYear",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "ProjectName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "FoundationFloors",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "CurrentFloors",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "UsableRooms",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "UnusableRooms",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "IsRisky",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "IsAbandoned",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "IsDamagedDeclared",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "IsUnderConstruction",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "ExpandedOrRepairedLast5Years",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "BuildingType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "Comments",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "LengthFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "WidthFeet",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "IsProposed",
+          "jsonName": null,
+          "type": "System.Boolean",
+          "typeSimple": "boolean",
+          "isRequired": false
+        },
+        {
+          "name": "SchoolId",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "School",
+          "jsonName": null,
+          "type": "PWD.Audit.DtoModels.SchoolDto",
+          "typeSimple": "PWD.Audit.DtoModels.SchoolDto",
+          "isRequired": false
+        }
+      ]
+    },
+    "PWD.Audit.DtoModels.StudentCountDto": {
+      "baseType": "Volo.Abp.Application.Dtos.EntityDto<System.Int32>",
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "ClassLevel",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false
+        },
+        {
+          "name": "StudentNumber",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "SchoolId",
+          "jsonName": null,
+          "type": "System.Int32",
+          "typeSimple": "number",
+          "isRequired": false
+        },
+        {
+          "name": "School",
+          "jsonName": null,
+          "type": "PWD.Audit.DtoModels.SchoolDto",
+          "typeSimple": "PWD.Audit.DtoModels.SchoolDto",
           "isRequired": false
         }
       ]
