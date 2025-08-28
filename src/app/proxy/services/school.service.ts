@@ -24,5 +24,13 @@ export class SchoolService {
     },
     { apiName: this.apiName });
 
+  getListByOfficeByCode = (code: string) =>
+    this.restService.request<any, SchoolDto[]>({
+      method: 'GET',
+      url: '/api/app/school/by-office',
+      params: { code },
+    },
+    { apiName: this.apiName });
+
   constructor(private restService: RestService) {}
 }

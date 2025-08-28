@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SchoolEntryComponent } from './school-entry/school-entry.component';
+import { SchoolListComponent } from './school-list/school-list.component';
 //import { TransferPreparationComponent } from './transfer-preparation/transfer-preparation.component';
 //import { TransferListComponent } from './transfer-list/transfer-list.component';
 
@@ -8,6 +9,7 @@ const routes: Routes = [
   //{ path: 'transfer-order',component:TransferPreparationComponent },
   //{ path: 'transfer-order-edit/:id',component:TransferPreparationComponent },
   //{ path: 'transfer-list',component:TransferListComponent },
+  { path: 'list', component: SchoolListComponent },
   { path: 'entry',component:SchoolEntryComponent },
   { path: 'entry/:id',component:SchoolEntryComponent },
   

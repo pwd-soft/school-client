@@ -11,6 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from '../shared/shared.module';
 import { SchoolEntryComponent } from './school-entry/school-entry.component';
+import { SchoolListComponent } from './school-list/school-list.component';
 //import { TransferListComponent } from './transfer-list/transfer-list.component';
 
 @Injectable()
@@ -65,6 +66,7 @@ import { SchoolEntryComponent } from './school-entry/school-entry.component';
   declarations: [
     //TransferPreparationComponent,
     SchoolEntryComponent,
+    SchoolListComponent,
     //TransferListComponent
   ],
   imports: [

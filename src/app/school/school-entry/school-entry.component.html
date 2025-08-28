@@ -1,15 +1,34 @@
-<div class="container mt-5">
+ 
   <!--<h2 class="mb-4">তথ্য ছক</h2>-->
-  <form [formGroup]="schoolForm" (ngSubmit)="onSubmit()">
+  <div [formGroup]="schoolForm" (ngSubmit)="onSubmit()">
     <div class="card mb-4">
-      <!--<h5 class="card-title">বিদ্যালয়ের তথ্য</h5>-->
+
       <div class="card-header">
-        <h2>তথ্য ছক</h2>
+        <div class="card-title">
+          <a routerLink="/school/list"
+             class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+             style="margin-right: 10px">
+            <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+                  [inlineSVG]="'./assets/media/svg/icons/General/back-button-svgrepo-com.svg'"
+                  (cacheSVG)="(cacheSVG)"></span>
+          </a>
+          <h5 class="card-label">
+            তথ্য ছক
+          </h5>
+        </div>
+
+        <div class="card-toolbar">
+          
+        </div>
+
       </div>
-      <div class="card-header">
-        <h4>বিদ্যালয়ের তথ্য</h4>
-      </div>
+
+       
+       
       <div class="card-body">
+        <div class="row">
+          <h2>বিদ্যালয়ের তথ্য</h2>
+        </div>
         <div class="row">
           <div class="col-md-6 mb-3">
             <label>বিদ্যালয়ের নাম</label>
@@ -89,10 +108,10 @@
             <div class="invalid-feedback">প্রয়োজন।</div>
           </div>
           <!--<div class="col-md-6 mb-3">
-            <label>অতিরিক্ত শ্রেণিকক্ষ প্রয়োজন</label>
-            <input type="number" class="form-control" formControlName="additionalClassroomsRequired" [ngClass]="{'is-invalid': schoolForm.get('additionalClassroomsRequired')?.invalid && schoolForm.get('additionalClassroomsRequired')?.touched}">
-            <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-          </div>-->
+        <label>অতিরিক্ত শ্রেণিকক্ষ প্রয়োজন</label>
+        <input type="number" class="form-control" formControlName="additionalClassroomsRequired" [ngClass]="{'is-invalid': schoolForm.get('additionalClassroomsRequired')?.invalid && schoolForm.get('additionalClassroomsRequired')?.touched}">
+        <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+      </div>-->
         </div>
         <div class="row">
           <div class="col-md-6 mb-3">
@@ -221,22 +240,22 @@
 
         </div>
         <!--<div class="row">
-                  <div class="col-md-6 mb-3">
-                    <label>দৈর্ঘ্য (ফুট)</label>
-                    <input type="number" class="form-control" formControlName="fieldLengthFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldLengthFeet')?.invalid && schoolForm.get('fieldLengthFeet')?.touched}">
-                    <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <label>প্রস্থ (ফুট)</label>
-                    <input type="number" class="form-control" formControlName="fieldWidthFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldWidthFeet')?.invalid && schoolForm.get('fieldWidthFeet')?.touched}">
-                    <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-                  </div>
-                  <div class="col-md-6 mb-3">
-          <label>উচ্চতা (ফুট)</label>
-          <input type="number" class="form-control" formControlName="fieldHeightFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldHeightFeet')?.invalid && schoolForm.get('fieldHeightFeet')?.touched}">
-          <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
-        </div>
-                </div>-->
+              <div class="col-md-6 mb-3">
+                <label>দৈর্ঘ্য (ফুট)</label>
+                <input type="number" class="form-control" formControlName="fieldLengthFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldLengthFeet')?.invalid && schoolForm.get('fieldLengthFeet')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label>প্রস্থ (ফুট)</label>
+                <input type="number" class="form-control" formControlName="fieldWidthFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldWidthFeet')?.invalid && schoolForm.get('fieldWidthFeet')?.touched}">
+                <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+              </div>
+              <div class="col-md-6 mb-3">
+      <label>উচ্চতা (ফুট)</label>
+      <input type="number" class="form-control" formControlName="fieldHeightFeet" [ngClass]="{'is-invalid': schoolForm.get('fieldHeightFeet')?.invalid && schoolForm.get('fieldHeightFeet')?.touched}">
+      <div class="invalid-feedback">প্রয়োজন এবং >= ০ হতে হবে।</div>
+    </div>
+            </div>-->
         <div class="row">
 
           <div class="col-md-3 mb-3">
@@ -434,7 +453,6 @@
       </div>
     </div>
     <button type="submit" class="btn btn-success btn-lg">ডাটাবেসে সংরক্ষণ করুন</button>
-  </form>
-</div>
+  </div>
 <!--<p>school-entry works!</p>-->
 <!--[disabled]="schoolForm.invalid"-->

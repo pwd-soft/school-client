@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { OrderDto } from 'src/app/proxy/dto-models';
-import { CadreType } from 'src/app/proxy/enum';
-import { OrderService } from 'src/app/proxy/services';
 import { Common } from 'src/app/shared/common/common';
 import { SubSink } from 'subsink';
 import pdfMake from 'pdfmake/build/pdfmake';
+import { SchoolDto } from '../../proxy/dto-models';
+import { SchoolService } from '../../proxy/services';
+import { PreparationService } from '../../shared/services/preparation.service';
 
 pdfMake.fonts = {
   // download default Roboto font from cdnjs.com
@@ -31,23 +31,24 @@ pdfMake.fonts = {
 };
 
 @Component({
-  selector: 'app-transfer-list',
-  templateUrl: './transfer-list.component.html',
-  styleUrls: ['./transfer-list.component.scss'],
+  selector: 'app-school-list',
+  templateUrl: './school-list.component.html',
+  styleUrls: ['./school-list.component.scss'],
 })
-export class TransferListComponent implements OnInit {
+export class SchoolListComponent implements OnInit {
   subs = new SubSink();
   cacheSVG = true;
   fg: FormGroup;
 
-  orders: OrderDto[] = [];
+  schools: SchoolDto[] = [];
 
   // PDF PROPERTIES
   pdfDefinition: any;
   pdfContent: any[] = [];
 
   constructor(
-    private orderService: OrderService,
+    private schoolService: SchoolService, 
+    private prep: PreparationService,
     private cdRef: ChangeDetectorRef,
     private spinnerService: NgxSpinnerService
   ) {}
@@ -58,13 +59,15 @@ export class TransferListComponent implements OnInit {
 
   loadData(): void {
     this.spinnerService.show();
-    this.subs.sink = this.orderService
-      .getList(CadreType.NonCadre)
-      .subscribe((orders) => {
+    
+    this.subs.sink = this.schoolService
+      .getListByOfficeByCode("ee_nator")
+      //.getListByOfficeByCode(this.prep.getUserName())
+      .subscribe((s) => {
         this.spinnerService.hide();
-        this.orders = orders;
+        this.schools = s;
         this.cdRef.detectChanges();
-        console.log(orders);
+        console.log(s);
       });
   }
 
@@ -115,68 +118,7 @@ export class TransferListComponent implements OnInit {
     });
     let serial: number = 1;
 
-    // this.summaries.forEach((data) => {
-    //   this.pdfContent.push([
-    //     {
-    //       text: this.toLocal(data.serial),
-    //       alignment: 'center',
-    //       margin: [0, 3, 0, 0],
-    //     },
-    //     { text: data.name, style: 'tableTexts' },
-    //     {
-    //       text: this.toLocal(data.previousObjectionNumber),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: '-', //text: this.toLakhAndLocal(data.previousObjectionAmount),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: this.toLocal(data.currentObjectionNumber),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: '-', //text: this.toLakhAndLocal(data.currentObjectionAmount),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: this.toLocal(data.subTotalObjectionNumber),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: '-', //text: this.toLakhAndLocal(data.subTotalObjectionAmount),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: this.toLocal(data.previousBroadsheetNumber),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: this.toLocal(data.unsetteledBroadsheetNumber),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: this.toLocal(data.currentObjectionSettlementNumber),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: '-', //text: this.toLakhAndLocal(data.currentObjectionSettlementAmount),
-    //       style: 'tableNumbers',
-    //     },
-    //     { text: this.toLocal(data.nonSfiNumber), style: 'tableNumbers' },
-    //     { text: this.toLocal(data.sfiNumber), style: 'tableNumbers' },
-    //     { text: this.toLocal(data.draftNumber), style: 'tableNumbers' },
-    //     {
-    //       text: this.toLocal(data.totalObjectionNumber),
-    //       style: 'tableNumbers',
-    //     },
-    //     {
-    //       text: '-', //text: this.toLakhAndLocal(data.totalObjectionAmount),
-    //       style: 'tableNumbers',
-    //     },
-    //     { text: '', style: 'tableTexts' },
-    //   ]);
-    // });
+   
   }
 
   createDocument() {

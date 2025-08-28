@@ -12,6 +12,7 @@ import { SchoolDto } from '../../proxy/dto-models';
 })
 export class SchoolEntryComponent implements OnInit {
   schoolForm: FormGroup;
+  cacheSVG = true;
 
   id: string = "";
 

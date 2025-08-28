@@ -1,0 +1,80 @@
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)"
+             size="default"
+             type="ball-spin-clockwise">
+  <p style="color: white">Please Wait .....</p>
+</ngx-spinner>
+
+<div class="card card-custom gutter-b mb-3">
+  <div class="card-header">
+    <div class="card-title">
+      <a routerLink="/dashboard"
+         class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+         style="margin-right: 10px">
+        <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+              [inlineSVG]="'./assets/media/svg/icons/General/back-button-svgrepo-com.svg'"
+              (cacheSVG)="(cacheSVG)"></span>
+      </a>
+      <h5 class="card-label">
+        স্কুলের তালিকা
+      </h5>
+    </div>
+
+    <div class="card-toolbar">
+      <!-- <button class="btn btn-primary mr-2" routerLink="/audit/objection/new" >
+        <i class="fas fa-plus"></i> অডিট আপত্তি লিপিবদ্ধকরণ</button> -->
+    </div>
+
+  </div>
+
+  <div class="card-body">
+
+
+
+    <div class="row pt-4">
+      <div class="table-responsive" *ngIf="schools?.length">
+        <table class="table table-bordered table-str">
+          <tr>
+            <!--//বিভাগ	জেলা 	উপজেলা 	ক্রমিক নং	বিদ্যালয়ের নাম	EMIS কোড-->
+
+            <th class="w-5">#</th>            
+            <th class="w-10">জেলা</th>
+            <th class="w-10">উপজেলা</th>
+            <th class="w-5">ক্রমিক নং</th>
+            <th class="w-40">বিদ্যালয়ের নাম</th>
+            <th class="w-15">EMIS কোড</th>
+            <th class="w-5">ইনপুট </th>
+            <th class="w-10">ডাউনলোড </th>
+          </tr>
+          <tr *ngFor="let item of schools; let i = index">
+            <td>{{ toLocal(i + 1) }}</td>
+            <td class="text-start p-2">{{ item.district }}</td>
+            <td>{{ item.thana }}</td>
+            <td>{{ item.sequence }}</td>
+            <td class="text-start p-2"> <a  [routerLink] = "['/school/entry', item.emis]"> {{ item.name }}  </a> </td>
+            <td>{{ item.emis }}</td>
+            <td>{{ item.isSaved }}</td>
+            <!--<td>{{ convertDateToBengali(item.executeDate) }}</td>-->
+             
+            <td>
+               
+               
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card-body">
+       
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+
+   
+
+  </div>
+
+</div>
