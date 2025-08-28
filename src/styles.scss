@@ -3,3 +3,35 @@
 
 // Replace above style with this SCSS file to enable dark mode styles
 //@import "./assets/sass/style.dark";
+
+
+.loader {
+  width: 60px;
+  aspect-ratio: 1;
+  --_g: no-repeat radial-gradient(farthest-side,#000 90%,#0000);
+  background: var(--_g), var(--_g), var(--_g);
+  background-size: 25% 25%;
+  animation: l17 1s infinite;
+}
+@keyframes l17{
+  0%     {background-position: 0% -100%,50% -100%,100% -100%}
+  16.67% {background-position: 0%   50%,50% -100%,100% -100%}
+  33.33% {background-position: 0%   50%,50%   50%,100% -100%}
+  45%,55%{background-position: 0%   50%,50%   50%,100%   50%}
+  66.67% {background-position: 0%  200%,50%   50%,100%   50%}
+  83.33% {background-position: 0%  200%,50%  200%,100%   50%}
+  100%   {background-position: 0%  200%,50%  200%,100%  200%}
+}
+
+// .loader {
+//   width: 120px;
+//   height: 20px;
+//   border-radius: 20px;
+//   background:
+//    repeating-linear-gradient(135deg,#f03355 0 10px,#ffa516 0 20px) 0/0%   no-repeat,
+//    repeating-linear-gradient(135deg,#ddd    0 10px,#eee    0 20px) 0/100%;
+//   animation: l3 2s infinite;
+// }
+// @keyframes l3 {
+//     100% {background-size:100%}
+// }
