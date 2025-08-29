@@ -7,11 +7,11 @@ import { BuildingInputDto, SchoolInputDto, StudentInputDto } from '../../proxy/i
 
 
 @Component({
-  selector: 'app-school-entry',
-  templateUrl: './school-entry.component.html',
-  styleUrls: ['./school-entry.component.scss']
+  selector: 'app-school-view',
+  templateUrl: './school-view.component.html',
+  styleUrls: ['./school-view.component.scss']
 })
-export class SchoolEntryComponent implements OnInit {
+export class SchoolViewComponent implements OnInit {
   schoolForm: FormGroup;
   buildingForm: FormGroup;
   studentForm: FormGroup;

@@ -31,7 +31,6 @@ export interface BuildingDto extends EntityDto<number> {
   widthFeet: number;
   isProposed: boolean;
   schoolId: number;
-  school: SchoolDto;
 }
 
 export interface ChangePass {
@@ -138,14 +137,19 @@ export interface SchoolDto extends EntityDto<number> {
   westBoundaryFeet: number;
   specialComments?: string;
   buildings: BuildingDto[];
-  studentCounts: StudentCountDto[];
+  student: StudentDto;
 }
 
-export interface StudentCountDto extends EntityDto<number> {
-  classLevel?: string;
-  studentNumber: number;
+export interface StudentDto extends EntityDto<number> {
   schoolId: number;
-  school: SchoolDto;
+  prePrimary4Plus: number;
+  prePrimary5Plus: number;
+  class1: number;
+  class2: number;
+  class3: number;
+  class4: number;
+  class5: number;
+  specialComment?: string;
 }
 
 export interface UpdateRoleDto {
