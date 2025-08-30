@@ -126,7 +126,6 @@ export interface SchoolDto extends EntityDto<number> {
   spaceAvailableForNewBuilding: boolean;
   needsTemporaryRoomsDuringConstruction: boolean;
   additionalClassroomsRequired: number;
-  recommendation?: string;
   soilFillingCubicFeet: number;
   fieldLengthFeet: number;
   fieldWidthFeet: number;
@@ -135,7 +134,8 @@ export interface SchoolDto extends EntityDto<number> {
   southBoundaryFeet: number;
   eastBoundaryFeet: number;
   westBoundaryFeet: number;
-  specialComments?: string;
+  proposedLength: number;
+  proposedWidth: number;
   buildings: BuildingDto[];
   student: StudentDto;
 }

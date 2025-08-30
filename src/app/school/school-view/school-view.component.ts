@@ -108,15 +108,15 @@ export class SchoolViewComponent implements OnInit {
       specialComment: ['']
     })
 
-    // Initialize student counts for predefined class levels
-    //this.addStudentCount('প্রি-প্রাইমারী (৪+)');
-    //this.addStudentCount('প্রি-প্রাইমারী (৫+)');
-    //this.addStudentCount('প্রথম শ্রেণী');
-    //this.addStudentCount('দ্বিতীয় শ্রেণী');
-    //this.addStudentCount('তৃতীয় শ্রেণী');
-    //this.addStudentCount('চতুর্থ শ্রেণী');
-    //this.addStudentCount('পঞ্চম শ্রেণী');
-    //this.addBuilding(); 
+    
+  }
+
+  calculateTotal() {
+    var s = this.school.student;
+    if (s)
+      return s.class1 + s.class2 + s.class3 + s.class4 + s.class5 + s.prePrimary4Plus + s.prePrimary5Plus;
+    else
+      return 0;
   }
 
   loadData() {
@@ -149,7 +149,7 @@ export class SchoolViewComponent implements OnInit {
       c.spaceAvailableForNewBuilding.setValue(x.spaceAvailableForNewBuilding);
       c.needsTemporaryRoomsDuringConstruction.setValue(x.needsTemporaryRoomsDuringConstruction);
       c.additionalClassroomsRequired.setValue(x.additionalClassroomsRequired);
-      c.recommendation.setValue(x.recommendation);
+      //c.recommendation.setValue(x.recommendation);
       c.soilFillingCubicFeet.setValue(x.soilFillingCubicFeet);
       c.fieldLengthFeet.setValue(x.fieldLengthFeet);
       c.fieldWidthFeet.setValue(x.fieldWidthFeet);
@@ -158,7 +158,7 @@ export class SchoolViewComponent implements OnInit {
       c.southBoundaryFeet.setValue(x.southBoundaryFeet);
       c.eastBoundaryFeet.setValue(x.eastBoundaryFeet);
       c.westBoundaryFeet.setValue(x.westBoundaryFeet);
-      c.specialComments.setValue(x.specialComments);
+      //c.specialComments.setValue(x.specialComments);
       var c = this.studentForm.controls;
       c.prePrimary4Plus.setValue(x.student.prePrimary4Plus);
       c.prePrimary5Plus.setValue(x.student.prePrimary5Plus);
@@ -175,154 +175,12 @@ export class SchoolViewComponent implements OnInit {
     });
   }
 
-  calculateTotal() { }
-
-  addBuilding(): void {
-    var v = this.buildingForm.value;
-    let b = {} as BuildingInputDto;
-    b.buildingNumber = v.buildingNumber;
-    b.buildingType = v.buildingType;
-    b.comments = v.comments;
-    b.constructionYear = v.constructionYear;
-    b.projectName = v.projectName;
-    b.currentFloors = v.currentFloors;
-    b.foundationFloors = v.foundationFloors;
-    b.usableRooms = v.usableRooms;
-    b.unusableRooms = v.unusableRooms;
-    b.isRisky = v.isRisky;
-    b.isDamagedDeclared = v.isDamagedDeclared;
-    b.lengthFeet = v.lengthFeet;
-    b.widthFeet = v.widthFeet;
-    this.buildings.push(b);
-    this.cdRef.detectChanges();
-  }
-
   removeBuilding(index: number): void {
 
   }
 
-  updateSchool(): void {
-    if (this.schoolForm.valid) {
 
-      var s: SchoolInputDto = {} as SchoolInputDto;
-
-      s.id = this.school.id;
-      s.officeCode = this.school.officeCode;
-      s.sdOfficeCode = this.school.sdOfficeCode;
-      s.division = this.school.division;
-      s.district = this.school.district;
-      s.thana = this.school.thana;
-      s.sequence = this.school.sequence;
-      s.name = this.school.name;
-      s.emis = this.school.emis;
-
-      var v = this.schoolForm.value;
-      s.headMaster = v.headMaster;
-      s.mobile = v.mobile;
-      s.totalLandDecimals = v.totalLandDecimals;
-      s.undisputedLandDecimals = v.undisputedLandDecimals;
-      s.hasLandComplications = v.hasLandComplications;
-      s.complicatedLandDecimals = v.complicatedLandDecimals;
-      s.landRecordedInGovtName = v.landRecordedInGovtName;
-      s.boundaryDetermined = v.boundaryDetermined;
-      s.boundaryWallNeededFeet = v.boundaryWallNeededFeet;
-      s.totalTeacherPosts = v.totalTeacherPosts;
-      s.workingTeachers = v.workingTeachers;
-      s.shiftType = v.shiftType;
-      s.isRiverErosionProne = v.isRiverErosionProne;
-      s.distanceFromRiverMeters = v.distanceFromRiverMeters;
-      s.additionalRoomsMethod = v.additionalRoomsMethod;
-      s.spaceAvailableForNewBuilding = v.spaceAvailableForNewBuilding;
-      s.needsTemporaryRoomsDuringConstruction = v.needsTemporaryRoomsDuringConstruction;
-      s.additionalClassroomsRequired = v.additionalClassroomsRequired;
-      s.recommendation = v.recommendation;
-      s.soilFillingCubicFeet = v.soilFillingCubicFeet;
-      s.fieldLengthFeet = v.fieldLengthFeet;
-      s.fieldWidthFeet = v.fieldWidthFeet;
-      s.fieldHeightFeet = v.fieldHeightFeet;
-      s.northBoundaryFeet = v.northBoundaryFeet;
-      s.southBoundaryFeet = v.southBoundaryFeet;
-      s.eastBoundaryFeet = v.eastBoundaryFeet;
-      s.westBoundaryFeet = v.westBoundaryFeet;
-      s.specialComments = v.specialComments;
-      s.buildings = this.buildings;
-      //s.buildings.push(this.buildings[0]);
-      //s.buildings.push(this.buildings[1]);
-      s.buildings[0].projectName += "asdf";
-
-      var t: StudentInputDto = {} as StudentInputDto;
-      var v = this.studentForm.value;
-      t.id = this.school.student.id;
-      t.prePrimary4Plus = v.prePrimary4Plus;
-      t.prePrimary5Plus = v.prePrimary5Plus;
-      t.class1 = v.class1;
-      t.class2 = v.class2;
-      t.class3 = v.class3;
-      t.class4 = v.class4;
-      t.class5 = v.class5;
-      t.specialComment = v.specialComment;
-      s.student = t;
-      if (this.bIds.length > 0)
-        this.schoolService.removeBuildingsByIds(this.bIds).subscribe(() => {
-
-        })
-      this.schoolService.update(s).subscribe(
-        response => {
-          console.log('Form saved successfully', response);
-        },
-        error => {
-          console.error('Error saving form', error);
-        }
-      );
-    } else {
-      this.schoolForm.markAllAsTouched();
-    }
-  }
-
-  edit(i) {
-    console.log(this.buildings[i]);
-    var b = this.buildings[i];
-    let c = this.buildingForm.controls;
-    this.editId = i;
-    c.buildingNumber.setValue(b.buildingNumber);
-    c.constructionYear.setValue(b.constructionYear);
-    c.projectName.setValue(b.projectName);
-    c.foundationFloors.setValue(b.foundationFloors);
-    c.currentFloors.setValue(b.currentFloors);
-    c.usableRooms.setValue(b.usableRooms);
-    c.unusableRooms.setValue(b.unusableRooms);
-    c.isRisky.setValue(b.isRisky);
-    c.isAbandoned.setValue(b.isAbandoned);
-    c.isDamagedDeclared.setValue(b.isDamagedDeclared);
-    c.isUnderConstruction.setValue(b.isUnderConstruction);
-    c.expandedOrRepairedLast5Years.setValue(b.expandedOrRepairedLast5Years);
-    c.buildingType.setValue(b.buildingType);
-    c.comments.setValue(b.comments);
-    c.lengthFeet.setValue(b.lengthFeet);
-    c.widthFeet.setValue(b.widthFeet);
-    c.isProposed.setValue(b.isProposed);
-    this.cdRef.detectChanges();
-  }
-
-  updateBuilding() {
-    let v = this.buildingForm.value;
-    let b = this.buildings[this.editId];
-    b.buildingNumber = v.buildingNumber;
-    b.buildingType = v.buildingType;
-    b.comments = v.comments;
-    b.constructionYear = v.constructionYear;
-    b.projectName = v.projectName;
-    b.currentFloors = v.currentFloors;
-    b.foundationFloors = v.foundationFloors;
-    b.usableRooms = v.usableRooms;
-    b.unusableRooms = v.unusableRooms;
-    b.isRisky = v.isRisky;
-    b.isDamagedDeclared = v.isDamagedDeclared;
-    b.lengthFeet = v.lengthFeet;
-    b.widthFeet = v.widthFeet;
-    this.editId = 0;
-    this.cdRef.detectChanges();
-  }
+ 
   reset() {
     this.buildingForm.reset();
     this.editId = 0;

@@ -75,7 +75,6 @@ export interface SchoolInputDto {
   spaceAvailableForNewBuilding: boolean;
   needsTemporaryRoomsDuringConstruction: boolean;
   additionalClassroomsRequired: number;
-  recommendation?: string;
   soilFillingCubicFeet: number;
   fieldLengthFeet: number;
   fieldWidthFeet: number;
@@ -84,18 +83,10 @@ export interface SchoolInputDto {
   southBoundaryFeet: number;
   eastBoundaryFeet: number;
   westBoundaryFeet: number;
-  specialComments?: string;
+  proposedLength: number;
+  proposedWidth: number;
   student: StudentInputDto;
   buildings: BuildingInputDto[];
-  studentCounts: StudentCountInputDto[];
-}
-
-export interface StudentCountInputDto {
-  id: number;
-  classLevel?: string;
-  studentNumber: number;
-  schoolId: number;
-  school: SchoolInputDto;
 }
 
 export interface StudentInputDto extends EntityDto<number> {

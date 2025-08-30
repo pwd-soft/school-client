@@ -53,7 +53,8 @@
             <td>{{ item.sequence }}</td>
             <td class="text-start p-2"> <a  [routerLink] = "['/school/view', item.emis]"> {{ item.name }}  </a> </td>
             <td>{{ item.emis }}</td>
-            <td>{{ item.isSaved }}</td>
+            <td *ngIf="item.isSaved" ><strong> <span style="color: #008080; ">আছে</span></strong>  </td>
+            <td *ngIf="!item.isSaved"><strong> <span style="color: #ff0000;">নাই</span> </strong>  </td>
             <!--<td>{{ convertDateToBengali(item.executeDate) }}</td>-->
              
             <td>

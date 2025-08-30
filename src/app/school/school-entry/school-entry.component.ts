@@ -1,9 +1,10 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SchoolService } from '../../proxy/services';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BuildingDto, SchoolDto } from '../../proxy/dto-models';
 import { BuildingInputDto, SchoolInputDto, StudentInputDto } from '../../proxy/input-dtos';
+import { ToasterService } from '@abp/ng.theme.shared';
 
 
 @Component({
@@ -23,7 +24,9 @@ export class SchoolEntryComponent implements OnInit {
   editId: number = 0;
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private cdRef: ChangeDetectorRef,
+    private toast: ToasterService,
 
     private schoolService: SchoolService) { }
 
@@ -73,6 +76,8 @@ export class SchoolEntryComponent implements OnInit {
       southBoundaryFeet: [0, [Validators.required, Validators.min(0)]],
       eastBoundaryFeet: [0, [Validators.required, Validators.min(0)]],
       westBoundaryFeet: [0, [Validators.required, Validators.min(0)]],
+      proposedLength: [0, [Validators.required, Validators.min(0)]],
+      proposedWidth: [0, [Validators.required, Validators.min(0)]],
       specialComments: [''],
 
     });
@@ -149,7 +154,7 @@ export class SchoolEntryComponent implements OnInit {
       c.spaceAvailableForNewBuilding.setValue(x.spaceAvailableForNewBuilding);
       c.needsTemporaryRoomsDuringConstruction.setValue(x.needsTemporaryRoomsDuringConstruction);
       c.additionalClassroomsRequired.setValue(x.additionalClassroomsRequired);
-      c.recommendation.setValue(x.recommendation);
+      //c.recommendation.setValue(x.recommendation);
       c.soilFillingCubicFeet.setValue(x.soilFillingCubicFeet);
       c.fieldLengthFeet.setValue(x.fieldLengthFeet);
       c.fieldWidthFeet.setValue(x.fieldWidthFeet);
@@ -158,7 +163,11 @@ export class SchoolEntryComponent implements OnInit {
       c.southBoundaryFeet.setValue(x.southBoundaryFeet);
       c.eastBoundaryFeet.setValue(x.eastBoundaryFeet);
       c.westBoundaryFeet.setValue(x.westBoundaryFeet);
-      c.specialComments.setValue(x.specialComments);
+      c.proposedLength.setValue(x.proposedLength);
+      c.proposedWidth.setValue(x.proposedWidth);
+
+
+      //c.specialComments.setValue(x.specialComments);
       var c = this.studentForm.controls;
       c.prePrimary4Plus.setValue(x.student.prePrimary4Plus);
       c.prePrimary5Plus.setValue(x.student.prePrimary5Plus);
@@ -175,7 +184,13 @@ export class SchoolEntryComponent implements OnInit {
     });
   }
 
-  calculateTotal() { }
+  calculateTotal() {
+    var s = this.school.student;
+    if (s)
+      return s.class1 + s.class2 + s.class3 + s.class4 + s.class5 + s.prePrimary4Plus + s.prePrimary5Plus;
+    else
+      return 0;
+  }
 
   addBuilding(): void {
     var v = this.buildingForm.value;
@@ -193,13 +208,11 @@ export class SchoolEntryComponent implements OnInit {
     b.isDamagedDeclared = v.isDamagedDeclared;
     b.lengthFeet = v.lengthFeet;
     b.widthFeet = v.widthFeet;
+    b.isProposed = false;
     this.buildings.push(b);
     this.cdRef.detectChanges();
   }
 
-  removeBuilding(index: number): void {
-
-  }
 
   updateSchool(): void {
     if (this.schoolForm.valid) {
@@ -235,7 +248,6 @@ export class SchoolEntryComponent implements OnInit {
       s.spaceAvailableForNewBuilding = v.spaceAvailableForNewBuilding;
       s.needsTemporaryRoomsDuringConstruction = v.needsTemporaryRoomsDuringConstruction;
       s.additionalClassroomsRequired = v.additionalClassroomsRequired;
-      s.recommendation = v.recommendation;
       s.soilFillingCubicFeet = v.soilFillingCubicFeet;
       s.fieldLengthFeet = v.fieldLengthFeet;
       s.fieldWidthFeet = v.fieldWidthFeet;
@@ -244,11 +256,10 @@ export class SchoolEntryComponent implements OnInit {
       s.southBoundaryFeet = v.southBoundaryFeet;
       s.eastBoundaryFeet = v.eastBoundaryFeet;
       s.westBoundaryFeet = v.westBoundaryFeet;
-      s.specialComments = v.specialComments;
+      s.proposedLength = v.proposedLength;
+      s.proposedWidth = v.proposedWidth;
+      s.isSaved = true;
       s.buildings = this.buildings;
-      //s.buildings.push(this.buildings[0]);
-      //s.buildings.push(this.buildings[1]);
-      s.buildings[0].projectName += "asdf";
 
       var t: StudentInputDto = {} as StudentInputDto;
       var v = this.studentForm.value;
@@ -269,6 +280,8 @@ export class SchoolEntryComponent implements OnInit {
       this.schoolService.update(s).subscribe(
         response => {
           console.log('Form saved successfully', response);
+          this.toast.success("School info saved");
+          this.router.navigateByUrl("/school/view/" + this.school.emis);
         },
         error => {
           console.error('Error saving form', error);
@@ -300,7 +313,7 @@ export class SchoolEntryComponent implements OnInit {
     c.comments.setValue(b.comments);
     c.lengthFeet.setValue(b.lengthFeet);
     c.widthFeet.setValue(b.widthFeet);
-    c.isProposed.setValue(b.isProposed);
+    //c.isProposed.setValue(b.isProposed);
     this.cdRef.detectChanges();
   }
 
@@ -323,11 +336,13 @@ export class SchoolEntryComponent implements OnInit {
     this.editId = 0;
     this.cdRef.detectChanges();
   }
+
   reset() {
     this.buildingForm.reset();
     this.editId = 0;
     this.cdRef.detectChanges();
   }
+
   remove(i) {
     console.log(this.buildings[i]);
     var b = this.buildings[i];

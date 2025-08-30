@@ -155,23 +155,23 @@
 
       <div class="row mt-4">
         <div class="col-md-3">
-          <label>সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার</label>
-          <input type="text" class="form-control" placeholder="মোবাইল নাম্বারঃ">
+          <p>সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
+          <p>মোবাইল নাম্বারঃ</p>
           <p>সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
         </div>
         <div class="col-md-3">
-          <label>প্রধান শিক্ষক</label>
-          <input type="text" class="form-control" placeholder="মোবাইল নাম্বারঃ">
+          <p>প্রধান শিক্ষক</p>
+          <p>মোবাইল নাম্বারঃ</p>
           <p>স্বাক্ষর ও সীল</p>
         </div>
         <div class="col-md-3">
-          <label>উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী</label>
-          <input type="text" class="form-control" placeholder="মোবাইল নাম্বারঃ">
+          <p>উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী</p>
+          <p>মোবাইল নাম্বারঃ</p>
           <p>স্বাক্ষর ও সীল</p>
         </div>
         <div class="col-md-3">
-          <label>উপজেলা প্রাথমিক শিক্ষা অফিসার</label>
-          <input type="text" class="form-control" placeholder="মোবাইল নাম্বারঃ">
+          <p>উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
+          <p>মোবাইল নাম্বারঃ</p>
           <p>স্বাক্ষর ও সীল</p>
         </div>
       </div>
@@ -189,16 +189,16 @@
       <!-- Sheet 2: ভবন নির্মাণ সংক্রান্ত তথ্য ছক -->
       <h4>ভবন নির্মাণ সংক্রান্ত তথ্য ছক</h4>
       <div class="row">
-        <div class="col-6"><label>বিদ্যালয়ের নাম:</label></div>
-        <div class="col-6"><label>ইএমআইএস কোড নং:</label></div>
+        <div class="col-6"><label>বিদ্যালয়ের নাম: {{school.name}}</label></div>
+        <div class="col-6"><label>ইএমআইএস কোড নং: {{school.emis}}</label></div>
       </div>
       <div class="row">
-        <div class="col-6"><label>উপজেলা:</label></div>
-        <div class="col-6"><label>জেলা:</label></div>
+        <div class="col-6"><label>উপজেলা: {{school.thana}}</label></div>
+        <div class="col-6"><label>জেলা: {{school.district}}</label></div>
       </div>
       <div class="row">
-        <div class="col-6"><label>প্রধান শিক্ষকের নামঃ</label></div>
-        <div class="col-6"><label>মোবাইল নাম্বারঃ</label></div>
+        <div class="col-6"><label>প্রধান শিক্ষকের নামঃ {{school.headMaster}}</label></div>
+        <div class="col-6"><label>মোবাইল নাম্বারঃ {{school.mobile}}</label></div>
       </div>
 
 
@@ -220,14 +220,19 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td><input type="text" class="form-control"></td>
-            <!-- Add inputs for each cell -->
-            <!-- ... -->
+          <tr *ngFor="let b of buildings; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{b.constructionYear}}</td>
+            <td>{{b.projectName}}</td>
+            <td>{{b.foundationFloors}}</td>
+            <td>{{b.currentFloors}}</td>
+            <td>{{b.usableRooms}}</td>
+            <td>{{b.unusableRooms}}</td>
+            <td>{{b.usableRooms+b.unusableRooms}}</td>
+            <td>{{b.isRisky}}</td>
+            <td>{{b.isDamagedDeclared}}</td>
+            <td>{{b.comments}}</td>
           </tr>
-          <!-- Add rows 2-5 -->
-          <!-- ... -->
         </tbody>
       </table>
 
@@ -247,18 +252,45 @@
         </thead>
         <tbody>
           <tr>
-            <td><input type="text" class="form-control"></td>
-            <!-- ... -->
+            <td>{{school.student.prePrimary4Plus}} </td>
+            <td>{{school.student.prePrimary5Plus}} </td>
+            <td>{{school.student.class1}} </td>
+            <td>{{school.student.class2}} </td>
+            <td>{{school.student.class3}} </td>
+            <td>{{school.student.class4}} </td>
+            <td>{{school.student.class5}} </td>
+            <td>{{calculateTotal()}} </td>
           </tr>
         </tbody>
       </table>
 
       <h5>৩। বিশেষ মতামত (যদি থাকে):</h5>
-      <textarea class="form-control" rows="5"></textarea>
+      <div class="form-control col-12">
+        {{school.student.specialComment}}
+      </div>
 
       <!-- Signatures -->
       <div class="row mt-4">
-        <!-- Similar to Form1 -->
+        <div class="col-md-3">
+          <p>সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
+          <p>মোবাইল নাম্বারঃ</p>
+          <p>সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
+        </div>
+        <div class="col-md-3">
+          <p>প্রধান শিক্ষক</p>
+          <p>মোবাইল নাম্বারঃ</p>
+          <p>স্বাক্ষর ও সীল</p>
+        </div>
+        <div class="col-md-3">
+          <p>উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী</p>
+          <p>মোবাইল নাম্বারঃ</p>
+          <p>স্বাক্ষর ও সীল</p>
+        </div>
+        <div class="col-md-3">
+          <p>উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
+          <p>মোবাইল নাম্বারঃ</p>
+          <p>স্বাক্ষর ও সীল</p>
+        </div>
       </div>
     </form>
   </div>
@@ -273,59 +305,70 @@
 
     <form>
       <div class="row">
-        <div class="col-6"><label>বিদ্যালয়ের নাম:</label></div>
-        <div class="col-6"><label>ইএমআইএস কোড নং:</label></div>
+        <div class="col-6"><label>বিদ্যালয়ের নাম: {{school.name}}</label></div>
+        <div class="col-6"><label>ইএমআইএস কোড নং: {{school.emis}}</label></div>
       </div>
       <div class="row">
-        <div class="col-6"><label>উপজেলা:</label></div>
-        <div class="col-6"><label>জেলা:</label></div>
+        <div class="col-6"><label>উপজেলা: {{school.thana}}</label></div>
+        <div class="col-6"><label>জেলা: {{school.district}}</label></div>
       </div>
       <div class="row">
-        <div class="col-6"><label>প্রধান শিক্ষকের নামঃ</label></div>
-        <div class="col-6"><label>মোবাইল নাম্বারঃ</label></div>
+        <div class="col-6"><label>প্রধান শিক্ষকের নামঃ {{school.headMaster}}</label></div>
+        <div class="col-6"><label>মোবাইল নাম্বারঃ {{school.mobile}}</label></div>
       </div>
 
       <p>বিদ্যালয়ের সীমানা নির্ধারণ করে বিদ্যালয়ের জমির উপর বিদ্যমান স্থাপনা সমূহের পরিমাপ এবং প্রস্তাবিত নির্মাণযোগ্য ভবনের পরিমাপসহ Sketch Map এ আবশ্যিকভাবে চিহ্নিত করতে হবে।</p>
 
       <div class="text-center">
-        <label>উত্তর =</label>
-        <input type="text" class="form-control d-inline-block w-25" placeholder=".... ফুট">
+        <label>উত্তর = {{school.northBoundaryFeet}}  ফুট</label>
+        <!--<input type="text" class="form-control d-inline-block w-25" placeholder=".... ফুট">-->
       </div>
       <div class="row">
         <div class="col">
-          <label>পশ্চিম=</label>
-          <input type="text" class="form-control" placeholder=".... ফুট">
+          <label>পশ্চিম= {{school.westBoundaryFeet}}  ফুট</label>
+          <!--<input type="text" class="form-control" placeholder=".... ফুট">-->
         </div>
         <div class="col text-center">
           <!-- Placeholder for sketch area, perhaps use canvas or div -->
           <div class="border p-5" style="height: 300px;">Sketch Map Area (Use drawing tools or describe)</div>
         </div>
         <div class="col">
-          <label>পূর্ব =</label>
-          <input type="text" class="form-control" placeholder=".... ফুট">
+          <label>পূর্ব = {{school.eastBoundaryFeet}} ফুট</label>
+          <!--<input type="text" class="form-control" placeholder=".... ">-->
         </div>
       </div>
       <div class="text-center">
-        <label>দক্ষিণ =</label>
-        <input type="text" class="form-control d-inline-block w-25" placeholder=".... ফুট">
+        <label>দক্ষিণ =  {{school.southBoundaryFeet}} ফুট</label>
+        <!--<input type="text" class="form-control d-inline-block w-25" placeholder=".... ফুট">-->
       </div>
 
       <ul class="list-unstyled">
-        <li>ক) ১নং ভবনের পরিমাপ = <input type="text" class="form-control d-inline-block w-25" placeholder="..........ফুট x ......... ফুট"></li>
-        <li>খ) ২নং ভবনের পরিমাপ = <input type="text" class="form-control d-inline-block w-25" placeholder="..........ফুট x ......... ফুট"></li>
-        <li>গ) ৩নং ভবনের পরিমাপ = <input type="text" class="form-control d-inline-block w-25" placeholder="..........ফুট x ......... ফুট"></li>
-        <li>ঘ) ৪নং ভবনের পরিমাপ= <input type="text" class="form-control d-inline-block w-25" placeholder="..........ফুট x ......... ফুট"></li>
-        <li>ঙ) প্রস্তাবিত ভবন নির্মাণের জায়গার পরিমাপ = <input type="text" class="form-control d-inline-block w-25" placeholder="..........ফুট x ......... ফুট"></li>
+        <li *ngFor="let b of buildings; let i = index"> {{i+1}} নং ভবনের পরিমাপ = {{b.lengthFeet}} ফুট x   {{b.widthFeet}}  ফুট</li>
+        <li>প্রস্তাবিত ভবন নির্মাণের জায়গার পরিমাপ =  {{school.proposedLength}} ফুট x   {{school.proposedWidth}}  ফুট</li>
       </ul>
 
       <!-- Signatures -->
       <div class="row mt-4">
-        <div class="col">
-          <label>উপ-সহকারী প্রকৌশলী/সহকারি প্রক্যেীশলী</label>
-          <input type="text" class="form-control" placeholder="মোবাইল নাম্বারঃ">
+        <div class="col-md-3">
+          <p>সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
+          <p>মোবাইল নাম্বারঃ</p>
+          <p>সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
+        </div>
+        <div class="col-md-3">
+          <p>প্রধান শিক্ষক</p>
+          <p>মোবাইল নাম্বারঃ</p>
           <p>স্বাক্ষর ও সীল</p>
         </div>
-        <!-- Add others -->
+        <div class="col-md-3">
+          <p>উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী</p>
+          <p>মোবাইল নাম্বারঃ</p>
+          <p>স্বাক্ষর ও সীল</p>
+        </div>
+        <div class="col-md-3">
+          <p>উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
+          <p>মোবাইল নাম্বারঃ</p>
+          <p>স্বাক্ষর ও সীল</p>
+        </div>
       </div>
     </form>
   </div>
