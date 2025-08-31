@@ -1,18 +1,17 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SchoolService } from '../../proxy/services';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BuildingDto, SchoolDto } from '../../proxy/dto-models';
 import { BuildingInputDto, SchoolInputDto, StudentInputDto } from '../../proxy/input-dtos';
-import { ToasterService } from '@abp/ng.theme.shared';
 
 
 @Component({
-  selector: 'app-school-entry',
-  templateUrl: './school-entry.component.html',
-  styleUrls: ['./school-entry.component.scss']
+  selector: 'app-school-view',
+  templateUrl: './school-view.component.html',
+  styleUrls: ['./school-view.component.scss']
 })
-export class SchoolEntryComponent implements OnInit {
+export class SchoolViewComponent implements OnInit {
   schoolForm: FormGroup;
   buildingForm: FormGroup;
   studentForm: FormGroup;
@@ -24,9 +23,7 @@ export class SchoolEntryComponent implements OnInit {
   editId: number = 0;
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
     private cdRef: ChangeDetectorRef,
-    private toast: ToasterService,
 
     private schoolService: SchoolService) { }
 
@@ -76,8 +73,6 @@ export class SchoolEntryComponent implements OnInit {
       southBoundaryFeet: [0, [Validators.required, Validators.min(0)]],
       eastBoundaryFeet: [0, [Validators.required, Validators.min(0)]],
       westBoundaryFeet: [0, [Validators.required, Validators.min(0)]],
-      proposedLength: [0, [Validators.required, Validators.min(0)]],
-      proposedWidth: [0, [Validators.required, Validators.min(0)]],
       specialComments: [''],
 
     });
@@ -113,15 +108,15 @@ export class SchoolEntryComponent implements OnInit {
       specialComment: ['']
     })
 
-    // Initialize student counts for predefined class levels
-    //this.addStudentCount('প্রি-প্রাইমারী (৪+)');
-    //this.addStudentCount('প্রি-প্রাইমারী (৫+)');
-    //this.addStudentCount('প্রথম শ্রেণী');
-    //this.addStudentCount('দ্বিতীয় শ্রেণী');
-    //this.addStudentCount('তৃতীয় শ্রেণী');
-    //this.addStudentCount('চতুর্থ শ্রেণী');
-    //this.addStudentCount('পঞ্চম শ্রেণী');
-    //this.addBuilding(); 
+    
+  }
+
+  calculateTotal() {
+    var s = this.school.student;
+    if (s)
+      return s.class1 + s.class2 + s.class3 + s.class4 + s.class5 + s.prePrimary4Plus + s.prePrimary5Plus;
+    else
+      return 0;
   }
 
   loadData() {
@@ -163,10 +158,6 @@ export class SchoolEntryComponent implements OnInit {
       c.southBoundaryFeet.setValue(x.southBoundaryFeet);
       c.eastBoundaryFeet.setValue(x.eastBoundaryFeet);
       c.westBoundaryFeet.setValue(x.westBoundaryFeet);
-      c.proposedLength.setValue(x.proposedLength);
-      c.proposedWidth.setValue(x.proposedWidth);
-
-
       //c.specialComments.setValue(x.specialComments);
       var c = this.studentForm.controls;
       c.prePrimary4Plus.setValue(x.student.prePrimary4Plus);
@@ -184,165 +175,17 @@ export class SchoolEntryComponent implements OnInit {
     });
   }
 
-  calculateTotal() {
-    var s = this.school.student;
-    if (s)
-      return s.class1 + s.class2 + s.class3 + s.class4 + s.class5 + s.prePrimary4Plus + s.prePrimary5Plus;
-    else
-      return 0;
-  }
+  removeBuilding(index: number): void {
 
-  addBuilding(): void {
-    var v = this.buildingForm.value;
-    let b = {} as BuildingInputDto;
-    b.buildingNumber = v.buildingNumber;
-    b.buildingType = v.buildingType;
-    b.comments = v.comments;
-    b.constructionYear = v.constructionYear;
-    b.projectName = v.projectName;
-    b.currentFloors = v.currentFloors;
-    b.foundationFloors = v.foundationFloors;
-    b.usableRooms = v.usableRooms;
-    b.unusableRooms = v.unusableRooms;
-    b.isRisky = v.isRisky;
-    b.isDamagedDeclared = v.isDamagedDeclared;
-    b.lengthFeet = v.lengthFeet;
-    b.widthFeet = v.widthFeet;
-    b.isProposed = false;
-    this.buildings.push(b);
-    this.cdRef.detectChanges();
   }
 
 
-  updateSchool(): void {
-    if (this.schoolForm.valid) {
-
-      var s: SchoolInputDto = {} as SchoolInputDto;
-
-      s.id = this.school.id;
-      s.officeCode = this.school.officeCode;
-      s.sdOfficeCode = this.school.sdOfficeCode;
-      s.division = this.school.division;
-      s.district = this.school.district;
-      s.thana = this.school.thana;
-      s.sequence = this.school.sequence;
-      s.name = this.school.name;
-      s.emis = this.school.emis;
-
-      var v = this.schoolForm.value;
-      s.headMaster = v.headMaster;
-      s.mobile = v.mobile;
-      s.totalLandDecimals = v.totalLandDecimals;
-      s.undisputedLandDecimals = v.undisputedLandDecimals;
-      s.hasLandComplications = v.hasLandComplications;
-      s.complicatedLandDecimals = v.complicatedLandDecimals;
-      s.landRecordedInGovtName = v.landRecordedInGovtName;
-      s.boundaryDetermined = v.boundaryDetermined;
-      s.boundaryWallNeededFeet = v.boundaryWallNeededFeet;
-      s.totalTeacherPosts = v.totalTeacherPosts;
-      s.workingTeachers = v.workingTeachers;
-      s.shiftType = v.shiftType;
-      s.isRiverErosionProne = v.isRiverErosionProne;
-      s.distanceFromRiverMeters = v.distanceFromRiverMeters;
-      s.additionalRoomsMethod = v.additionalRoomsMethod;
-      s.spaceAvailableForNewBuilding = v.spaceAvailableForNewBuilding;
-      s.needsTemporaryRoomsDuringConstruction = v.needsTemporaryRoomsDuringConstruction;
-      s.additionalClassroomsRequired = v.additionalClassroomsRequired;
-      s.soilFillingCubicFeet = v.soilFillingCubicFeet;
-      s.fieldLengthFeet = v.fieldLengthFeet;
-      s.fieldWidthFeet = v.fieldWidthFeet;
-      s.fieldHeightFeet = v.fieldHeightFeet;
-      s.northBoundaryFeet = v.northBoundaryFeet;
-      s.southBoundaryFeet = v.southBoundaryFeet;
-      s.eastBoundaryFeet = v.eastBoundaryFeet;
-      s.westBoundaryFeet = v.westBoundaryFeet;
-      s.proposedLength = v.proposedLength;
-      s.proposedWidth = v.proposedWidth;
-      s.isSaved = true;
-      s.buildings = this.buildings;
-
-      var t: StudentInputDto = {} as StudentInputDto;
-      var v = this.studentForm.value;
-      t.id = this.school.student.id;
-      t.prePrimary4Plus = v.prePrimary4Plus;
-      t.prePrimary5Plus = v.prePrimary5Plus;
-      t.class1 = v.class1;
-      t.class2 = v.class2;
-      t.class3 = v.class3;
-      t.class4 = v.class4;
-      t.class5 = v.class5;
-      t.specialComment = v.specialComment;
-      s.student = t;
-      if (this.bIds.length > 0)
-        this.schoolService.removeBuildingsByIds(this.bIds).subscribe(() => {
-
-        })
-      this.schoolService.update(s).subscribe(
-        response => {
-          console.log('Form saved successfully', response);
-          this.toast.success("School info saved");
-          this.router.navigateByUrl("/school/view/" + this.school.emis);
-        },
-        error => {
-          console.error('Error saving form', error);
-        }
-      );
-    } else {
-      this.schoolForm.markAllAsTouched();
-    }
-  }
-
-  edit(i) {
-    console.log(this.buildings[i]);
-    var b = this.buildings[i];
-    let c = this.buildingForm.controls;
-    this.editId = i;
-    c.buildingNumber.setValue(b.buildingNumber);
-    c.constructionYear.setValue(b.constructionYear);
-    c.projectName.setValue(b.projectName);
-    c.foundationFloors.setValue(b.foundationFloors);
-    c.currentFloors.setValue(b.currentFloors);
-    c.usableRooms.setValue(b.usableRooms);
-    c.unusableRooms.setValue(b.unusableRooms);
-    c.isRisky.setValue(b.isRisky);
-    c.isAbandoned.setValue(b.isAbandoned);
-    c.isDamagedDeclared.setValue(b.isDamagedDeclared);
-    c.isUnderConstruction.setValue(b.isUnderConstruction);
-    c.expandedOrRepairedLast5Years.setValue(b.expandedOrRepairedLast5Years);
-    c.buildingType.setValue(b.buildingType);
-    c.comments.setValue(b.comments);
-    c.lengthFeet.setValue(b.lengthFeet);
-    c.widthFeet.setValue(b.widthFeet);
-    //c.isProposed.setValue(b.isProposed);
-    this.cdRef.detectChanges();
-  }
-
-  updateBuilding() {
-    let v = this.buildingForm.value;
-    let b = this.buildings[this.editId];
-    b.buildingNumber = v.buildingNumber;
-    b.buildingType = v.buildingType;
-    b.comments = v.comments;
-    b.constructionYear = v.constructionYear;
-    b.projectName = v.projectName;
-    b.currentFloors = v.currentFloors;
-    b.foundationFloors = v.foundationFloors;
-    b.usableRooms = v.usableRooms;
-    b.unusableRooms = v.unusableRooms;
-    b.isRisky = v.isRisky;
-    b.isDamagedDeclared = v.isDamagedDeclared;
-    b.lengthFeet = v.lengthFeet;
-    b.widthFeet = v.widthFeet;
-    this.editId = 0;
-    this.cdRef.detectChanges();
-  }
-
+ 
   reset() {
     this.buildingForm.reset();
     this.editId = 0;
     this.cdRef.detectChanges();
   }
-
   remove(i) {
     console.log(this.buildings[i]);
     var b = this.buildings[i];

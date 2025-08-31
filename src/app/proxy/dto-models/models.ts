@@ -31,7 +31,6 @@ export interface BuildingDto extends EntityDto<number> {
   widthFeet: number;
   isProposed: boolean;
   schoolId: number;
-  school: SchoolDto;
 }
 
 export interface ChangePass {
@@ -127,7 +126,6 @@ export interface SchoolDto extends EntityDto<number> {
   spaceAvailableForNewBuilding: boolean;
   needsTemporaryRoomsDuringConstruction: boolean;
   additionalClassroomsRequired: number;
-  recommendation?: string;
   soilFillingCubicFeet: number;
   fieldLengthFeet: number;
   fieldWidthFeet: number;
@@ -136,16 +134,22 @@ export interface SchoolDto extends EntityDto<number> {
   southBoundaryFeet: number;
   eastBoundaryFeet: number;
   westBoundaryFeet: number;
-  specialComments?: string;
+  proposedLength: number;
+  proposedWidth: number;
   buildings: BuildingDto[];
-  studentCounts: StudentCountDto[];
+  student: StudentDto;
 }
 
-export interface StudentCountDto extends EntityDto<number> {
-  classLevel?: string;
-  studentNumber: number;
+export interface StudentDto extends EntityDto<number> {
   schoolId: number;
-  school: SchoolDto;
+  prePrimary4Plus: number;
+  prePrimary5Plus: number;
+  class1: number;
+  class2: number;
+  class3: number;
+  class4: number;
+  class5: number;
+  specialComment?: string;
 }
 
 export interface UpdateRoleDto {

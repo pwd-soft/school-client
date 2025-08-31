@@ -1,3 +1,4 @@
+import type { EntityDto } from '@abp/ng.core';
 
 export interface BuildingInputDto {
   id: number;
@@ -74,7 +75,6 @@ export interface SchoolInputDto {
   spaceAvailableForNewBuilding: boolean;
   needsTemporaryRoomsDuringConstruction: boolean;
   additionalClassroomsRequired: number;
-  recommendation?: string;
   soilFillingCubicFeet: number;
   fieldLengthFeet: number;
   fieldWidthFeet: number;
@@ -83,15 +83,20 @@ export interface SchoolInputDto {
   southBoundaryFeet: number;
   eastBoundaryFeet: number;
   westBoundaryFeet: number;
-  specialComments?: string;
+  proposedLength: number;
+  proposedWidth: number;
+  student: StudentInputDto;
   buildings: BuildingInputDto[];
-  studentCounts: StudentCountInputDto[];
 }
 
-export interface StudentCountInputDto {
-  id: number;
-  classLevel?: string;
-  studentNumber: number;
+export interface StudentInputDto extends EntityDto<number> {
   schoolId: number;
-  school: SchoolInputDto;
+  prePrimary4Plus: number;
+  prePrimary5Plus: number;
+  class1: number;
+  class2: number;
+  class3: number;
+  class4: number;
+  class5: number;
+  specialComment?: string;
 }

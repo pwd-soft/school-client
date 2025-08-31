@@ -59,9 +59,10 @@ export class SchoolListComponent implements OnInit {
 
   loadData(): void {
     this.spinnerService.show();
+    var posting = localStorage.getItem("posting");
 
     this.subs.sink = this.schoolService
-      // .getListByOfficeByCode("ee_nator")
+      //.getListByOfficeByCode("ee_nator")
       .getListByOfficeByCode(this.prep.getUserName())
       .subscribe((s) => {
         this.spinnerService.hide();

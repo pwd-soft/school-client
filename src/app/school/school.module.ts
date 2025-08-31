@@ -12,6 +12,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SharedModule } from '../shared/shared.module';
 import { SchoolEntryComponent } from './school-entry/school-entry.component';
 import { SchoolListComponent } from './school-list/school-list.component';
+import { SchoolViewComponent } from './school-view/school-view.component';
 //import { TransferListComponent } from './transfer-list/transfer-list.component';
 
 @Injectable()
@@ -66,6 +67,7 @@ import { SchoolListComponent } from './school-list/school-list.component';
   declarations: [
     //TransferPreparationComponent,
     SchoolEntryComponent,
+    SchoolViewComponent,
     SchoolListComponent,
     //TransferListComponent
   ],

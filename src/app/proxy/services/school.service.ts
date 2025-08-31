@@ -9,14 +9,6 @@ import type { SchoolInputDto } from '../input-dtos/models';
 export class SchoolService {
   apiName = 'Default';
 
-  create = (input: SchoolInputDto) =>
-    this.restService.request<any, SchoolDto>({
-      method: 'POST',
-      url: '/api/app/school',
-      body: input,
-    },
-    { apiName: this.apiName });
-
   getById = (id: string) =>
     this.restService.request<any, SchoolDto>({
       method: 'GET',
@@ -29,6 +21,29 @@ export class SchoolService {
       method: 'GET',
       url: '/api/app/school/by-office',
       params: { code },
+    },
+    { apiName: this.apiName });
+
+  removeBuildingsByIds = (ids: number[]) =>
+    this.restService.request<any, void>({
+      method: 'DELETE',
+      url: '/api/app/school/buildings',
+      params: { ids },
+    },
+    { apiName: this.apiName });
+
+  update = (input: SchoolInputDto) =>
+    this.restService.request<any, SchoolDto>({
+      method: 'PUT',
+      url: '/api/app/school',
+      body: input,
+    },
+    { apiName: this.apiName });
+
+  some = () =>
+    this.restService.request<any, void>({
+      method: 'POST',
+      url: '/api/app/school/some',
     },
     { apiName: this.apiName });
 
