@@ -5,174 +5,260 @@
 <div class="card mb-4">
   <div class="card-header">
     <div class="card-title">
-      <a routerLink="/school/list"
-         class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
-         style="margin-right: 10px">
-        <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
-              [inlineSVG]="'./assets/media/svg/icons/General/back-button-svgrepo-com.svg'"
-              (cacheSVG)="(cacheSVG)"></span>
+      <a
+        routerLink="/school/list"
+        class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+        style="margin-right: 10px"
+      >
+        <span
+          class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+          [inlineSVG]="
+            './assets/media/svg/icons/General/back-button-svgrepo-com.svg'
+          "
+          (cacheSVG)="(cacheSVG)"
+        ></span>
       </a>
-      <a [routerLink] = "['/school/entry', school.emis]"
-         class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
-         style="margin-right: 10px">
-        <span class="svg-icon svg-icon-3x svg-icon-primary mb-2"
-              [inlineSVG]="'./assets/media/svg/icons/Design/Edit.svg'"
-              (cacheSVG)="(cacheSVG)"></span>
-      </a>
-      <h5 class="card-label">
-        তথ্য ছক
-      </h5>
+      <h5 class="card-label">তথ্য ছক</h5>
     </div>
 
     <div class="card-toolbar">
+      <a
+        [routerLink]="['/school/entry', school.emis]"
+        class="d-flex flex-column flex-center h-100 p-6 border-end border-bottom cursor-pointer"
+        style="margin-right: 10px"
+      >
+        <span
+          class="svg-icon svg-icon-3x svg-icon-primary mb-2"
+          [inlineSVG]="'./assets/media/svg/icons/Design/Edit.svg'"
+          (cacheSVG)="(cacheSVG)"
+        ></span>
 
+        এডিট করুন
+      </a>
     </div>
-
   </div>
   <div class="card-body">
     <h2 class="text-center">তথ্য ছক-১</h2>
-    <p class="text-center">ভবন নির্মাণ, গেইটসহ সীমানা প্রাচীর নির্মাণ ও মাঠ উন্নয়ন কাজের জন্য তথ্য ছকঃ</p>
+    <h4 class="text-center">
+      ভবন নির্মাণ, গেইটসহ সীমানা প্রাচীর নির্মাণ ও মাঠ উন্নয়ন কাজের জন্য তথ্য
+      ছক
+    </h4>
 
     <form>
       <div class="row">
-        <div class="col-6"><label>বিদ্যালয়ের নাম: {{school.name}}</label></div>
-        <div class="col-6"><label>ইএমআইএস কোড নং: {{school.emis}}</label></div>
+        <div class="col-6">
+          <label><strong>বিদ্যালয়ের নাম:</strong> {{ school.name }}</label>
+        </div>
+        <div class="col-6">
+          <label><strong>ইএমআইএস কোড নং:</strong> {{ school.emis }}</label>
+        </div>
       </div>
       <div class="row">
-        <div class="col-6"><label>উপজেলা: {{school.thana}}</label></div>
-        <div class="col-6"><label>জেলা: {{school.district}}</label></div>
+        <div class="col-6">
+          <label><strong>উপজেলা:</strong> {{ school.thana }}</label>
+        </div>
+        <div class="col-6">
+          <label><strong>জেলা:</strong> {{ school.district }}</label>
+        </div>
       </div>
-      <div class="row">
-        <div class="col-6"><label>প্রধান শিক্ষকের নামঃ {{school.headMaster}}</label></div>
-        <div class="col-6"><label>মোবাইল নাম্বারঃ {{school.mobile}}</label></div>
+      <div class="row pb-3">
+        <div class="col-6">
+          <label><strong>প্রধান শিক্ষকের নাম:</strong> {{ school.headMaster }}</label>
+        </div>
+        <div class="col-6">
+          <label><strong>মোবাইল নাম্বার:</strong> {{ school.mobile }}</label>
+        </div>
       </div>
-
-
 
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>ক্রমিক নং</th>
-            <th>বিবরণ</th>
-            <th>মন্তব্য ( ঘরে টিক চিহ্ন দিন )</th>
+            <th class="w-5">ক্রমিক নং</th>
+            <th class="w-80">বিবরণ</th>
+            <th>
+              মন্তব্য <br />
+              ( ঘরে টিক চিহ্ন দিন )
+            </th>
+          </tr>
+          <tr>
+            <th>১</th>
+            <th>২</th>
+            <th>৩</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>১।</td>
-            <td>ক) বিদ্যালয়ে অতিরিক্ত শ্রেনিকক্ষ নির্মাণের প্রয়োজনীয়তা থাকলে তা কিভাবে বাস্তবায়ন সম্ভব?</td>
+            <td class="numberColumn">১।</td>
             <td>
-              {{school.additionalClassroomsRequired}}
+              ক) বিদ্যালয়ে অতিরিক্ত শ্রেনিকক্ষ নির্মাণের প্রয়োজনীয়তা থাকলে তা
+              কিভাবে বাস্তবায়ন সম্ভব?
+            </td>
+            <td>
+              {{ convertNumbersToBengali(school.additionalClassroomsRequired) }}
             </td>
           </tr>
           <tr>
             <td></td>
-            <td>খ) যদি বিদ্যালয় প্রাঙ্গণে পৃথকভাবে নতুন ভবন নির্মাণ করা হয় সেক্ষেত্রে প্রয়োজনীয় জায়গা আছে কিনা?</td>
             <td>
-              {{school.spaceAvailableForNewBuilding}}
+              খ) যদি বিদ্যালয় প্রাঙ্গণে পৃথকভাবে নতুন ভবন নির্মাণ করা হয়
+              সেক্ষেত্রে প্রয়োজনীয় জায়গা আছে কিনা?
+            </td>
+            <td>
+              {{ convertBooleanToBengali(school.spaceAvailableForNewBuilding) }}
             </td>
           </tr>
           <tr>
-            <td>২।</td>
-            <td>যদি পুরাতন/জরাজীর্ন ভবন ভেঙে নতুন ভবন নির্মাণ করা প্রয়োজন হয় সেক্ষেত্রে ভবন নির্মাণ কালে পাঠদান কার্যক্রম পরিচালনার জন্য অস্থায়ী ঘরের (Make Shift Arrangement)  প্রয়োজন হবে কিনা?</td>
+            <td class="numberColumn">২।</td>
             <td>
-              {{school.needsTemporaryRoomsDuringConstruction}}
+              যদি পুরাতন/জরাজীর্ন ভবন ভেঙে নতুন ভবন নির্মাণ করা প্রয়োজন হয়
+              সেক্ষেত্রে ভবন নির্মাণ কালে পাঠদান কার্যক্রম পরিচালনার জন্য
+              অস্থায়ী ঘরের (Make Shift Arrangement) প্রয়োজন হবে কিনা?
+            </td>
+            <td>
+              {{
+                convertBooleanToBengali(
+                  school.needsTemporaryRoomsDuringConstruction
+                )
+              }}
             </td>
           </tr>
           <tr>
-            <td>৩।</td>
+            <td class="numberColumn">৩।</td>
             <td>বিদ্যালয়টির জমি সরকার/ বিদ্যালয়ের নামে রেকর্ড আছে কিনা?</td>
             <td>
-              {{school.landRecordedInGovtName}}
+              {{ convertBooleanToBengali(school.landRecordedInGovtName) }}
             </td>
           </tr>
           <tr>
-            <td>৪।</td>
-            <td>ক) বিদ্যালয়ের মোট জমির পরিমান কত শতক?<br>খ) বিদ্যালয়ে নিস্কন্টক জমির পরিমান কত শতক?</td>
+            <td class="numberColumn">৪।</td>
             <td>
-              <div> {{school.totalLandDecimals}} শতক </div>
-              <div> {{school.undisputedLandDecimals}} শতক </div>
+              ক) বিদ্যালয়ের মোট জমির পরিমান কত শতক?<br />খ) বিদ্যালয়ে নিস্কন্টক
+              জমির পরিমান কত শতক?
             </td>
-          </tr>
-          <tr>
-            <td>৫।</td>
-            <td>ক) জমি সংক্রান্ত কোন জটিলতা/মামলা/বেদখল আছে কিনা?<br>খ) যদি জমি সংক্রান্ত কোন জটিলতা/মামলা/বেদখল থাকে তবে জমির পরিমান কত শতক?</td>
             <td>
-              {{school.hasLandComplications}}
-              <div> {{school.complicatedLandDecimals}} শতক </div>
+              <div>
+                {{ convertNumbersToBengali(school.totalLandDecimals) }} শতক
+              </div>
+              <div>
+                {{ convertNumbersToBengali(school.undisputedLandDecimals) }} শতক
+              </div>
             </td>
           </tr>
           <tr>
-            <td>৬।</td>
+            <td class="numberColumn">৫।</td>
+            <td>
+              ক) জমি সংক্রান্ত কোন জটিলতা/মামলা/বেদখল আছে কিনা?
+              <br />খ) যদি জমি সংক্রান্ত কোন জটিলতা/মামলা/বেদখল থাকে তবে জমির
+              পরিমান কত শতক?
+            </td>
+            <td>
+              {{ convertBooleanToBengali(school.hasLandComplications) }}
+              <div>
+                {{ convertNumbersToBengali(school.complicatedLandDecimals) }}
+                শতক
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="numberColumn">৬।</td>
             <td>ক) বিদ্যালয়ের জমির সীমানা নির্ধারণ করা আছে কিনা?</td>
             <td>
-              {{school.boundaryDetermined}}
+              {{ convertBooleanToBengali(school.boundaryDetermined) }}
             </td>
           </tr>
           <tr>
             <td></td>
-            <td>খ) সীমানা প্রাচীরের প্রয়োজনীয়তা থাকলে কত ফুট সীমানা প্রাচীরের প্রয়োজন আছে?</td>
             <td>
-              <div> {{school.boundaryWallNeededFeet}} শতক </div>
+              খ) সীমানা প্রাচীরের প্রয়োজনীয়তা থাকলে কত ফুট সীমানা প্রাচীরের
+              প্রয়োজন আছে?
+            </td>
+            <td>
+              <div>
+                {{ convertNumbersToBengali(school.boundaryWallNeededFeet) }} শতক
+              </div>
             </td>
           </tr>
           <tr>
-            <td>৭।</td>
-            <td>ক) যদি বিদ্যালয়ের মাঠ উন্নয়নের জন্য মাটি ভরাটের প্রয়োজনীয়তা থাকে, তাহলে কত ঘনফুট মাটির প্রয়োজন? (দৈর্ঘ্য {{school.fieldLengthFeet}} ফুট, প্রস্থ {{school.fieldWidthFeet}} ফুট, উচ্চতা {{school.fieldHeightFeet}}ফুট)</td>
+            <td class="numberColumn">৭।</td>
             <td>
-              <div> {{school.soilFillingCubicFeet}} ঘনফুট </div>
+              ক) যদি বিদ্যালয়ের মাঠ উন্নয়নের জন্য মাটি ভরাটের প্রয়োজনীয়তা থাকে,
+              তাহলে কত ঘনফুট মাটির প্রয়োজন? (দৈর্ঘ্য
+              {{ convertNumbersToBengali(school.fieldLengthFeet) }} ফুট, প্রস্থ
+              {{ convertNumbersToBengali(school.fieldWidthFeet) }} ফুট, উচ্চতা
+              {{ convertNumbersToBengali(school.fieldHeightFeet) }}ফুট)
+            </td>
+            <td>
+              <div>
+                {{ convertNumbersToBengali(school.soilFillingCubicFeet) }} ঘনফুট
+              </div>
             </td>
           </tr>
           <tr>
-            <td>৮।</td>
+            <td class="numberColumn">৮।</td>
             <td>বিদ্যালয়টি কোন শিফটে পরিচালিত হচ্ছে?</td>
             <td>
-              {{school.shiftType}}
+              {{ school.shiftType }}
             </td>
           </tr>
           <tr>
-            <td>৯।</td>
-            <td>ক) মোট শিক্ষকের পদ সংখ্যাঃ {{school.totalTeacherPosts}} জন<br>খ) কর্মরত শিক্ষকের সংখ্যাঃ  {{school.workingTeachers}} জন</td>
+            <td class="numberColumn">৯।</td>
             <td>
+              ক) মোট শিক্ষকের পদ সংখ্যাঃ
+              {{ convertNumbersToBengali(school.totalTeacherPosts) }} জন
+              <br />খ) কর্মরত শিক্ষকের সংখ্যাঃ
+              {{ convertNumbersToBengali(school.workingTeachers) }} জন
             </td>
+            <td></td>
           </tr>
           <tr>
-            <td>১০।</td>
+            <td class="numberColumn">১০।</td>
             <td>ক) বিদ্যালয়টি নদী ভাঙ্গন প্রবণ এলাকায় অবস্থিত কিনা?</td>
             <td>
-              {{school.isRiverErosionProne}}
+              {{ convertBooleanToBengali(school.isRiverErosionProne) }}
             </td>
           </tr>
           <tr>
             <td></td>
             <td>খ) যদি অবস্থিত হয় তাহলে নদী থেকে কত দূরে অবস্থিত</td>
             <td>
-              <div> {{school.distanceFromRiverMeters}} মিটার </div>
+              <div>
+                {{ convertNumbersToBengali(school.distanceFromRiverMeters) }}
+                মিটার
+              </div>
             </td>
           </tr>
         </tbody>
       </table>
 
-      <div class="row mt-4">
-        <div class="col-md-3">
-          <p>সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
+      <div class="row pt-20">
+        <div class="col-3">
+          <p>
+            প্রধান শিক্ষক <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
-        <div class="col-md-3">
-          <p>প্রধান শিক্ষক</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
         </div>
-        <div class="col-md-3">
-          <p>উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <!-- <p>মোবাইল নাম্বারঃ</p> -->
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
-        <div class="col-md-3">
-          <p>উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            উপজেলা প্রাথমিক শিক্ষা অফিসার <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
       </div>
     </form>
@@ -183,26 +269,32 @@
 
 <div class="card mb-4">
   <div class="card-body">
-    <h2 class="text-center">তথ্য ছক -২</h2>
+
+    <h2 class="text-center">তথ্য ছক-২</h2>
+    <h4 class="text-center">
+      ভবন নির্মাণ সংক্রান্ত তথ্য ছক
+    </h4>
 
     <form>
       <!-- Sheet 2: ভবন নির্মাণ সংক্রান্ত তথ্য ছক -->
-      <h4>ভবন নির্মাণ সংক্রান্ত তথ্য ছক</h4>
       <div class="row">
-        <div class="col-6"><label>বিদ্যালয়ের নাম: {{school.name}}</label></div>
-        <div class="col-6"><label>ইএমআইএস কোড নং: {{school.emis}}</label></div>
+        <div class="col-6">
+          <label>বিদ্যালয়ের নাম: {{ school.name }}</label>
+        </div>
+        <div class="col-6">
+          <label>ইএমআইএস কোড নং: {{ school.emis }}</label>
+        </div>
       </div>
       <div class="row">
-        <div class="col-6"><label>উপজেলা: {{school.thana}}</label></div>
-        <div class="col-6"><label>জেলা: {{school.district}}</label></div>
-      </div>
-      <div class="row">
-        <div class="col-6"><label>প্রধান শিক্ষকের নামঃ {{school.headMaster}}</label></div>
-        <div class="col-6"><label>মোবাইল নাম্বারঃ {{school.mobile}}</label></div>
+        <div class="col-6">
+          <label>উপজেলা: {{ school.thana }}</label>
+        </div>
+        <div class="col-6">
+          <label>জেলা: {{ school.district }}</label>
+        </div>
       </div>
 
-
-      <h5>১। বিদ্যমান ভবন/স্থাপনা সংক্রান্ত তথ্যঃ</h5>
+      <h5 class="pt-5">১। বিদ্যমান ভবন/স্থাপনা সংক্রান্ত তথ্যঃ</h5>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -221,27 +313,27 @@
         </thead>
         <tbody>
           <tr *ngFor="let b of buildings; let i = index">
-            <td>{{i+1}}</td>
-            <td>{{b.constructionYear}}</td>
-            <td>{{b.projectName}}</td>
-            <td>{{b.foundationFloors}}</td>
-            <td>{{b.currentFloors}}</td>
-            <td>{{b.usableRooms}}</td>
-            <td>{{b.unusableRooms}}</td>
-            <td>{{b.usableRooms+b.unusableRooms}}</td>
-            <td>{{b.isRisky}}</td>
-            <td>{{b.isDamagedDeclared}}</td>
-            <td>{{b.comments}}</td>
+            <td>{{ i + 1 }}</td>
+            <td>{{ b.constructionYear }}</td>
+            <td>{{ b.projectName }}</td>
+            <td>{{ b.foundationFloors }}</td>
+            <td>{{ b.currentFloors }}</td>
+            <td>{{ b.usableRooms }}</td>
+            <td>{{ b.unusableRooms }}</td>
+            <td>{{ b.usableRooms + b.unusableRooms }}</td>
+            <td>{{ b.isRisky }}</td>
+            <td>{{ b.isDamagedDeclared }}</td>
+            <td>{{ b.comments }}</td>
           </tr>
         </tbody>
       </table>
 
-      <h5>2। ছাত্র/ছাত্রী সংক্রান্ত তথ্যঃ</h5>
+      <h5>২। ছাত্র/ছাত্রী সংক্রান্ত তথ্যঃ</h5>
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>প্রি-প্রাইমারী: (৪+)</th>
-            <th>প্রি-প্রাইমারী: (5+)</th>
+            <th class="w-15">প্রি-প্রাইমারী: (৪+)</th>
+            <th class="w-15">প্রি-প্রাইমারী: (5+)</th>
             <th>প্রথম শ্রেণী</th>
             <th>দ্বিতীয় শ্রেনি</th>
             <th>তৃতীয় শ্রেণি</th>
@@ -252,44 +344,53 @@
         </thead>
         <tbody>
           <tr>
-            <td>{{school.student.prePrimary4Plus}} </td>
-            <td>{{school.student.prePrimary5Plus}} </td>
-            <td>{{school.student.class1}} </td>
-            <td>{{school.student.class2}} </td>
-            <td>{{school.student.class3}} </td>
-            <td>{{school.student.class4}} </td>
-            <td>{{school.student.class5}} </td>
-            <td>{{calculateTotal()}} </td>
+            <td class="numberColumn">{{ convertNumbersToBengali(school.student.prePrimary4Plus) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(school.student.prePrimary5Plus) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(school.student.class1) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(school.student.class2) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(school.student.class3) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(school.student.class4) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(school.student.class5) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(calculateTotal()) }}</td>
           </tr>
         </tbody>
       </table>
 
       <h5>৩। বিশেষ মতামত (যদি থাকে):</h5>
       <div class="form-control col-12">
-        {{school.student.specialComment}}
+        {{ school.student.specialComment }}
       </div>
 
       <!-- Signatures -->
-      <div class="row mt-4">
-        <div class="col-md-3">
-          <p>সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
+      <div class="row pt-20">
+        <div class="col-3">
+          <p>
+            প্রধান শিক্ষক <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
-        <div class="col-md-3">
-          <p>প্রধান শিক্ষক</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
         </div>
-        <div class="col-md-3">
-          <p>উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <!-- <p>মোবাইল নাম্বারঃ</p> -->
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
-        <div class="col-md-3">
-          <p>উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            উপজেলা প্রাথমিক শিক্ষা অফিসার <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
       </div>
     </form>
@@ -301,79 +402,120 @@
 <div class="card mb-4">
   <div class="card-body">
     <h2 class="text-center">তথ্য ছক-৩</h2>
-    <p class="text-center">সরকারি প্রাথমিক বিদ্যালয় ভবন নির্মাণের জন্য Sketch Map</p>
+    <h4 class="text-center">
+      সরকারি প্রাথমিক বিদ্যালয় ভবন নির্মাণের জন্য Sketch Map
+    </h4>
 
     <form>
       <div class="row">
-        <div class="col-6"><label>বিদ্যালয়ের নাম: {{school.name}}</label></div>
-        <div class="col-6"><label>ইএমআইএস কোড নং: {{school.emis}}</label></div>
+        <div class="col-6">
+          <label><strong>বিদ্যালয়ের নাম:</strong> {{ school.name }}</label>
+        </div>
+        <div class="col-6">
+          <label><strong>ইএমআইএস কোড নং:</strong> {{ school.emis }}</label>
+        </div>
       </div>
       <div class="row">
-        <div class="col-6"><label>উপজেলা: {{school.thana}}</label></div>
-        <div class="col-6"><label>জেলা: {{school.district}}</label></div>
-      </div>
-      <div class="row">
-        <div class="col-6"><label>প্রধান শিক্ষকের নামঃ {{school.headMaster}}</label></div>
-        <div class="col-6"><label>মোবাইল নাম্বারঃ {{school.mobile}}</label></div>
+        <div class="col-6">
+          <label><strong>উপজেলা:</strong> {{ school.thana }}</label>
+        </div>
+        <div class="col-6">
+          <label><strong>জেলা:</strong> {{ school.district }}</label>
+        </div>
       </div>
 
-      <p>বিদ্যালয়ের সীমানা নির্ধারণ করে বিদ্যালয়ের জমির উপর বিদ্যমান স্থাপনা সমূহের পরিমাপ এবং প্রস্তাবিত নির্মাণযোগ্য ভবনের পরিমাপসহ Sketch Map এ আবশ্যিকভাবে চিহ্নিত করতে হবে।</p>
+      <div class="row pt-3">
+        <!-- <p>
+        বিদ্যালয়ের সীমানা নির্ধারণ করে বিদ্যালয়ের জমির উপর বিদ্যমান স্থাপনা
+        সমূহের পরিমাপ এবং প্রস্তাবিত নির্মাণযোগ্য ভবনের পরিমাপসহ Sketch Map এ
+        আবশ্যিকভাবে চিহ্নিত করতে হবে।
+      </p> -->
 
-      <div class="text-center">
-        <label>উত্তর = {{school.northBoundaryFeet}}  ফুট</label>
-        <!--<input type="text" class="form-control d-inline-block w-25" placeholder=".... ফুট">-->
-      </div>
-      <div class="row">
-        <div class="col">
-          <label>পশ্চিম= {{school.westBoundaryFeet}}  ফুট</label>
-          <!--<input type="text" class="form-control" placeholder=".... ফুট">-->
+        <div class="text-center">
+          <label
+            >উত্তর =
+            {{ convertNumbersToBengali(school.northBoundaryFeet) }} ফুট</label
+          >
+          <!--<input type="text" class="form-control d-inline-block w-25" placeholder=".... ফুট">-->
         </div>
-        <div class="col text-center">
-          <!-- Placeholder for sketch area, perhaps use canvas or div -->
-          <div class="border p-5" style="height: 300px;">Sketch Map Area (Use drawing tools or describe)</div>
+        <div class="row text-end">
+          <div class="col mt-20">
+            <label
+              >পশ্চিম=
+              {{ convertNumbersToBengali(school.westBoundaryFeet) }} ফুট</label
+            >
+            <!--<input type="text" class="form-control" placeholder=".... ফুট">-->
+          </div>
+          <div class="col text-center">
+            <!-- Placeholder for sketch area, perhaps use canvas or div -->
+            <div class="box">
+              Sketch Map Area (Use drawing tools or describe)
+            </div>
+          </div>
+          <div class="col text-start">
+            <label class="col mt-20"
+              >পূর্ব =
+              {{ convertNumbersToBengali(school.eastBoundaryFeet) }} ফুট</label
+            >
+            <!--<input type="text" class="form-control" placeholder=".... ">-->
+          </div>
         </div>
-        <div class="col">
-          <label>পূর্ব = {{school.eastBoundaryFeet}} ফুট</label>
-          <!--<input type="text" class="form-control" placeholder=".... ">-->
+        <div class="text-center">
+          <label
+            >দক্ষিণ =
+            {{ convertNumbersToBengali(school.southBoundaryFeet) }} ফুট</label
+          >
+          <!--<input type="text" class="form-control d-inline-block w-25" placeholder=".... ফুট">-->
         </div>
-      </div>
-      <div class="text-center">
-        <label>দক্ষিণ =  {{school.southBoundaryFeet}} ফুট</label>
-        <!--<input type="text" class="form-control d-inline-block w-25" placeholder=".... ফুট">-->
       </div>
 
       <ul class="list-unstyled">
-        <li *ngFor="let b of buildings; let i = index"> {{i+1}} নং ভবনের পরিমাপ = {{b.lengthFeet}} ফুট x   {{b.widthFeet}}  ফুট</li>
-        <li>প্রস্তাবিত ভবন নির্মাণের জায়গার পরিমাপ =  {{school.proposedLength}} ফুট x   {{school.proposedWidth}}  ফুট</li>
+        <li *ngFor="let b of buildings; let i = index">
+          {{ i + 1 }} নং ভবনের পরিমাপ =
+          {{ convertNumbersToBengali(b.lengthFeet) }} ফুট x
+          {{ convertNumbersToBengali(b.widthFeet) }} ফুট
+        </li>
+        <li>
+          প্রস্তাবিত ভবন নির্মাণের জায়গার পরিমাপ =
+          {{ convertNumbersToBengali(school.proposedLength) }} ফুট x
+          {{ convertNumbersToBengali(school.proposedWidth) }} ফুট
+        </li>
       </ul>
 
       <!-- Signatures -->
-      <div class="row mt-4">
-        <div class="col-md-3">
-          <p>সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
+      <div class="row pt-20">
+        <div class="col-3">
+          <p>
+            প্রধান শিক্ষক <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
-        <div class="col-md-3">
-          <p>প্রধান শিক্ষক</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            সহকারী উপজেলা প্রাথমিক শিক্ষা অফিসার <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">সংশ্লিষ্ট ক্লাস্টার (স্বাক্ষর ও সীল)</p>
         </div>
-        <div class="col-md-3">
-          <p>উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            উপ-সহকারী প্রকৌশলী/সহকারি প্রকৌশলী <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <!-- <p>মোবাইল নাম্বারঃ</p> -->
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
-        <div class="col-md-3">
-          <p>উপজেলা প্রাথমিক শিক্ষা অফিসার</p>
-          <p>মোবাইল নাম্বারঃ</p>
-          <p>স্বাক্ষর ও সীল</p>
+        <div class="col-3">
+          <p>
+            উপজেলা প্রাথমিক শিক্ষা অফিসার <br />
+            মোবাইল নাম্বারঃ
+          </p>
+          <p class="text-center mt-n3">স্বাক্ষর ও সীল</p>
         </div>
       </div>
     </form>
   </div>
 </div>
-
-
 
 <!--<p>school-entry works!</p>-->

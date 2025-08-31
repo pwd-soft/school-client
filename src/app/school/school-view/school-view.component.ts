@@ -3,13 +3,17 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SchoolService } from '../../proxy/services';
 import { ActivatedRoute } from '@angular/router';
 import { BuildingDto, SchoolDto } from '../../proxy/dto-models';
-import { BuildingInputDto, SchoolInputDto, StudentInputDto } from '../../proxy/input-dtos';
-
+import {
+  BuildingInputDto,
+  SchoolInputDto,
+  StudentInputDto,
+} from '../../proxy/input-dtos';
+import {toBengaliNumber} from 'bengali-number';
 
 @Component({
   selector: 'app-school-view',
   templateUrl: './school-view.component.html',
-  styleUrls: ['./school-view.component.scss']
+  styleUrls: ['./school-view.component.scss'],
 })
 export class SchoolViewComponent implements OnInit {
   schoolForm: FormGroup;
@@ -17,24 +21,25 @@ export class SchoolViewComponent implements OnInit {
   studentForm: FormGroup;
   cacheSVG = true;
   buildings: BuildingInputDto[] = [];
-  id: string = "";
+  id: string = '';
   bIds: number[] = [];
   school: SchoolDto = {} as SchoolDto;
   editId: number = 0;
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private cdRef: ChangeDetectorRef,
 
-    private schoolService: SchoolService) { }
+    private schoolService: SchoolService
+  ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id') || "";
-    this.loadForm()
+    this.id = this.route.snapshot.paramMap.get('id') || '';
+    this.loadForm();
     this.loadData();
   }
 
   loadForm() {
-
     this.schoolForm = this.fb.group({
       id: [0],
       officeCode: [''],
@@ -63,7 +68,10 @@ export class SchoolViewComponent implements OnInit {
       additionalRoomsMethod: ['', Validators.required],
       spaceAvailableForNewBuilding: [false, Validators.required],
       needsTemporaryRoomsDuringConstruction: [false, Validators.required],
-      additionalClassroomsRequired: [0, [Validators.required, Validators.min(0)]],
+      additionalClassroomsRequired: [
+        0,
+        [Validators.required, Validators.min(0)],
+      ],
       recommendation: [''],
       soilFillingCubicFeet: [0, [Validators.required, Validators.min(0)]],
       fieldLengthFeet: [0, [Validators.required, Validators.min(0)]],
@@ -74,7 +82,6 @@ export class SchoolViewComponent implements OnInit {
       eastBoundaryFeet: [0, [Validators.required, Validators.min(0)]],
       westBoundaryFeet: [0, [Validators.required, Validators.min(0)]],
       specialComments: [''],
-
     });
     this.buildingForm = this.fb.group({
       buildingNumber: [0, [Validators.required, Validators.min(1)]],
@@ -94,7 +101,7 @@ export class SchoolViewComponent implements OnInit {
       lengthFeet: [0, [Validators.required, Validators.min(0)]],
       widthFeet: [0, [Validators.required, Validators.min(0)]],
       isProposed: [false, Validators.required],
-      schoolId: [0]
+      schoolId: [0],
     });
 
     this.studentForm = this.fb.group({
@@ -105,18 +112,23 @@ export class SchoolViewComponent implements OnInit {
       class3: [0, [Validators.required, Validators.min(0)]],
       class4: [0, [Validators.required, Validators.min(0)]],
       class5: [0, [Validators.required, Validators.min(0)]],
-      specialComment: ['']
-    })
-
-    
+      specialComment: [''],
+    });
   }
 
   calculateTotal() {
     var s = this.school.student;
     if (s)
-      return s.class1 + s.class2 + s.class3 + s.class4 + s.class5 + s.prePrimary4Plus + s.prePrimary5Plus;
-    else
-      return 0;
+      return (
+        s.class1 +
+        s.class2 +
+        s.class3 +
+        s.class4 +
+        s.class5 +
+        s.prePrimary4Plus +
+        s.prePrimary5Plus
+      );
+    else return 0;
   }
 
   loadData() {
@@ -147,7 +159,9 @@ export class SchoolViewComponent implements OnInit {
       c.distanceFromRiverMeters.setValue(x.distanceFromRiverMeters);
       c.additionalRoomsMethod.setValue(x.additionalRoomsMethod);
       c.spaceAvailableForNewBuilding.setValue(x.spaceAvailableForNewBuilding);
-      c.needsTemporaryRoomsDuringConstruction.setValue(x.needsTemporaryRoomsDuringConstruction);
+      c.needsTemporaryRoomsDuringConstruction.setValue(
+        x.needsTemporaryRoomsDuringConstruction
+      );
       c.additionalClassroomsRequired.setValue(x.additionalClassroomsRequired);
       //c.recommendation.setValue(x.recommendation);
       c.soilFillingCubicFeet.setValue(x.soilFillingCubicFeet);
@@ -175,22 +189,26 @@ export class SchoolViewComponent implements OnInit {
     });
   }
 
-  removeBuilding(index: number): void {
+  removeBuilding(index: number): void {}
 
-  }
-
-
- 
   reset() {
     this.buildingForm.reset();
     this.editId = 0;
     this.cdRef.detectChanges();
   }
+
   remove(i) {
     console.log(this.buildings[i]);
     var b = this.buildings[i];
-    if (b.id > 0)
-      this.bIds.push(b.id);
+    if (b.id > 0) this.bIds.push(b.id);
     this.buildings.splice(i, 1);
+  }
+
+  convertNumbersToBengali(num: number) {
+    return toBengaliNumber(num);
+  }
+
+  convertBooleanToBengali(value: boolean) {
+    return value ? 'হ্যাঁ' : 'না';
   }
 }
