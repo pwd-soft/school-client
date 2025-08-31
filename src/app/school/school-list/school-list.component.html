@@ -37,7 +37,7 @@
           <tr>
             <!--//বিভাগ	জেলা 	উপজেলা 	ক্রমিক নং	বিদ্যালয়ের নাম	EMIS কোড-->
 
-            <th class="w-5">#</th>            
+            <th class="w-5">#</th>
             <th class="w-10">জেলা</th>
             <th class="w-10">উপজেলা</th>
             <th class="w-5">ক্রমিক নং</th>
@@ -53,12 +53,14 @@
             <td>{{ item.sequence }}</td>
             <td class="text-start p-2"> <a  [routerLink] = "['/school/entry', item.emis]"> {{ item.name }}  </a> </td>
             <td>{{ item.emis }}</td>
-            <td>{{ item.isSaved }}</td>
+            <td *ngIf="item.isSaved"><span class="text-success">হ্যাঁ</span></td>
+            <td *ngIf="!item.isSaved"><span class="text-danger">না</span></td>
+            <!-- <td>{{ isInputComplete(item.isSaved) }}</td> -->
             <!--<td>{{ convertDateToBengali(item.executeDate) }}</td>-->
-             
+
             <td>
-               
-               
+
+
             </td>
           </tr>
         </table>
@@ -66,14 +68,14 @@
     </div>
 
     <div class="card-body">
-       
+
     </div>
 
   </div>
 
   <div class="card-footer">
 
-   
+
 
   </div>
 
