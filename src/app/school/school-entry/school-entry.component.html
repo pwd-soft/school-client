@@ -158,11 +158,11 @@
                 'is-invalid':
                   schoolForm.get('mobile')?.invalid &&
                   schoolForm.get('mobile')?.touched
-              }"
+              }" numbersOnly
             />
           </div>
           <div class="invalid-feedback">
-            বৈধ মোবাইল নাম্বার প্রয়োজন (১০-১৫ সংখ্যা)।
+            বৈধ মোবাইল নাম্বার প্রয়োজন (১১ সংখ্যা)।
           </div>
         </div>
       </div>
@@ -1088,31 +1088,31 @@
           </thead>
           <tbody>
             <tr>
-              <td>1</td>
-              <td>2</td>
-              <td>3</td>
-              <td>4</td>
-              <td>5</td>
-              <td>6</td>
-              <td>7</td>
-              <td>8 = (6+7)</td>
-              <td>9</td>
-              <td>10</td>
-              <td>11</td>
-              <td></td>
+              <td class="numberColumn">1</td>
+              <td class="numberColumn">2</td>
+              <td class="numberColumn">3</td>
+              <td class="numberColumn">4</td>
+              <td class="numberColumn">5</td>
+              <td class="numberColumn">6</td>
+              <td class="numberColumn">7</td>
+              <td class="numberColumn">8 = (6+7)</td>
+              <td class="numberColumn">9</td>
+              <td class="numberColumn">10</td>
+              <td class="numberColumn">11</td>
+              <td class="numberColumn"></td>
             </tr>
             <tr *ngFor="let b of buildings; let i = index">
-              <td>{{ i + 1 }}</td>
-              <td>{{ b.constructionYear }}</td>
-              <td>{{ b.projectName }}</td>
-              <td>{{ b.foundationFloors }}</td>
-              <td>{{ b.currentFloors }}</td>
-              <td>{{ b.usableRooms }}</td>
-              <td>{{ b.unusableRooms }}</td>
-              <td>{{ b.usableRooms + b.unusableRooms }}</td>
-              <td>{{ b.isRisky }}</td>
-              <td>{{ b.isDamagedDeclared }}</td>
-              <td>{{ b.comments }}</td>
+              <td class="numberColumn">{{ convertNumbersToBengali(i + 1) }}</td>
+              <td class="numberColumn">{{ convertNumbersToBengali(b.constructionYear) }}</td>
+              <td class="numberColumn">{{ b.projectName }}</td>
+              <td class="numberColumn">{{ convertNumbersToBengali(b.foundationFloors) }}</td>
+              <td class="numberColumn">{{ convertNumbersToBengali(b.currentFloors) }}</td>
+              <td class="numberColumn">{{ convertNumbersToBengali(b.usableRooms) }}</td>
+              <td class="numberColumn">{{ convertNumbersToBengali(b.unusableRooms) }}</td>
+              <td class="numberColumn">{{ convertNumbersToBengali(b.usableRooms + b.unusableRooms) }}</td>
+              <td class="numberColumn">{{ convertBooleanToBengali(b.isRisky) }}</td>
+              <td class="numberColumn">{{ convertBooleanToBengali(b.isDamagedDeclared) }}</td>
+              <td class="numberColumn">{{ b.comments }}</td>
               <td>
                 <a class="mx-1" (click)="edit(i)">
                   <span
@@ -1175,7 +1175,7 @@
                       studentForm.get('prePrimary4Plus')?.invalid &&
                       studentForm.get('prePrimary4Plus')?.touched
                   }"
-                  min="0"
+                  min="0" (change)="calculateTotal()"
                 />
                 <div
                   *ngIf="
@@ -1198,7 +1198,7 @@
                       studentForm.get('prePrimary5Plus')?.invalid &&
                       studentForm.get('prePrimary5Plus')?.touched
                   }"
-                  min="0"
+                  min="0" (change)="calculateTotal()"
                 />
                 <div
                   *ngIf="
@@ -1221,7 +1221,7 @@
                       studentForm.get('class1')?.invalid &&
                       studentForm.get('class1')?.touched
                   }"
-                  min="0"
+                  min="0" (change)="calculateTotal()"
                 />
                 <div
                   *ngIf="
@@ -1244,7 +1244,7 @@
                       studentForm.get('class2')?.invalid &&
                       studentForm.get('class2')?.touched
                   }"
-                  min="0"
+                  min="0" (change)="calculateTotal()"
                 />
                 <div
                   *ngIf="
@@ -1267,7 +1267,7 @@
                       studentForm.get('class3')?.invalid &&
                       studentForm.get('class3')?.touched
                   }"
-                  min="0"
+                  min="0" (change)="calculateTotal()"
                 />
                 <div
                   *ngIf="
@@ -1290,7 +1290,7 @@
                       studentForm.get('class4')?.invalid &&
                       studentForm.get('class4')?.touched
                   }"
-                  min="0"
+                  min="0" (change)="calculateTotal()"
                 />
                 <div
                   *ngIf="
@@ -1313,7 +1313,7 @@
                       studentForm.get('class5')?.invalid &&
                       studentForm.get('class5')?.touched
                   }"
-                  min="0"
+                  min="0" (change)="calculateTotal()"
                 />
                 <div
                   *ngIf="

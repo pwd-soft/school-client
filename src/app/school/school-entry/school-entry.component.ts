@@ -3,14 +3,18 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SchoolService } from '../../proxy/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BuildingDto, SchoolDto } from '../../proxy/dto-models';
-import { BuildingInputDto, SchoolInputDto, StudentInputDto } from '../../proxy/input-dtos';
+import {
+  BuildingInputDto,
+  SchoolInputDto,
+  StudentInputDto,
+} from '../../proxy/input-dtos';
 import { ToasterService } from '@abp/ng.theme.shared';
-
+import {toBengaliNumber} from 'bengali-number';
 
 @Component({
   selector: 'app-school-entry',
   templateUrl: './school-entry.component.html',
-  styleUrls: ['./school-entry.component.scss']
+  styleUrls: ['./school-entry.component.scss'],
 })
 export class SchoolEntryComponent implements OnInit {
   schoolForm: FormGroup;
@@ -18,26 +22,27 @@ export class SchoolEntryComponent implements OnInit {
   studentForm: FormGroup;
   cacheSVG = true;
   buildings: BuildingInputDto[] = [];
-  id: string = "";
+  id: string = '';
   bIds: number[] = [];
   school: SchoolDto = {} as SchoolDto;
   editId: number = 0;
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private cdRef: ChangeDetectorRef,
     private toast: ToasterService,
 
-    private schoolService: SchoolService) { }
+    private schoolService: SchoolService
+  ) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id') || "";
-    this.loadForm()
+    this.id = this.route.snapshot.paramMap.get('id') || '';
+    this.loadForm();
     this.loadData();
   }
 
   loadForm() {
-
     this.schoolForm = this.fb.group({
       id: [0],
       officeCode: [''],
@@ -49,7 +54,7 @@ export class SchoolEntryComponent implements OnInit {
       name: ['', Validators.required],
       emis: ['', Validators.required],
       headMaster: ['', Validators.required],
-      mobile: ['', [Validators.required, Validators.pattern(/^\d{10,15}$/)]],
+      mobile: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]],
       isSaved: [false],
       totalLandDecimals: [0, [Validators.required, Validators.min(0)]],
       undisputedLandDecimals: [0, [Validators.required, Validators.min(0)]],
@@ -66,7 +71,10 @@ export class SchoolEntryComponent implements OnInit {
       additionalRoomsMethod: ['', Validators.required],
       spaceAvailableForNewBuilding: [false, Validators.required],
       needsTemporaryRoomsDuringConstruction: [false, Validators.required],
-      additionalClassroomsRequired: [0, [Validators.required, Validators.min(0)]],
+      additionalClassroomsRequired: [
+        0,
+        [Validators.required, Validators.min(0)],
+      ],
       recommendation: [''],
       soilFillingCubicFeet: [0, [Validators.required, Validators.min(0)]],
       fieldLengthFeet: [0, [Validators.required, Validators.min(0)]],
@@ -79,7 +87,6 @@ export class SchoolEntryComponent implements OnInit {
       proposedLength: [0, [Validators.required, Validators.min(0)]],
       proposedWidth: [0, [Validators.required, Validators.min(0)]],
       specialComments: [''],
-
     });
     this.buildingForm = this.fb.group({
       buildingNumber: [0, [Validators.required, Validators.min(1)]],
@@ -99,7 +106,7 @@ export class SchoolEntryComponent implements OnInit {
       lengthFeet: [0, [Validators.required, Validators.min(0)]],
       widthFeet: [0, [Validators.required, Validators.min(0)]],
       isProposed: [false, Validators.required],
-      schoolId: [0]
+      schoolId: [0],
     });
 
     this.studentForm = this.fb.group({
@@ -110,8 +117,8 @@ export class SchoolEntryComponent implements OnInit {
       class3: [0, [Validators.required, Validators.min(0)]],
       class4: [0, [Validators.required, Validators.min(0)]],
       class5: [0, [Validators.required, Validators.min(0)]],
-      specialComment: ['']
-    })
+      specialComment: [''],
+    });
 
     // Initialize student counts for predefined class levels
     //this.addStudentCount('প্রি-প্রাইমারী (৪+)');
@@ -121,7 +128,7 @@ export class SchoolEntryComponent implements OnInit {
     //this.addStudentCount('তৃতীয় শ্রেণী');
     //this.addStudentCount('চতুর্থ শ্রেণী');
     //this.addStudentCount('পঞ্চম শ্রেণী');
-    //this.addBuilding(); 
+    //this.addBuilding();
   }
 
   loadData() {
@@ -152,7 +159,9 @@ export class SchoolEntryComponent implements OnInit {
       c.distanceFromRiverMeters.setValue(x.distanceFromRiverMeters);
       c.additionalRoomsMethod.setValue(x.additionalRoomsMethod);
       c.spaceAvailableForNewBuilding.setValue(x.spaceAvailableForNewBuilding);
-      c.needsTemporaryRoomsDuringConstruction.setValue(x.needsTemporaryRoomsDuringConstruction);
+      c.needsTemporaryRoomsDuringConstruction.setValue(
+        x.needsTemporaryRoomsDuringConstruction
+      );
       c.additionalClassroomsRequired.setValue(x.additionalClassroomsRequired);
       //c.recommendation.setValue(x.recommendation);
       c.soilFillingCubicFeet.setValue(x.soilFillingCubicFeet);
@@ -165,7 +174,6 @@ export class SchoolEntryComponent implements OnInit {
       c.westBoundaryFeet.setValue(x.westBoundaryFeet);
       c.proposedLength.setValue(x.proposedLength);
       c.proposedWidth.setValue(x.proposedWidth);
-
 
       //c.specialComments.setValue(x.specialComments);
       var c = this.studentForm.controls;
@@ -185,11 +193,18 @@ export class SchoolEntryComponent implements OnInit {
   }
 
   calculateTotal() {
-    var s = this.school.student;
+    var s = this.studentForm.value;
     if (s)
-      return s.class1 + s.class2 + s.class3 + s.class4 + s.class5 + s.prePrimary4Plus + s.prePrimary5Plus;
-    else
-      return 0;
+      return (
+        s.class1 +
+        s.class2 +
+        s.class3 +
+        s.class4 +
+        s.class5 +
+        s.prePrimary4Plus +
+        s.prePrimary5Plus
+      );
+    else return 0;
   }
 
   addBuilding(): void {
@@ -213,10 +228,8 @@ export class SchoolEntryComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-
   updateSchool(): void {
     if (this.schoolForm.valid) {
-
       var s: SchoolInputDto = {} as SchoolInputDto;
 
       s.id = this.school.id;
@@ -246,7 +259,8 @@ export class SchoolEntryComponent implements OnInit {
       s.distanceFromRiverMeters = v.distanceFromRiverMeters;
       s.additionalRoomsMethod = v.additionalRoomsMethod;
       s.spaceAvailableForNewBuilding = v.spaceAvailableForNewBuilding;
-      s.needsTemporaryRoomsDuringConstruction = v.needsTemporaryRoomsDuringConstruction;
+      s.needsTemporaryRoomsDuringConstruction =
+        v.needsTemporaryRoomsDuringConstruction;
       s.additionalClassroomsRequired = v.additionalClassroomsRequired;
       s.soilFillingCubicFeet = v.soilFillingCubicFeet;
       s.fieldLengthFeet = v.fieldLengthFeet;
@@ -274,16 +288,14 @@ export class SchoolEntryComponent implements OnInit {
       t.specialComment = v.specialComment;
       s.student = t;
       if (this.bIds.length > 0)
-        this.schoolService.removeBuildingsByIds(this.bIds).subscribe(() => {
-
-        })
+        this.schoolService.removeBuildingsByIds(this.bIds).subscribe(() => {});
       this.schoolService.update(s).subscribe(
-        response => {
+        (response) => {
           console.log('Form saved successfully', response);
-          this.toast.success("School info saved");
-          this.router.navigateByUrl("/school/view/" + this.school.emis);
+          this.toast.success('School info saved');
+          this.router.navigateByUrl('/school/view/' + this.school.emis);
         },
-        error => {
+        (error) => {
           console.error('Error saving form', error);
         }
       );
@@ -346,8 +358,15 @@ export class SchoolEntryComponent implements OnInit {
   remove(i) {
     console.log(this.buildings[i]);
     var b = this.buildings[i];
-    if (b.id > 0)
-      this.bIds.push(b.id);
+    if (b.id > 0) this.bIds.push(b.id);
     this.buildings.splice(i, 1);
+  }
+
+  convertNumbersToBengali(num: number) {
+    return toBengaliNumber(num);
+  }
+
+  convertBooleanToBengali(value: boolean) {
+    return value ? 'হ্যাঁ' : 'না';
   }
 }

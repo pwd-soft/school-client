@@ -279,18 +279,18 @@
       <!-- Sheet 2: ভবন নির্মাণ সংক্রান্ত তথ্য ছক -->
       <div class="row">
         <div class="col-6">
-          <label>বিদ্যালয়ের নাম: {{ school.name }}</label>
+          <label><strong>বিদ্যালয়ের নাম:</strong> {{ school.name }}</label>
         </div>
         <div class="col-6">
-          <label>ইএমআইএস কোড নং: {{ school.emis }}</label>
+          <label><strong>ইএমআইএস কোড নং:</strong> {{ school.emis }}</label>
         </div>
       </div>
       <div class="row">
         <div class="col-6">
-          <label>উপজেলা: {{ school.thana }}</label>
+          <label><strong>উপজেলা:</strong> {{ school.thana }}</label>
         </div>
         <div class="col-6">
-          <label>জেলা: {{ school.district }}</label>
+          <label><strong>জেলা:</strong> {{ school.district }}</label>
         </div>
       </div>
 
@@ -313,16 +313,16 @@
         </thead>
         <tbody>
           <tr *ngFor="let b of buildings; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ b.constructionYear }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(i + 1) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(b.constructionYear) }}</td>
             <td>{{ b.projectName }}</td>
-            <td>{{ b.foundationFloors }}</td>
-            <td>{{ b.currentFloors }}</td>
-            <td>{{ b.usableRooms }}</td>
-            <td>{{ b.unusableRooms }}</td>
-            <td>{{ b.usableRooms + b.unusableRooms }}</td>
-            <td>{{ b.isRisky }}</td>
-            <td>{{ b.isDamagedDeclared }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(b.foundationFloors) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(b.currentFloors) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(b.usableRooms) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(b.unusableRooms) }}</td>
+            <td class="numberColumn">{{ convertNumbersToBengali(b.usableRooms + b.unusableRooms) }}</td>
+            <td class="numberColumn">{{ convertBooleanToBengali(b.isRisky) }}</td>
+            <td class="numberColumn">{{ convertBooleanToBengali(b.isDamagedDeclared) }}</td>
             <td>{{ b.comments }}</td>
           </tr>
         </tbody>
@@ -471,7 +471,7 @@
 
       <ul class="list-unstyled">
         <li *ngFor="let b of buildings; let i = index">
-          {{ i + 1 }} নং ভবনের পরিমাপ =
+          {{ convertNumbersToBengali(i + 1) }} নং ভবনের পরিমাপ =
           {{ convertNumbersToBengali(b.lengthFeet) }} ফুট x
           {{ convertNumbersToBengali(b.widthFeet) }} ফুট
         </li>
